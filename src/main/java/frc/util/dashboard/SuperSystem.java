@@ -7,8 +7,6 @@ import java.util.List;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
- * this is Subsystem base.
- * 
  * @author Matan Steinmetz
  */
 public class SuperSystem extends SubsystemBase {

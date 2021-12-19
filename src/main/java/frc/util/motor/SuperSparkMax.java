@@ -65,7 +65,6 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
         getEncoder().setPositionConversionFactor(positionMultiply);
         getEncoder().setVelocityConversionFactor(velocityMultiply);
         setIdleMode(mode);
-
                 
         getPIDController().setP(gains.kp);
         getPIDController().setI(gains.ki);
