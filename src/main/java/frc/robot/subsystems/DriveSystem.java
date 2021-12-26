@@ -41,13 +41,16 @@ public class DriveSystem extends SuperSystem {
     LS.follow(LM);
     RS.follow(RM);
 
-    setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> RobotButtons.driverJoystick.getRawAxis(5),
-        () -> RobotButtons.driverJoystick.getRawAxis(0), 0.2, 0.5));
+    setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> {
+      return RobotButtons.driverJoystick.getRawAxis(5);
+    }, () -> {
+      return RobotButtons.driverJoystick.getRawAxis(0);
+    }, 0.2, 0.5));
   }
 
   @Override
   public void periodic() {
-    changeNeoMode();
+    // changeNeoMode();
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance());
     getTab().putInDashboard("right encoder position", getRightEncoderDistance());
     getTab().putInDashboard("average position", getPosition());
@@ -55,17 +58,23 @@ public class DriveSystem extends SuperSystem {
 
   public void tank(double left, double right) {
     LM.set(left);
+    // LS.set(left);
     RM.set(right);
+    // RS.set(right);
   }
 
   public void setOutput(double setOutput) {
     LM.set(setOutput);
+    // LS.set(setOutput);
     RM.set(setOutput);
+    // RS.set(setOutput);
   }
 
   public void resetSensors() {
     RM.reset(0);
+    // RS.reset(0);
     LM.reset(0);
+    // LS.reset(0);
   }
 
   public Gains getGains() {
