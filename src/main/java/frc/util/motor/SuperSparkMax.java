@@ -25,7 +25,7 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
     private PIDController pidController;
 
     /**
-     * This constractor of master
+     * This constractor of m0aster
      * 
      * @param deviceNumber can id
      * @param motorType    type of motor Brushed or Brushless

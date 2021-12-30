@@ -26,8 +26,8 @@ public class DriveWithJoysticksAccCommand extends CommandBase {
 	 * @param maxAdd          need to be who mach to add between speeds..
 	 * @param restraintOutput need to be the max output to give to motors
 	 */
-	public DriveWithJoysticksAccCommand(DriveSystem driveSystem, DoubleSupplier speed, DoubleSupplier turn, double maxAdd,
-			double restraintOutput) {
+	public DriveWithJoysticksAccCommand(DriveSystem driveSystem, DoubleSupplier speed, DoubleSupplier turn,
+			double maxAdd, double restraintOutput) {
 		this.turn_ = turn;
 		this.speed_ = speed;
 		this.maxAdd = maxAdd;
@@ -53,11 +53,13 @@ public class DriveWithJoysticksAccCommand extends CommandBase {
 		right = speed - turn;
 
 		if (Math.abs(left) > 1) {
-			left = left / Math.abs(left);
+			right = right * (1 / Math.abs(left));
+			left = left * (1 / Math.abs(left));
 		}
 
 		if (Math.abs(right) > 1) {
-			right = right / Math.abs(right);
+			left = left * (1 / Math.abs(right));
+			right = right * (1 / Math.abs(right));
 		}
 
 		sl = left - lastLeft_ > 0 ? 1 : -1;// turn / Math.abs(turn);

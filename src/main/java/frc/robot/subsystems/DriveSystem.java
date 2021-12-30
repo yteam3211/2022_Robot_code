@@ -23,13 +23,12 @@ import frc.util.commands.DriveWithJoysticksAccCommand;
 public class DriveSystem extends SuperSystem {
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless, 60, true,
       IdleMode.kBrake);
-  private SuperSparkMax RS = new SuperSparkMax(Constants.CAN_DRIVE_RS_MOTOR, MotorType.kBrushless, 60, false,
+  private SuperSparkMax RS = new SuperSparkMax(Constants.CAN_DRIVE_RS_MOTOR, MotorType.kBrushless, 60, true,
       IdleMode.kBrake);
-  private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless, 60, true,
+  private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless, 60, false,
       IdleMode.kBrake);
   private SuperSparkMax LS = new SuperSparkMax(Constants.CAN_DRIVE_LS_MOTOR, MotorType.kBrushless, 60, false,
       IdleMode.kBrake);
-
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
   public static Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
@@ -40,6 +39,8 @@ public class DriveSystem extends SuperSystem {
 
     LS.follow(LM);
     RS.follow(RM);
+
+    resetSensors();
 
     setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> {
       return RobotButtons.driverJoystick.getRawAxis(5);
@@ -58,23 +59,19 @@ public class DriveSystem extends SuperSystem {
 
   public void tank(double left, double right) {
     LM.set(left);
-    // LS.set(left);
     RM.set(right);
-    // RS.set(right);
+    System.out
+        .println("LM: " + left + " LPOS: " + getLeftPosition() + " | RM: " + right + " RPOS: " + getRightPosition());
   }
 
   public void setOutput(double setOutput) {
     LM.set(setOutput);
-    // LS.set(setOutput);
     RM.set(setOutput);
-    // RS.set(setOutput);
   }
 
   public void resetSensors() {
     RM.reset(0);
-    // RS.reset(0);
     LM.reset(0);
-    // LS.reset(0);
   }
 
   public Gains getGains() {
@@ -100,6 +97,14 @@ public class DriveSystem extends SuperSystem {
 
   public double getLeftEncoderDistance() {
     return LM.getEncoder().getPosition() * ENCODER_2_METER;
+  }
+
+  public double getRightPosition() {
+    return RM.getEncoder().getPosition();
+  }
+
+  public double getLeftPosition() {
+    return LM.getEncoder().getPosition();
   }
 
   public void changeNeoMode() {
