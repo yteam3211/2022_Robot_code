@@ -49,6 +49,10 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
     return navX.getAngle();
   }
 
+  public double getSuperAngle() {
+    return getAngle();
+  }
+
   public double getAngle360() {
     double angle = getAngle() % 360;
 

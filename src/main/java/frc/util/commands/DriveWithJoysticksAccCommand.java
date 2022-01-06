@@ -49,8 +49,8 @@ public class DriveWithJoysticksAccCommand extends CommandBase {
 		turn = getAxisValue(turn_.getAsDouble(), 0.02);// 4
 		speed = -getAxisValue(speed_.getAsDouble(), 0.02);
 
-		left = speed + turn;
-		right = speed - turn;
+		left = speed - turn;
+		right = speed + turn;
 
 		if (Math.abs(left) > 1) {
 			right = right * (1 / Math.abs(left));

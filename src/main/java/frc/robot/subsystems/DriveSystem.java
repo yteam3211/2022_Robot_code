@@ -42,11 +42,8 @@ public class DriveSystem extends SuperSystem {
 
     resetSensors();
 
-    setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> {
-      return RobotButtons.driverJoystick.getRawAxis(5);
-    }, () -> {
-      return RobotButtons.driverJoystick.getRawAxis(0);
-    }, 0.2, 0.5));
+    setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> RobotButtons.driverJoystick.getRawAxis(5),
+     () -> RobotButtons.driverJoystick.getRawAxis(0), 0.2, 0.5));
   }
 
   @Override

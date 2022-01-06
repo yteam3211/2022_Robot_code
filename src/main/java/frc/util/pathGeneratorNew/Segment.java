@@ -5,16 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.util.pathGeneratorNew;
 
-import edu.wpi.first.wpilibj.Joystick;
+/**
+ * Add your docs here.
+ */
+public class Segment {
+    public double velocity, acceleration, pos;
 
-public class RobotButtons {
-    // all joysticks:
-    public static Joystick driverJoystick = new Joystick(0);
-    
-
-    public void loadButtons() {
-        
+    public Segment(double pos, double velocity, double acceleration) {
+        this.velocity = velocity;
+        this.acceleration = acceleration;
+        this.pos = pos;
     }
 }
