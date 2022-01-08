@@ -1,4 +1,4 @@
-package frc.util.pathGeneretor.commandAuto;
+package frc.util.pathGenerator.commandAuto;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

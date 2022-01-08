@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.util.pathGeneratorNew.Path;
+import frc.util.pathGenerator.Path;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -22,14 +22,9 @@ public final class Constants {
     public static final int CAN_DRIVE_LS_MOTOR = 1;
     public static final int CAN_DRIVE_RM_MOTOR = 4;
     public static final int CAN_DRIVE_RS_MOTOR = 3;
-    
-    
-    public static final Path myFirstPath = new Path("myFirstPath.csv");
-    
-    
+
+    public static final Path auto1 = new Path("auto1");
+
     public static final int ROBOT_WIDTH = 1;
-
-
-
 
 }

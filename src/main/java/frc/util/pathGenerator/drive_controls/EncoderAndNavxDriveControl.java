@@ -1,15 +1,14 @@
 package frc.util.pathGenerator.drive_controls;
 
 import frc.util.SuperNavX;
-import frc.util.pathGeneratorNew.DrivePosition;
-import frc.util.pathGeneratorNew.PointSegments;
+import frc.util.pathGenerator.Path;
+import frc.util.pathGenerator.Point;
 import frc.robot.subsystems.DriveSystem;
 
 /**
  * @author Matan Steinmetz
  */
 public class EncoderAndNavxDriveControl extends DriveControl {
-    private DrivePosition errorPosition = new DrivePosition();
     private double errorAngle;
     private SuperNavX navX;
 
@@ -17,14 +16,16 @@ public class EncoderAndNavxDriveControl extends DriveControl {
         super(driveSystem);
         this.navX = navX;
     }
-
+    
     @Override
-    public DrivePosition getRobotErrorPosition(Point point) {
-        errorAngle = angle2Distance(point.angle - navX.getSuperAngle());
+    public double getRobotErrorRightPosition(int index){
+        errorAngle = angle2Distance(path.getAngle(index) - navX.getSuperAngle());
+        return path.right[index].pos - getRightPosition() - errorAngle;
 
-        errorPosition.left = point.leftPoint.pos - getLeftPosition() + errorAngle;
-        errorPosition.right = point.rightPoint.pos - getRightPosition() - errorAngle;
-
-        return errorPosition;
+    }
+    @Override
+    public  double getRobotErrorLeftPosition(int index){
+        errorAngle = angle2Distance(path.getAngle(index) - navX.getSuperAngle());
+        return path.left[index].pos - getLeftPosition() + errorAngle;
     }
 }

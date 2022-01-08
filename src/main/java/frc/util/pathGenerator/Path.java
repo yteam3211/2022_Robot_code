@@ -15,12 +15,17 @@ public class Path {
     private double startAngle;
 
 
+
+    public Path(String autoName) {
+        this(autoName, 0);
+    }
+
 /**
  * 
  * @param autoName - the name of the auto
  * @param startAngle - the start angle
  */
-    Path(String autoName, double startAngle) {
+    public Path(String autoName, double startAngle) {
         this.startAngle = startAngle;
         String pathFolder = Filesystem.getDeployDirectory().toString() + "/" + autoName;
         right = loudFromCsv(pathFolder + "/" + autoName + ".right.csv");
@@ -32,7 +37,7 @@ public class Path {
      * @param index
      * @return the angle from this point
      */
-    double getAngle(int index) {
+    public double getAngle(int index) {
         return startAngle + ((left[index].pos - right[index].pos) / Constants.ROBOT_WIDTH);
     }
 

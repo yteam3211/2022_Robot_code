@@ -50,6 +50,7 @@ public class FollowPathCommand extends CommandBase {
         rightOutput = 0;
         leftOutput = 0;
         index = 0;
+        dc.setPath(path);
     }
 
     @Override
@@ -57,8 +58,8 @@ public class FollowPathCommand extends CommandBase {
         leftPoint = path.left[index];
         rightPoint = path.right[index];
 
-        double errorLeft = dc.getRobotErrorLeftPosition(leftPoint);
-        double errorRight = dc.getRobotErrorRightPosition(rightPoint);
+        double errorLeft = dc.getRobotErrorLeftPosition(index);
+        double errorRight = dc.getRobotErrorRightPosition(index);
 
         leftOutput = (gains.kp * errorLeft + gains.kd * ((errorLeft - leftLestError) / Robot.kDefaultPeriod)
                 + (gains.kv * leftPoint.vel + gains.ka * leftPoint.acc));

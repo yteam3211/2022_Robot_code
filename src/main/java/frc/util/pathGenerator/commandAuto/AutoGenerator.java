@@ -35,7 +35,7 @@ public class AutoGenerator extends SequentialCommandGroup {
         addCommands(new ResetSensorsCommand(navX, 0));
     }
 
-    public AutoGenerator(String namePath, Gains gains, DriveSystem driveSystem, SuperNavX navX, double angle) {
+    public AutoGenerator(String nameAuto, Gains gains, DriveSystem driveSystem, SuperNavX navX, double angle) {
         this.namePath = namePath;
         this.gains = gains;
         this.dc = new EncoderAndNavxDriveControl(driveSystem, navX);
