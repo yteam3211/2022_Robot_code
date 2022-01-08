@@ -1,9 +1,8 @@
 package frc.util.pathGenerator.drive_controls;
 
 import frc.robot.Constants;
+import frc.util.pathGenerator.Path;
 import frc.util.pathGenerator.Point;
-import frc.util.pathGeneratorNew.DrivePosition;
-import frc.util.pathGeneratorNew.PointSegments;
 import frc.robot.subsystems.DriveSystem;
 
 /**
@@ -11,13 +10,17 @@ import frc.robot.subsystems.DriveSystem;
  */
 public abstract class DriveControl {
     private DriveSystem driveSystem;
+    protected Path path;
 
     public DriveControl(DriveSystem driveSystem) {
         this.driveSystem = driveSystem;
     }
 
-    public abstract double getRobotErrorRightPosition(Point point);
-    public abstract double getRobotErrorLeftPosition(Point point);
+    public abstract double getRobotErrorRightPosition(int index);
+    public abstract double getRobotErrorLeftPosition(int index);
+
+
+    public 
 
     public double getRightPosition() {
         return driveSystem.getRightPosition();
