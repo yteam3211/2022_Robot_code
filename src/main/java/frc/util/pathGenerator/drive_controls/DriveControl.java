@@ -2,7 +2,6 @@ package frc.util.pathGenerator.drive_controls;
 
 import frc.robot.Constants;
 import frc.util.pathGenerator.Path;
-import frc.util.pathGenerator.Point;
 import frc.robot.subsystems.DriveSystem;
 
 /**
@@ -17,10 +16,12 @@ public abstract class DriveControl {
     }
 
     public abstract double getRobotErrorRightPosition(int index);
+
     public abstract double getRobotErrorLeftPosition(int index);
 
-
-    public 
+    public void setPath(Path path) {
+        this.path = path;
+    }
 
     public double getRightPosition() {
         return driveSystem.getRightPosition();
