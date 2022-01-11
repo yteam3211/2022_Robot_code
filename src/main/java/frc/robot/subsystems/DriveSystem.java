@@ -32,7 +32,7 @@ public class DriveSystem extends SuperSystem {
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
   public static Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
-  public static Gains autoGains = new Gains("autoGains", 0.195, 0.0525, 2, 0, 0);
+  public static Gains autoGains = new Gains("autoGains", 0.195, 0.00225, 0.002, 0.0005, 0.005);
 
   public DriveSystem() {
     super("Drive");
@@ -43,7 +43,7 @@ public class DriveSystem extends SuperSystem {
     resetSensors();
 
     setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> RobotButtons.driverJoystick.getRawAxis(5),
-     () -> RobotButtons.driverJoystick.getRawAxis(0), 0.2, 0.5));
+        () -> RobotButtons.driverJoystick.getRawAxis(0), 0.2, 0.5));
   }
 
   @Override

@@ -19,16 +19,10 @@ public class AutoChooser {
         SmartDashboard.putData("Auto Chooser", autoChooser);
     }
 
-    private Command getAutoCommand() {
+    public Command getAutoCommand() {
         return autoChooser.getSelected();
     }
 
-    public void startAuto() {
-        autoCommand = getAutoCommand();
-        if (autoCommand != null) {
-            autoCommand.schedule();
-        }
-    }
 
     public void stopAuto() {
         if (autoCommand != null) {

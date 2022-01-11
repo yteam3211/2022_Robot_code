@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.util.SuperNavX;
-import frc.util.pathGenerator.Path;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
 import frc.robot.subsystems.DriveSystem;
 

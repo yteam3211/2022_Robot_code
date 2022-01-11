@@ -10,8 +10,8 @@ import frc.util.dashboard.SuperSystem;
 public class SuperNavX extends SuperSystem implements SuperInterface {
   private AHRS navX = new AHRS(SPI.Port.kMXP);
 
-  public SuperNavX(String name) {
-    super(name);
+  public SuperNavX() {
+    super("Navx");
     this.resetNavx();
     getTab().addCommandToDashboard("ResetSensor", new ResetSensorsCommand(this,
     0));

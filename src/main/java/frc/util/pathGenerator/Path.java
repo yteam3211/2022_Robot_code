@@ -14,17 +14,15 @@ public class Path {
     public Point[] right;
     private double startAngle;
 
-
-
     public Path(String autoName) {
         this(autoName, 0);
     }
 
-/**
- * 
- * @param autoName - the name of the auto
- * @param startAngle - the start angle
- */
+    /**
+     * 
+     * @param autoName   - the name of the auto
+     * @param startAngle - the start angle
+     */
     public Path(String autoName, double startAngle) {
         this.startAngle = startAngle;
         String pathFolder = Filesystem.getDeployDirectory().toString() + "/" + autoName;
@@ -43,22 +41,22 @@ public class Path {
 
     /**
      * 
-     * @param filePath the path of the file 
+     * @param filePath the path of the file
      * @return array of points
      */
     Point[] loudFromCsv(String filePath) {
         List<Point> points = new ArrayList<Point>();
         try {
             File csvFile = new File(filePath);
-            //TODO this is may cause problem
+            // TODO this is may cause problem
             Scanner myReader = new Scanner(csvFile);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                if(data.charAt(0) == 'a'){
+                if (data.charAt(0) == 'a') {
                     continue;
                 }
-                String[] pointArr = data.split(",", 2);
-                //move the scv to list
+                String[] pointArr = data.split(",", 0);
+                // move the scv to list;
                 Point point = new Point(pointArr[0], pointArr[1], pointArr[2]);
                 points.add(point);
             }
