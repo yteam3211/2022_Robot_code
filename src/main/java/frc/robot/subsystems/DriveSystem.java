@@ -32,7 +32,7 @@ public class DriveSystem extends SuperSystem {
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
   public static Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
-  public static Gains autoGains = new Gains("autoGains", 0.195, 0.00225, 0.002, 0.0005, 0.005);
+  public static Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 0.02, 0, 0);
 
   public DriveSystem() {
     super("Drive");
@@ -48,7 +48,8 @@ public class DriveSystem extends SuperSystem {
 
   @Override
   public void periodic() {
-    // changeNeoMode();
+    changeNeoMode();
+    getTab().putInDashboard("left position", getLeftPosition());
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance());
     getTab().putInDashboard("right encoder position", getRightEncoderDistance());
     getTab().putInDashboard("average position", getPosition());
@@ -57,8 +58,6 @@ public class DriveSystem extends SuperSystem {
   public void tank(double left, double right) {
     LM.set(left);
     RM.set(right);
-    System.out
-        .println("LM: " + left + " LPOS: " + getLeftPosition() + " | RM: " + right + " RPOS: " + getRightPosition());
   }
 
   public void setOutput(double setOutput) {

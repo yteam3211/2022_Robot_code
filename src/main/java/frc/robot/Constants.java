@@ -24,6 +24,7 @@ public final class Constants {
     public static final int CAN_DRIVE_RS_MOTOR = 3;
 
     public static final Path auto1 = new Path("auto1");
+    public static final Path forward = new Path("forward");
 
     public static final int ROBOT_WIDTH = 1;
 

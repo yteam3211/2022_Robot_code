@@ -14,7 +14,8 @@ public class EncoderDriveControl extends DriveControl {
 
     @Override
     public double getRobotErrorLeftPosition(int index) {
-        return path.left[index].pos - getLeftPosition();
+        driveSystem.getTab().putInDashboard("left path pos", path.left[index].pos);
+        return path.left[index].pos - getLeftPosition();        
     }
 
     @Override

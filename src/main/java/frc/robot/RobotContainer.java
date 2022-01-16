@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TestAuto;
+import frc.robot.commands.forwardAuto;
 import frc.robot.subsystems.DriveSystem;
 import frc.util.SuperNavX;
 import frc.util.pathGenerator.commandAuto.AutoChooser;
@@ -28,9 +29,9 @@ public class RobotContainer {
   public final DriveSystem driveSystem = new DriveSystem();
   public final SuperNavX navx = new SuperNavX();
   public final TestAuto testAuto = new TestAuto(driveSystem, navx);
-  public final AutoGenerator[] autoCommands = { testAuto };
-  public final AutoChooser autoChooser = new AutoChooser(testAuto,
-      autoCommands);
+  public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
+  public final AutoGenerator[] autoCommands = { testAuto, forwardAuto };
+  public final AutoChooser autoChooser = new AutoChooser(testAuto, autoCommands);
   // private final ExampleCommand m_autoCommand = new
   // ExampleCommand(m_exampleSubsystem);
 

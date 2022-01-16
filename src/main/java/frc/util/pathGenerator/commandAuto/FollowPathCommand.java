@@ -60,7 +60,7 @@ public class FollowPathCommand extends CommandBase {
 
         double errorLeft = dc.getRobotErrorLeftPosition(index);
         double errorRight = dc.getRobotErrorRightPosition(index);
-
+        System.out.println(errorLeft);
         leftOutput = (gains.kp * errorLeft + gains.kd * ((errorLeft - leftLestError) / Robot.kDefaultPeriod)
                 + (gains.kv * leftPoint.vel + gains.ka * leftPoint.acc));
         rightOutput = (gains.kp * errorRight + gains.kd * ((errorRight - rightLestError) / Robot.kDefaultPeriod)

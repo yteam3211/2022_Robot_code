@@ -8,7 +8,7 @@ import frc.robot.subsystems.DriveSystem;
  * @author Matan Steinmetz
  */
 public abstract class DriveControl {
-    private DriveSystem driveSystem;
+    protected DriveSystem driveSystem;
     protected Path path;
 
     public DriveControl(DriveSystem driveSystem) {
