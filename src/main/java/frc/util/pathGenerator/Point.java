@@ -4,7 +4,7 @@ public class Point {
     public double pos;
     public double vel;
     public double acc;
-    Point(String acc, String pos, String vel){
+    public Point(String acc, String pos, String vel){
         this.pos = Double.parseDouble(pos);
         this.vel = Double.parseDouble(vel);
         this.acc = Double.parseDouble(acc);

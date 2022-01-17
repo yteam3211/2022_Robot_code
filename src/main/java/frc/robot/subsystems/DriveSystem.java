@@ -104,7 +104,7 @@ public class DriveSystem extends SuperSystem {
   }
 
   public void changeNeoMode() {
-    if (DriverStation.getInstance().isDisabled()) {
+    if (DriverStation.isDisabled()) {
       RM.setIdleMode(IdleMode.kCoast);
       RS.setIdleMode(IdleMode.kCoast);
       LM.setIdleMode(IdleMode.kCoast);

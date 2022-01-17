@@ -8,7 +8,6 @@
 
 package frc.util.motor;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
 
 import frc.util.PID.Gains;
 import frc.util.PID.PIDController;

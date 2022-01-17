@@ -26,6 +26,6 @@ public final class Constants {
     public static final Path auto1 = new Path("auto1");
     public static final Path forward = new Path("forward");
 
-    public static final int ROBOT_WIDTH = 1;
+    public static final double ROBOT_WIDTH = 0.675;
 
 }

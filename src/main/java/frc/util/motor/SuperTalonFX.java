@@ -92,8 +92,7 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
 
     @Override
     public double getAmper() {
-        // TODO super.getMotorOutputVoltage(); || super.getBusVoltage()
-        return super.getMotorOutputVoltage();
+       return super.getMotorOutputVoltage();
     }
 
     @Override
