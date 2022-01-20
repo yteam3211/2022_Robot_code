@@ -1,6 +1,5 @@
 package frc.util.pathGenerator.drive_controls;
 
-import frc.util.pathGenerator.Path;
 import frc.robot.subsystems.DriveSystem;
 
 /**
@@ -15,11 +14,11 @@ public class EncoderDriveControl extends DriveControl {
     @Override
     public double getRobotErrorLeftPosition(int index) {
         driveSystem.getTab().putInDashboard("left path pos", path.left[index].pos);
-        return path.left[index].pos - getLeftPosition();        
+        return path.left[index].pos - getLeftEncoderDistance();        
     }
 
     @Override
     public double getRobotErrorRightPosition(int index) {
-        return path.right[index].pos - getRightPosition();
+        return path.right[index].pos - getRightEncoderDistance();
     }
 }

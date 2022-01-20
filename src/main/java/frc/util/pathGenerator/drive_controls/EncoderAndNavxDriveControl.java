@@ -20,12 +20,12 @@ public class EncoderAndNavxDriveControl extends DriveControl {
     @Override
     public double getRobotErrorRightPosition(int index){
         errorAngle = angle2Distance(path.getAngle(index) - navX.getSuperAngle());
-        return path.right[index].pos - getRightPosition() - errorAngle;
+        return path.right[index].pos - getRightEncoderDistance() - errorAngle;
 
     }
     @Override
     public  double getRobotErrorLeftPosition(int index){
         errorAngle = angle2Distance(path.getAngle(index) - navX.getSuperAngle());
-        return path.left[index].pos - getLeftPosition() + errorAngle;
+        return path.left[index].pos - getLeftEncoderDistance() + errorAngle;
     }
 }

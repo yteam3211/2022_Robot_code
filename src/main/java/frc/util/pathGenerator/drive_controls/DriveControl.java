@@ -31,6 +31,14 @@ public abstract class DriveControl {
         return driveSystem.getLeftPosition();
     }
 
+    public double getRightEncoderDistance(){
+        return driveSystem.getRightEncoderDistance();
+    }
+    
+    public double getLeftEncoderDistance(){
+        return driveSystem.getLeftEncoderDistance();
+    }
+
     // ----- Util ----- \\
     /**
      * @param angle
