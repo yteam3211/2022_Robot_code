@@ -1,5 +1,6 @@
 package frc.util.pathGenerator.commandAuto;
 
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.util.commands.ResetSensorsCommand;
@@ -40,7 +41,6 @@ public class AutoGenerator extends SequentialCommandGroup {
         this.gains = gains;
         this.dc = new EncoderAndNavxDriveControl(driveSystem, navX);
         this.driveSystem = driveSystem;
-
         addCommands(new ResetSensorsCommand(navX, angle));
     }
 

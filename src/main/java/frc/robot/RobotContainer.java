@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TestAuto;
+import frc.robot.commands.bowAuto;
 import frc.robot.commands.forwardAuto;
 import frc.robot.subsystems.DriveSystem;
 import frc.util.SuperNavX;
@@ -30,8 +31,10 @@ public class RobotContainer {
   public final SuperNavX navx = new SuperNavX();
   public final TestAuto testAuto = new TestAuto(driveSystem, navx);
   public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
-  public final AutoGenerator[] autoCommands = { testAuto, forwardAuto };
+  public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
+  public final AutoGenerator[] autoCommands = {forwardAuto, bowAuto};
   public final AutoChooser autoChooser = new AutoChooser(testAuto, autoCommands);
+  public final RobotButtons robotButtons = new RobotButtons();
   // private final ExampleCommand m_autoCommand = new
   // ExampleCommand(m_exampleSubsystem);
 
@@ -53,6 +56,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    robotButtons.loadButtons();
   }
 
   /**
