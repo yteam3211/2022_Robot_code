@@ -26,8 +26,8 @@ public class Path {
     public Path(String autoName, double startAngle) {
         this.startAngle = startAngle;
         String pathFolder = Filesystem.getDeployDirectory().toString() + "/" + autoName;
-        right = loudFromCsv(pathFolder + "/" + autoName + ".right.csv");
-        left = loudFromCsv(pathFolder + "/" + autoName + ".left.csv");
+        right = loudFromCsv(pathFolder + "/" + autoName + ".left.csv");
+        left = loudFromCsv(pathFolder + "/" + autoName + ".right.csv");
     }
 
     /**

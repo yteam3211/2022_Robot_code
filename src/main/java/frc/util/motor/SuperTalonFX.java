@@ -81,7 +81,6 @@ public class SuperTalonFX extends TalonFX implements SuperMotor {
             setOutput *= positionMultiply;
         else if (mode == TalonFXControlMode.Velocity)
             setOutput *= velocityMultiply;
-        // System.out.println(mode.toString());
         super.set(mode, setOutput);
     }
 
