@@ -32,8 +32,7 @@ public class DriveSystem extends SuperSystem {
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
   public static Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
-  // public static Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
-  public static Gains autoGains = new Gains("autoGains", 0.1825, 0, 0, 0, 0);
+  public static Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
 
   public DriveSystem() {
     super("Drive");

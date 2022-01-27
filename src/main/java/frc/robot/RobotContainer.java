@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TestAuto;
 import frc.robot.commands.bowAuto;
+import frc.robot.commands.check;
 import frc.robot.commands.forwardAuto;
 import frc.robot.subsystems.DriveSystem;
 import frc.util.SuperNavX;
@@ -32,7 +33,8 @@ public class RobotContainer {
   public final TestAuto testAuto = new TestAuto(driveSystem, navx);
   public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
-  public final AutoGenerator[] autoCommands = {forwardAuto, bowAuto};
+  public final check check = new check(driveSystem, navx);
+  public final AutoGenerator[] autoCommands = {forwardAuto, bowAuto, check};
   public final AutoChooser autoChooser = new AutoChooser(testAuto, autoCommands);
   public final RobotButtons robotButtons = new RobotButtons();
   // private final ExampleCommand m_autoCommand = new

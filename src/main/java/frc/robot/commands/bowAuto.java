@@ -11,7 +11,7 @@ import frc.robot.subsystems.DriveSystem;
 public class bowAuto extends AutoGenerator {
     public bowAuto(DriveSystem driveSystem, SuperNavX navX) {
             super("bowAuto", driveSystem.getAutoGains(), driveSystem, navX);
-            addCommands(addFollowPathCommand(Constants.bow, new EncoderAndNavxDriveControl(driveSystem, navX)));
+            addCommands(addFollowPathCommand(Constants.bow, new EncoderDriveControl(driveSystem)));
 
     }
 }
