@@ -29,7 +29,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final DriveSystem driveSystem = new DriveSystem();
-  public final SuperNavX navx = new SuperNavX();
+  static public final SuperNavX navx = new SuperNavX();
   public final TestAuto testAuto = new TestAuto(driveSystem, navx);
   public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
