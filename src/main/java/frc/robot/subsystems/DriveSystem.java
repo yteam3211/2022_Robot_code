@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotButtons;
 import frc.robot.Constants;
 import frc.util.PID.Gains;
@@ -23,11 +22,15 @@ import frc.util.commands.DriveWithJoysticksAccCommand;
 public class DriveSystem extends SuperSystem {
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless, 60, true,
       IdleMode.kBrake);
-  private SuperSparkMax RS = new SuperSparkMax(Constants.CAN_DRIVE_RS_MOTOR, MotorType.kBrushless, 60, true,
+  private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless, 60, true,
+      IdleMode.kBrake);
+  private SuperSparkMax RS2 = new SuperSparkMax(Constants.CAN_DRIVE_RS2_MOTOR, MotorType.kBrushless, 60, true,
       IdleMode.kBrake);
   private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless, 60, false,
       IdleMode.kBrake);
-  private SuperSparkMax LS = new SuperSparkMax(Constants.CAN_DRIVE_LS_MOTOR, MotorType.kBrushless, 60, false,
+  private SuperSparkMax LS1 = new SuperSparkMax(Constants.CAN_DRIVE_LS1_MOTOR, MotorType.kBrushless, 60, false,
+      IdleMode.kBrake);
+  private SuperSparkMax LS2 = new SuperSparkMax(Constants.CAN_DRIVE_LS2_MOTOR, MotorType.kBrushless, 60, false,
       IdleMode.kBrake);
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
@@ -37,8 +40,10 @@ public class DriveSystem extends SuperSystem {
   public DriveSystem() {
     super("Drive");
 
-    LS.follow(LM);
-    RS.follow(RM);
+    LS1.follow(LM);
+    LS2.follow(LM);
+    RS1.follow(RM);
+    RS2.follow(RM);
 
     resetSensors();
 
@@ -106,14 +111,18 @@ public class DriveSystem extends SuperSystem {
   public void changeNeoMode() {
     if (DriverStation.isDisabled()) {
       RM.setIdleMode(IdleMode.kCoast);
-      RS.setIdleMode(IdleMode.kCoast);
+      RS1.setIdleMode(IdleMode.kCoast);
+      RS2.setIdleMode(IdleMode.kCoast);
       LM.setIdleMode(IdleMode.kCoast);
-      LS.setIdleMode(IdleMode.kCoast);
+      LS1.setIdleMode(IdleMode.kCoast);
+      LS2.setIdleMode(IdleMode.kCoast);
     } else {
       RM.setIdleMode(IdleMode.kBrake);
-      RS.setIdleMode(IdleMode.kBrake);
+      RS1.setIdleMode(IdleMode.kBrake);
+      RS2.setIdleMode(IdleMode.kBrake);
       LM.setIdleMode(IdleMode.kBrake);
-      LS.setIdleMode(IdleMode.kBrake);
+      LS1.setIdleMode(IdleMode.kBrake);
+      LS2.setIdleMode(IdleMode.kBrake);
     }
   }
 
