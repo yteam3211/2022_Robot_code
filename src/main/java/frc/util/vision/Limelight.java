@@ -67,7 +67,6 @@ public class Limelight extends SubsystemBase {
     this.pitchAngle = builder.pitchAngle;
     this.cameraDistanceFromCenterRobot = builder.cameraDistanceFromCenterRobot;
     this.high = builder.high;
-
     tab = Shuffleboard.getTab(builder.table);
     CommandBase ledOn = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOn);
     CommandBase ledOff = new LimelightLEDChangeModeCommand(this, limelightLEDMode.kOff);
@@ -104,6 +103,7 @@ public class Limelight extends SubsystemBase {
     if (value == limelightLEDMode.kOn) {
       LEDMode.setNumber(3);
     } else if (value == limelightLEDMode.kOff) {
+      System.out.println(LEDMode.getNumber(33.5));
       LEDMode.setNumber(1);
     } else {
       LEDMode.setNumber(2);
@@ -279,6 +279,7 @@ public class Limelight extends SubsystemBase {
    * put limelight data in Dashboard.
    */
   public void putLimlightValuesInDashboard() {
+    System.out.println();
     putInDashboard("Is Valid", isValid(), 0, 0);
     putInDashboard("Tx", tx_, 0, 1);
     putInDashboard("Ty", ty_, 0, 2);
@@ -342,9 +343,7 @@ public class Limelight extends SubsystemBase {
 
     @Override
     public void execute() {
-      limelight.updateValues();
       limelight.putLimlightValuesInDashboard();
-      limelight.calculate();
     }
 
     @Override

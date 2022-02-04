@@ -15,6 +15,7 @@ import frc.robot.subsystems.DriveSystem;
 import frc.util.SuperNavX;
 import frc.util.pathGenerator.commandAuto.AutoChooser;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
+import frc.util.vision.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,6 +29,7 @@ import frc.util.pathGenerator.commandAuto.AutoGenerator;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  public final Limelight limelight = new Limelight.Builder().build();
   public final DriveSystem driveSystem = new DriveSystem();
   static public final SuperNavX navx = new SuperNavX();
   public final TestAuto testAuto = new TestAuto(driveSystem, navx);
