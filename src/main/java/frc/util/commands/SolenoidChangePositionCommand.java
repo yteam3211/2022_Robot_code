@@ -26,10 +26,10 @@ public class SolenoidChangePositionCommand extends InstantCommand {
 
   /**
    * This constractor will change solenoid position to what you whant.
-   * 
    * @param solenoid  solenid to change.
    * @param reverse   true to change to reverse.
    */
+  
   public SolenoidChangePositionCommand(SuperSolenoid solenoid, boolean reverse) {
     super(() -> solenoid.changePosition(reverse));
   }

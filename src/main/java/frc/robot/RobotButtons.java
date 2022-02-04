@@ -25,7 +25,7 @@ public class RobotButtons {
 
     public void loadButtons(ShootingSystem shoot, CartridgeSystem cartridge, CollectingSystem collect) {
         shootButton.whileActiveOnce(new SetOutputCommand(shoot, shoot.getTab().getFromDashboard("RPM", 0)));
-        cartridgeButton.whileActiveOnce(new SetOutputCommand(cartridge, cartridge.getTab().getFromDashboard("speed", 0)));
+        cartridgeButton.whileActiveOnce(new SetOutputCommand(cartridge, 0.7));
         collectButton.whileActiveOnce(new SetOutputCommand(collect, 0.7));
         collectSolenoidButton.whenActive(new SolenoidChangePositionCommand(collect.getSolenoid()));
     }

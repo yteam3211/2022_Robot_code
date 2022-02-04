@@ -41,12 +41,11 @@ public class DriveWithJoysticksAccCommand extends CommandBase {
 	public void initialize() {
 		lastLeft_ = 0;
 		lastRight_ = 0;
-
 	}
 
 	@Override
 	public void execute() {
-		turn = getAxisValue(turn_.getAsDouble(), 0.02);// 4
+		turn = getAxisValue(turn_.getAsDouble(), 0.02);
 		speed = -getAxisValue(speed_.getAsDouble(), 0.02);
 
 		left = speed - turn;

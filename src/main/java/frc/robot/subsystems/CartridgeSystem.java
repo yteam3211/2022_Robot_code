@@ -5,14 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.util.OutputSystem;
 
 public class CartridgeSystem extends OutputSystem {
   /** Creates a new CartridgeSystem. */
-  VictorSP CartridgeMotor1 = new VictorSP(Constants.CAN_CARTRIDGE1_MOTOR);
-  VictorSP CartridgeMotor2 = new VictorSP(Constants.CAN_CARTRIDGE2_MOTOR);
+  VictorSP CartridgeMotor1 = new VictorSP(Constants.PWM_CARTRIDGE1_MOTOR);
+  VictorSP CartridgeMotor2 = new VictorSP(Constants.PWM_CARTRIDGE2_MOTOR);
   public CartridgeSystem() {
     super("CartridgeSystem");
   }

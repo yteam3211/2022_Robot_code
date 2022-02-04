@@ -10,22 +10,26 @@ import frc.util.pathGenerator.Path;
 public final class Constants {
 
     //_______________CAN_________________
-    public static final int CAN_DRIVE_LM_MOTOR = 2;
-    public static final int CAN_DRIVE_LS1_MOTOR = 1;
-    public static final int CAN_DRIVE_LS2_MOTOR = 0;
-    public static final int CAN_DRIVE_RM_MOTOR = 4;
-    public static final int CAN_DRIVE_RS1_MOTOR = 3;
-    public static final int CAN_DRIVE_RS2_MOTOR = 0;
-    public static final int CAN_SHOOT_UP_MOTOR = 0;
-    public static final int CAN_SHOOT_DOWN_MOTOR = 0;
-    public static final int CAN_COLLECT_MOTOR = 0;
-    public static final int CAN_CARTRIDGE1_MOTOR = 0;
-    public static final int CAN_CARTRIDGE2_MOTOR = 0;
+    public static final int CAN_DRIVE_LM_MOTOR = 6;
+    public static final int CAN_DRIVE_LS1_MOTOR = 5;
+    public static final int CAN_DRIVE_LS2_MOTOR = 4;
+    public static final int CAN_DRIVE_RM_MOTOR = 3;
+    public static final int CAN_DRIVE_RS1_MOTOR = 2;
+    public static final int CAN_DRIVE_RS2_MOTOR = 1;
+    public static final int CAN_SHOOT_BACK_MOTOR = 7;
+    public static final int CAN_SHOOT_FROUNT_MOTOR = 8;
+
+
+
+
+    //_______________PWM_________________
+    public static final int PWM_COLLECT_MOTOR = 9;
+    public static final int PWM_CARTRIDGE1_MOTOR = 8;
+    public static final int PWM_CARTRIDGE2_MOTOR = 7;
 
 
     //_______________SOLENOIDS_________________
     public static final int COLLECT_SOLENOID = 0;
-
 
 
     //_______________PATH_________________

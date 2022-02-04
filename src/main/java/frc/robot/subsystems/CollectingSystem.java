@@ -5,14 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.util.OutputSystem;
 import frc.util.SuperSolenoid;
 
 public class CollectingSystem extends OutputSystem {
   /** Creates a new CollectingSystem. */
-  VictorSP collectMotor = new VictorSP(Constants.CAN_COLLECT_MOTOR);
+  VictorSP collectMotor = new VictorSP(Constants.PWM_COLLECT_MOTOR);
   SuperSolenoid collectSolenoid = new SuperSolenoid("collectSolenoid", Constants.COLLECT_SOLENOID, false);
   public CollectingSystem() {
     super("CollectingSystem");
@@ -32,8 +31,6 @@ public class CollectingSystem extends OutputSystem {
   public void changeSolenoid(){
     collectSolenoid.changePosition();
   }
-
-
 
   public SuperSolenoid getSolenoid(){
     return collectSolenoid;
