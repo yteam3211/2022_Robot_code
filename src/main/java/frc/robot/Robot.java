@@ -92,6 +92,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM", 0);
+    m_robotContainer.shootingSystem.getTab().putInDashboard("ratio", 0);
+    m_robotContainer.cartridgeSystem.getTab().putInDashboard("speed", 0);
   }
 
   /** This function is called periodically during operator control. */
