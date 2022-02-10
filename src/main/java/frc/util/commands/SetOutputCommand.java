@@ -4,6 +4,8 @@
 
 package frc.util.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.util.OutputSystem;
 
@@ -11,11 +13,20 @@ public class SetOutputCommand extends CommandBase {
   /** Creates a new SetOutputCommand. */
   OutputSystem outputSystem;
   double output;
+  DoubleSupplier outputSup = null;
   public SetOutputCommand(OutputSystem outputSystem, double output) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(outputSystem);
     this.outputSystem = outputSystem;
     this.output = output;
+  }
+
+
+  public SetOutputCommand(OutputSystem outputSystem, DoubleSupplier output) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(outputSystem);
+    this.outputSystem = outputSystem;
+    this.outputSup = output;
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +36,12 @@ public class SetOutputCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    outputSystem.setOutput(output);
+    if (outputSup != null){
+      outputSystem.setOutput(outputSup.getAsDouble());
+    }
+    else {
+      outputSystem.setOutput(output);
+    }
   }
 
   // Called once the command ends or is interrupted.

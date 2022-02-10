@@ -1,11 +1,8 @@
 package frc.util;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.SPI;
-import frc.util.SuperInterface;
+import com.kauailabs.navx.frc.AHRS;
 import frc.util.commands.ResetSensorsCommand;
-import frc.util.dashboard.SuperSystem;
 
 public class SuperNavX extends SuperSystem implements SuperInterface {
   private AHRS navX = new AHRS(SPI.Port.kMXP);
@@ -13,24 +10,17 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
   public SuperNavX() {
     super("Navx");
     this.resetNavx();
-    getTab().addCommandToDashboard("ResetSensor", new ResetSensorsCommand(this,
-    0));
+    getTab().addCommandToDashboard(
+        "ResetSensor",
+        new ResetSensorsCommand(this, 0));
   }
 
-  @Override
-  public void subsystemPeriodic() {
-    getTab().putInDashboard("NavX Angle", getAngle(), 2, 0);
-    getTab().putInDashboard("NavX Pitch", getPitch(), 2, 1);
-    getTab().putInDashboard("NavX Roll", getRoll(), 2, 2);
-    getTab().putInDashboard("NavX Yaw", getYaw(), 2, 3);
-
-  }
   @Override
   public void periodic() {
-    getTab().putInDashboard("NavX Angle", getAngle(), 2, 0);
-    getTab().putInDashboard("NavX Pitch", getPitch(), 2, 1);
-    getTab().putInDashboard("NavX Roll", getRoll(), 2, 2);
-    getTab().putInDashboard("NavX Yaw", getYaw(), 2, 3);
+    getTab().putInDashboard("NavX Angle", getAngle(), 2, 0, true);
+    getTab().putInDashboard("NavX Pitch", getPitch(), 2, 1, true);
+    getTab().putInDashboard("NavX Roll", getRoll(), 2, 2, true);
+    getTab().putInDashboard("NavX Yaw", getYaw(), 2, 3, true);
   }
 
   public float getYaw() {
@@ -55,10 +45,8 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
 
   public double getAngle360() {
     double angle = getAngle() % 360;
-
     if (angle < 0)
       angle += 360;
-
     return angle;
   }
 

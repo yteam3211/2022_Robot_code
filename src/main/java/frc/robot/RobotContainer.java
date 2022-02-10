@@ -12,7 +12,7 @@ import frc.robot.commands.auto.bowAuto;
 import frc.robot.commands.auto.check;
 import frc.robot.commands.auto.forwardAuto;
 import frc.robot.subsystems.CartridgeSystem;
-import frc.robot.subsystems.CollectingSystem;
+import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.SuperNavX;
@@ -32,9 +32,12 @@ import frc.util.vision.Limelight;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  public static double ratio = 0;
+  public static double speed = 0;
+  public static int RPM = 0;
   public final Limelight limelight = new Limelight.Builder().build();
   public final DriveSystem driveSystem = new DriveSystem();
-  public final CollectingSystem collectingSystem = new CollectingSystem();
+  public final CollectSystem collectingSystem = new CollectSystem();
   public final CartridgeSystem cartridgeSystem = new CartridgeSystem();
   public final ShootingSystem shootingSystem = new ShootingSystem();
   static public final SuperNavX navx = new SuperNavX();
@@ -53,7 +56,6 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the button bindings
-
     configureButtonBindings();
   }
 

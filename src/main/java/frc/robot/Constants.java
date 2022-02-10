@@ -6,10 +6,9 @@ package frc.robot;
 
 import frc.util.pathGenerator.Path;
 
-
 public final class Constants {
 
-    //_______________CAN_________________
+    // _______________CAN_________________
     public static final int CAN_DRIVE_LM_MOTOR = 6;
     public static final int CAN_DRIVE_LS1_MOTOR = 5;
     public static final int CAN_DRIVE_LS2_MOTOR = 4;
@@ -19,26 +18,21 @@ public final class Constants {
     public static final int CAN_SHOOT_BACK_MOTOR = 7;
     public static final int CAN_SHOOT_FROUNT_MOTOR = 8;
 
-
-
-
-    //_______________PWM_________________
+    // _______________PWM_________________
     public static final int PWM_COLLECT_MOTOR = 9;
     public static final int PWM_CARTRIDGE1_MOTOR = 8;
     public static final int PWM_CARTRIDGE2_MOTOR = 7;
 
-
-    //_______________SOLENOIDS_________________
+    // _______________SOLENOIDS_________________
     public static final int COLLECT_SOLENOID = 0;
 
-
-    //_______________PATH_________________
+    // _______________PATH_________________
     public static final Path auto1 = new Path("auto1");
     public static final Path forward = new Path("forward");
     public static final Path bow = new Path("TEST");
     public static final Path check = new Path("check");
 
-
-    //_______________OTHER_________________
+    // _______________OTHER_________________
     public static final double ROBOT_WIDTH = 0.7;
+    public static final int AMPER_LIMIT = 60;
 }

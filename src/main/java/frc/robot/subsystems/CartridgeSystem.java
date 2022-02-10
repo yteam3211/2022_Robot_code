@@ -9,9 +9,9 @@ import frc.robot.Constants;
 import frc.util.OutputSystem;
 
 public class CartridgeSystem extends OutputSystem {
-  /** Creates a new CartridgeSystem. */
-  VictorSP CartridgeMotor1 = new VictorSP(Constants.PWM_CARTRIDGE1_MOTOR);
-  VictorSP CartridgeMotor2 = new VictorSP(Constants.PWM_CARTRIDGE2_MOTOR);
+  private VictorSP CartridgeMotor1 = new VictorSP(Constants.PWM_CARTRIDGE1_MOTOR);
+  private VictorSP CartridgeMotor2 = new VictorSP(Constants.PWM_CARTRIDGE2_MOTOR);
+
   public CartridgeSystem() {
     super("CartridgeSystem");
   }
@@ -21,10 +21,9 @@ public class CartridgeSystem extends OutputSystem {
     // This method will be called once per scheduler run
   }
 
-  @Override  
+  @Override
   public void setOutput(double output) {
-    CartridgeMotor1.set(output);
-    CartridgeMotor2.set(output);
-    
+    CartridgeMotor1.set(-output);
+    CartridgeMotor2.set(-output);
   }
 }

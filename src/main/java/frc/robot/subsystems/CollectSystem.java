@@ -6,15 +6,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
+import frc.robot.commands.collect.DefueltCollectCommand;
 import frc.util.OutputSystem;
 import frc.util.SuperSolenoid;
 
-public class CollectingSystem extends OutputSystem {
-  /** Creates a new CollectingSystem. */
-  VictorSP collectMotor = new VictorSP(Constants.PWM_COLLECT_MOTOR);
-  SuperSolenoid collectSolenoid = new SuperSolenoid("collectSolenoid", Constants.COLLECT_SOLENOID, false);
-  public CollectingSystem() {
+public class CollectSystem extends OutputSystem {
+  private VictorSP motor = new VictorSP(Constants.PWM_COLLECT_MOTOR);
+  public final SuperSolenoid SOLENOID = new SuperSolenoid("collectSolenoid", Constants.COLLECT_SOLENOID, false);
+
+  public CollectSystem() {
     super("CollectingSystem");
+    setDefaultCommand(new DefueltCollectCommand(this));
   }
 
   @Override
@@ -24,15 +26,6 @@ public class CollectingSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    collectMotor.set(output);
-  }
-
-
-  public void changeSolenoid(){
-    collectSolenoid.changePosition();
-  }
-
-  public SuperSolenoid getSolenoid(){
-    return collectSolenoid;
+    motor.set(output);
   }
 }

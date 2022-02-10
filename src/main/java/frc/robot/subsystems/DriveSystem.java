@@ -10,54 +10,63 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.RobotButtons;
 import frc.robot.Constants;
+import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
-import frc.util.dashboard.SuperSystem;
 import frc.util.commands.DriveWithJoysticksAccCommand;
-// import frc.util.vision.Limelight;
+
 
 public class DriveSystem extends SuperSystem {
-  private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless, 60, true,
+  private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, false, IdleMode.kBrake);
+  private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, false,
       IdleMode.kBrake);
-  private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless, 60, true,
+  private SuperSparkMax RS2 = new SuperSparkMax(Constants.CAN_DRIVE_RS2_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, false,
       IdleMode.kBrake);
-  private SuperSparkMax RS2 = new SuperSparkMax(Constants.CAN_DRIVE_RS2_MOTOR, MotorType.kBrushless, 60, true,
+  private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, true,
       IdleMode.kBrake);
-  private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless, 60, false,
+  private SuperSparkMax LS1 = new SuperSparkMax(Constants.CAN_DRIVE_LS1_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, true,
       IdleMode.kBrake);
-  private SuperSparkMax LS1 = new SuperSparkMax(Constants.CAN_DRIVE_LS1_MOTOR, MotorType.kBrushless, 60, false,
+  private SuperSparkMax LS2 = new SuperSparkMax(Constants.CAN_DRIVE_LS2_MOTOR, MotorType.kBrushless,
+      Constants.AMPER_LIMIT, true,
       IdleMode.kBrake);
-  private SuperSparkMax LS2 = new SuperSparkMax(Constants.CAN_DRIVE_LS2_MOTOR, MotorType.kBrushless, 60, false,
-      IdleMode.kBrake);
+      
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
-  public static Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
-  public static Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
+  public static final Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
+  public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
 
   public DriveSystem() {
     super("Drive");
-
+    RM.setIdleMode(IdleMode.kCoast);
+    RS1.setIdleMode(IdleMode.kCoast);
+    RS2.setIdleMode(IdleMode.kCoast);
+    LM.setIdleMode(IdleMode.kCoast);
+    LS1.setIdleMode(IdleMode.kCoast);
+    LS2.setIdleMode(IdleMode.kCoast);
     LS1.follow(LM);
     LS2.follow(LM);
     RS1.follow(RM);
     RS2.follow(RM);
-
     resetSensors();
-
-    setDefaultCommand(new DriveWithJoysticksAccCommand(this, () -> RobotButtons.driverJoystick.getRawAxis(5),
-        () -> RobotButtons.driverJoystick.getRawAxis(0), 0.2, 0.5));
+    setDefaultCommand(new DriveWithJoysticksAccCommand(this,
+        () -> RobotButtons.driverJoystick.getRawAxis(5),
+        () -> -RobotButtons.driverJoystick.getRawAxis(0), 0.2, 1));
   }
 
   @Override
   public void periodic() {
-    changeNeoMode();
-    getTab().putInDashboard("left position", getLeftPosition());
-    getTab().putInDashboard("left encoder position", getLeftEncoderDistance());
-    getTab().putInDashboard("right encoder position", getRightEncoderDistance());
-    getTab().putInDashboard("average position", getPosition());
+    getTab().putInDashboard("left position", getLeftPosition(), true);
+    getTab().putInDashboard("right output", LM.getOutputCurrent(), true);
+    getTab().putInDashboard("left encoder position", getLeftEncoderDistance(), true);
+    getTab().putInDashboard("right encoder position", getRightEncoderDistance(), true);
+    getTab().putInDashboard("average position", getPosition(), true);
   }
 
   public void tank(double left, double right) {
@@ -106,24 +115,6 @@ public class DriveSystem extends SuperSystem {
 
   public double getLeftPosition() {
     return LM.getEncoder().getPosition();
-  }
-
-  public void changeNeoMode() {
-    if (DriverStation.isDisabled()) {
-      RM.setIdleMode(IdleMode.kCoast);
-      RS1.setIdleMode(IdleMode.kCoast);
-      RS2.setIdleMode(IdleMode.kCoast);
-      LM.setIdleMode(IdleMode.kCoast);
-      LS1.setIdleMode(IdleMode.kCoast);
-      LS2.setIdleMode(IdleMode.kCoast);
-    } else {
-      RM.setIdleMode(IdleMode.kBrake);
-      RS1.setIdleMode(IdleMode.kBrake);
-      RS2.setIdleMode(IdleMode.kBrake);
-      LM.setIdleMode(IdleMode.kBrake);
-      LS1.setIdleMode(IdleMode.kBrake);
-      LS2.setIdleMode(IdleMode.kBrake);
-    }
   }
 
   public void stopOutput() {

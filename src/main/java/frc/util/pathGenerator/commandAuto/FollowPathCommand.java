@@ -20,7 +20,7 @@ import frc.robot.subsystems.DriveSystem;
  */
 public class FollowPathCommand extends CommandBase {
     private Path path;
-    private double leftLestError, rightLestError, leftOutput, rightOutput;
+    private double leftLestError, rightLestError, leftOutput, rightOutput, errorLeft, errorRight;;
     private Gains gains;
     private DriveControl dc;
     private DriveSystem driveSystem;
@@ -58,8 +58,8 @@ public class FollowPathCommand extends CommandBase {
         leftPoint = path.left[index];
         rightPoint = path.right[index];
 
-        double errorLeft = dc.getRobotErrorLeftPosition(index);
-        double errorRight = dc.getRobotErrorRightPosition(index);
+        errorLeft = dc.getRobotErrorLeftPosition(index);
+        errorRight = dc.getRobotErrorRightPosition(index);
         leftOutput = (gains.kp * errorLeft + gains.kd * ((errorLeft - leftLestError) / Robot.kDefaultPeriod)
                 + (gains.kv * leftPoint.vel + gains.ka * leftPoint.acc));
         rightOutput = (gains.kp * errorRight + gains.kd * ((errorRight - rightLestError) / Robot.kDefaultPeriod)

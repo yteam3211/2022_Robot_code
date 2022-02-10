@@ -10,6 +10,7 @@ package frc.util.dashboard;
 import java.util.HashMap;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -31,8 +32,11 @@ public class SuperShuffleBoardTab {
      * 
      * @param key
      * @param value
+     * @param checkIfCompetition if true when the robot in comption the data will not be send
      */
-    public void putInDashboard(final String key, final Object value) {
+    public void putInDashboard(final String key, final Object value, boolean checkIfCompetition) {
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {
@@ -47,7 +51,10 @@ public class SuperShuffleBoardTab {
      * @param key
      * @param value
      */
-    public void putInDashboard(final String listName, final String key, final Object value) {
+    public void putInDashboard(final String listName, final String key, final Object value,
+            boolean checkIfCompetition) {
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {
@@ -55,7 +62,10 @@ public class SuperShuffleBoardTab {
         }
     }
 
-    public void putInDashboard(final String key, final Object value, final int columnIndex, final int rowIndex) {
+    public void putInDashboard(final String key, final Object value, final int columnIndex, final int rowIndex,
+            boolean checkIfCompetition) {
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {
@@ -64,7 +74,9 @@ public class SuperShuffleBoardTab {
     }
 
     public void putInDashboard(final String key, final Object value, final int columnIndex, final int rowIndex,
-            final WidgetType widgetType) {
+            final WidgetType widgetType, boolean checkIfCompetition) {
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {
@@ -73,7 +85,9 @@ public class SuperShuffleBoardTab {
     }
 
     public void putInDashboard(final String key, final Object value, final int columnIndex, final int rowIndex,
-            final WidgetType widgetType, final int width, final int height) {
+            final WidgetType widgetType, final int width, final int height, boolean checkIfCompetition) {
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {

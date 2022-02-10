@@ -5,12 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
 package frc.util.motor;
+
 import com.revrobotics.CANSparkMax;
 
 import frc.util.PID.Gains;
-import frc.util.PID.PIDController;
 
 /**
  * This class is SuperMotor of SparkMax
@@ -19,9 +18,7 @@ import frc.util.PID.PIDController;
  */
 public class SuperSparkMax extends CANSparkMax implements SuperMotor {
     private ControlType controlType;
-
     private static final int MAX_AMPS_DEFAULT = 60;
-    private PIDController pidController;
 
     /**
      * This constractor of m0aster
@@ -33,9 +30,7 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
      * @param mode         mode of motor brake or coast
      */
     public SuperSparkMax(int deviceNumber, MotorType motorType, int amps, boolean inverted, IdleMode mode) {
-
         super(deviceNumber, motorType);
-
         setInverted(inverted);
         setSmartCurrentLimit(amps);
         setIdleMode(mode);
@@ -64,7 +59,7 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
         getEncoder().setPositionConversionFactor(positionMultiply);
         getEncoder().setVelocityConversionFactor(velocityMultiply);
         setIdleMode(mode);
-                
+
         getPIDController().setP(gains.kp);
         getPIDController().setI(gains.ki);
         getPIDController().setD(gains.kd);
@@ -89,15 +84,12 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
      */
     public SuperSparkMax(SuperSparkMax leader, int deviceNumber, MotorType motorType, int amps, boolean inverted,
             IdleMode mode) {
-
         super(deviceNumber, motorType);
-
         follow(leader);
         setInverted(inverted);
         setSmartCurrentLimit(amps);
         setIdleMode(mode);
     }
-
 
     /**
      * This constractor of master
@@ -111,8 +103,8 @@ public class SuperSparkMax extends CANSparkMax implements SuperMotor {
 
     @Override
     public void setOutput(double output) {
-        if (controlType == null) {}
-
+        if (controlType == null)
+            return;
         set(output);
     }
 

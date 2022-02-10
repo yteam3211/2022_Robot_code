@@ -8,19 +8,18 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.util.OutputSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
 public class ShootingSystem extends OutputSystem {
-  /** Creates a new ShootingSystem. */
-  Gains shootGains = new Gains("shoot", 1, 0, 0);
-  SuperTalonFX frountMotor = new SuperTalonFX(Constants.CAN_SHOOT_FROUNT_MOTOR, 10, false/* inverted */,
-      false/* sensor inverted */, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
-  SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, false/* inverted */,
-      false/* sensor inverted */, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
-  
-  double outputRatio;
+  private Gains shootGains = new Gains("shoot", 0.15, 0.001, 0.4);
+
+  private SuperTalonFX frountMotor = new SuperTalonFX(Constants.CAN_SHOOT_FROUNT_MOTOR, 10, true,
+      false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
+  private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
+      shootGains, TalonFXControlMode.Velocity);
 
   public ShootingSystem() {
     super("ShootingSystem");
@@ -28,13 +27,18 @@ public class ShootingSystem extends OutputSystem {
 
   @Override
   public void periodic() {
-    outputRatio = getTab().getFromDashboard("ratio", 0);
-    // This method will be called once per scheduler run
+    getTab().putInDashboard("VelocityF", frountMotor.getVelocity(), true);
+    getTab().putInDashboard("VelocityB", backMotor.getVelocity(), true);
   }
 
   @Override
   public void setOutput(double output) {
-    frountMotor.setOutput(output);
-    backMotor.setOutput(output * outputRatio);
+    if (output == 0) {
+      frountMotor.set(TalonFXControlMode.PercentOutput, 0);
+      backMotor.set(TalonFXControlMode.PercentOutput, 0);
+    } else {
+      frountMotor.setOutput(output);
+      backMotor.setOutput(output * RobotContainer.ratio);
+    }
   }
 }

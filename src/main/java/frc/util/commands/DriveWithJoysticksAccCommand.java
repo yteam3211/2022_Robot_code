@@ -66,7 +66,7 @@ public class DriveWithJoysticksAccCommand extends CommandBase {
 
 		left = Math.abs(left - lastLeft_) > maxAdd ? lastLeft_ + maxAdd * sl : left;
 		right = Math.abs(right - lastRight_) > maxAdd ? lastRight_ + maxAdd * sr : right;
-
+		
 		driveSystem.tank(left * restraintOutput, right * restraintOutput);
 
 		lastLeft_ = left;

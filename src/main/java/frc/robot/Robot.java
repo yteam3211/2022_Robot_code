@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
    * for any initialization code.
    */
   @Override
-  public void robotInit() {
+  public void robotInit() {    
     // Instantiate our RobotContainer. This will perform all our button bindings,
     // and put our
     // autonomous chooser on the dashboard.''
@@ -85,6 +85,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM", 0,true);
+    m_robotContainer.shootingSystem.getTab().putInDashboard("ratio", 0,true);
+    m_robotContainer.cartridgeSystem.getTab().putInDashboard("speed", 0,true);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -92,14 +95,16 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM", 0);
-    m_robotContainer.shootingSystem.getTab().putInDashboard("ratio", 0);
-    m_robotContainer.cartridgeSystem.getTab().putInDashboard("speed", 0);
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    // System.out.println("a" + RobotContainer.RPM);
+    // System.out.println("b" + RobotContainer.speed);
+    RobotContainer.RPM =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM", 0);
+    RobotContainer.ratio = m_robotContainer.shootingSystem.getTab().getFromDashboard("ratio", 0);
+    RobotContainer.speed = m_robotContainer.cartridgeSystem.getTab().getFromDashboard("speed", 0);
   }
 
   @Override
