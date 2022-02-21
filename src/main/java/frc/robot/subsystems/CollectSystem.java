@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
 import frc.robot.commands.collect.DefueltCollectCommand;
+import frc.robot.commands.collect.DefueltsCollectCommand;
 import frc.util.OutputSystem;
 import frc.util.SuperSolenoid;
 
@@ -16,7 +17,7 @@ public class CollectSystem extends OutputSystem {
 
   public CollectSystem() {
     super("CollectingSystem");
-    setDefaultCommand(new DefueltCollectCommand(this));
+    setDefaultCommand(new DefueltsCollectCommand(this));
   }
 
   @Override

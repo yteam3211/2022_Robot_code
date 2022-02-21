@@ -20,21 +20,21 @@ import frc.util.commands.DriveWithJoysticksAccCommand;
 
 public class DriveSystem extends SuperSystem {
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, false, IdleMode.kBrake);
+      Constants.AMPER_LIMIT, Constants.reverse, IdleMode.kBrake);
   private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, false,
+      Constants.AMPER_LIMIT, Constants.reverse,
       IdleMode.kBrake);
   private SuperSparkMax RS2 = new SuperSparkMax(Constants.CAN_DRIVE_RS2_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, false,
+      Constants.AMPER_LIMIT, Constants.reverse,
       IdleMode.kBrake);
   private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, true,
+      Constants.AMPER_LIMIT, !Constants.reverse,
       IdleMode.kBrake);
   private SuperSparkMax LS1 = new SuperSparkMax(Constants.CAN_DRIVE_LS1_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, true,
+      Constants.AMPER_LIMIT, !Constants.reverse,
       IdleMode.kBrake);
   private SuperSparkMax LS2 = new SuperSparkMax(Constants.CAN_DRIVE_LS2_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, true,
+      Constants.AMPER_LIMIT, !Constants.reverse,
       IdleMode.kBrake);
       
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
@@ -55,9 +55,10 @@ public class DriveSystem extends SuperSystem {
     RS1.follow(RM);
     RS2.follow(RM);
     resetSensors();
+   
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
-        () -> RobotButtons.driverJoystick.getRawAxis(5),
-        () -> -RobotButtons.driverJoystick.getRawAxis(0), 0.2, 1));
+        () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
+        ,() -> Constants.DIRCTION *(0.5 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 0.2, 1));
   }
 
   @Override

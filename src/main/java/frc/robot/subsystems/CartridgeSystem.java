@@ -23,7 +23,13 @@ public class CartridgeSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    CartridgeMotor1.set(-output);
-    CartridgeMotor2.set(-output);
+    CartridgeMotor1.set(output);
+    CartridgeMotor2.set(output);
+  }
+
+
+  public void setMotorsOutput(double rightOutput, double leftOutput) {
+    CartridgeMotor1.set(rightOutput);
+    CartridgeMotor2.set(leftOutput);
   }
 }

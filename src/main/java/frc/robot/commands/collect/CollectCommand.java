@@ -5,6 +5,7 @@
 package frc.robot.commands.collect;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import frc.robot.commands.CartridgeCommand;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.CollectSystem;
 import frc.util.commands.SetOutputCommand;
@@ -13,8 +14,8 @@ import frc.util.commands.SolenoidChangePositionCommand;
 public class CollectCommand extends ParallelCommandGroup {
   public CollectCommand(CartridgeSystem cartridge, CollectSystem collect) {
     addCommands(
-        new SetOutputCommand(collect, -0.6),
-        new SetOutputCommand(cartridge, () -> -0.2),
+        new SetOutputCommand(collect, -1),
+        new CartridgeCommand(cartridge),
         new SolenoidChangePositionCommand(collect.SOLENOID, false));
   }
 }

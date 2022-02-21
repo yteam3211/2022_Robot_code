@@ -7,6 +7,7 @@
 
 package frc.util;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.Constants;
 
 /**
  * This class will make it easy to use Solenoid in the code.
@@ -25,8 +27,10 @@ public class SuperSolenoid {
 
     private DoubleSolenoid doubleSolenoid = null;
 
-    private static ShuffleboardTab tab = Shuffleboard.getTab("Solenoid");
+    public static ShuffleboardTab tab = Shuffleboard.getTab("Solenoid");
     private static int solenoidCount = 0;
+    
+
 
     /**
      * @param name    the name for the solenoid.
@@ -51,7 +55,6 @@ public class SuperSolenoid {
 
         tab.add(name + "open", open).withPosition(0, solenoidCount);
         tab.add(name + "close", close).withPosition(1, solenoidCount);
-
         solenoidCount++;
     }
 
