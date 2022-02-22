@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax.IdleMode;
@@ -12,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.RobotButtons;
 import frc.robot.Constants;
+import frc.util.SuperNavX;
 import frc.util.SuperSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
@@ -37,12 +31,15 @@ public class DriveSystem extends SuperSystem {
       Constants.AMPER_LIMIT, !Constants.reverse,
       IdleMode.kBrake);
       
+  // private SuperNavX navX;
+
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
   public static final Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
-  public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
+  //public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
+  public static final Gains autoGains = new Gains("autoGains", 0.3225, 0, 0, 0, 0);
 
-  public DriveSystem() {
+  public DriveSystem(SuperNavX navX) {
     super("Drive");
     RM.setIdleMode(IdleMode.kCoast);
     RS1.setIdleMode(IdleMode.kCoast);
@@ -56,6 +53,8 @@ public class DriveSystem extends SuperSystem {
     RS2.follow(RM);
     resetSensors();
    
+    // this.navX = navX;
+
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
         () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
         ,() -> Constants.DIRCTION *(0.5 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 0.2, 1));
@@ -67,7 +66,17 @@ public class DriveSystem extends SuperSystem {
     getTab().putInDashboard("right output", LM.getOutputCurrent(), true);
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance(), true);
     getTab().putInDashboard("right encoder position", getRightEncoderDistance(), true);
-    getTab().putInDashboard("average position", getPosition(), true);
+    // getTab().putInDashboard("average position", getPosition(), true);
+    // getTab().putInDashboard("VelocityX", navX.getNavX().getVelocityX(), false);
+    // getTab().putInDashboard("VelocityY", navX.getNavX().getVelocityY(), false);
+    // getTab().putInDashboard("VelocityZ", navX.getNavX().getVelocityZ(), false);
+
+    getTab().putInDashboard("LM", LM.getOutput(), false);
+    getTab().putInDashboard("LS1", LS1.getOutput(), false);
+    getTab().putInDashboard("LS2", LS2.getOutput(), false);
+    getTab().putInDashboard("RM", RM.getOutput(), false);
+    getTab().putInDashboard("RS1", RS1.getOutput(), false);
+    getTab().putInDashboard("LS2", RS2.getOutput(), false);
   }
 
   public void tank(double left, double right) {

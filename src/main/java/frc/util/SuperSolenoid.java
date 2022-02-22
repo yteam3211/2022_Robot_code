@@ -30,8 +30,6 @@ public class SuperSolenoid {
     public static ShuffleboardTab tab = Shuffleboard.getTab("Solenoid");
     private static int solenoidCount = 0;
     
-
-
     /**
      * @param name    the name for the solenoid.
      * @param channel The channel on the PCM to control (0..7).

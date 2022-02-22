@@ -56,8 +56,9 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
-    SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
+    //SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
+    //SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
+    
     m_robotContainer.driveSystem.periodic();
     m_robotContainer.shootingSystem.periodic();
     m_robotContainer.cartridgeSystem.periodic();
