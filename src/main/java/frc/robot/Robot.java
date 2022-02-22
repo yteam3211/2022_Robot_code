@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.util.SuperSolenoid;
+import frc.util.SuperSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,13 +57,14 @@ public class Robot extends TimedRobot {
     // and running subsystem periodic() methods. This must be called from the
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
-    //SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
-    //SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
     
     m_robotContainer.driveSystem.periodic();
     m_robotContainer.shootingSystem.periodic();
     m_robotContainer.cartridgeSystem.periodic();
-    m_robotContainer.collectingSystem.periodic();
+    m_robotContainer.collectSystem.periodic();
+    SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
+    SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
+    SuperSystem.periodics();
 
     CommandScheduler.getInstance().run();
   }

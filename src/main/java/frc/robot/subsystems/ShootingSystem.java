@@ -16,7 +16,7 @@ import frc.util.motor.SuperTalonFX;
 public class ShootingSystem extends OutputSystem {
   private Gains shootGains = new Gains("shoot", 0.22, 0.0005, 0.7);
 
-  private SuperTalonFX frontMotor = new SuperTalonFX(Constants.CAN_SHOOT_FROUNT_MOTOR, 10, true,
+  private SuperTalonFX frontMotor = new SuperTalonFX(Constants.CAN_SHOOT_FRONT_MOTOR, 10, true,
       false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
   private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
       shootGains, TalonFXControlMode.Velocity);

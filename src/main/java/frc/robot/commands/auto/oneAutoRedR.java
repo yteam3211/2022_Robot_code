@@ -1,5 +1,6 @@
 package frc.robot.commands.auto;
 
+
 import frc.robot.Constants;
 import frc.robot.commands.collect.CollectCommand;
 import frc.robot.commands.shooting.ShootingCommand;
@@ -8,22 +9,22 @@ import frc.util.commands.SetOutputCommand;
 import frc.util.commands.TimeCommand;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
 import frc.util.pathGenerator.drive_controls.EncoderAndNavxDriveControl;
+import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.CollectSystem;
-import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 
-public class oneAutoRedM extends AutoGenerator {
-    public oneAutoRedM(DriveSystem driveSystem, SuperNavX navX, CollectSystem collectSystem,
+public class oneAutoRedR extends AutoGenerator {
+    public oneAutoRedR(DriveSystem driveSystem, SuperNavX navX, CollectSystem collectSystem,
             EncoderAndNavxDriveControl navxDriveControl,
             CartridgeSystem cartridgeSystem, ShootingSystem shootingSystem) {
-        super("oneAutoRedM", driveSystem.getAutoGains(), driveSystem, navX);
+        super("oneAutoRedR", driveSystem.getAutoGains(), driveSystem, navX);
         addCommands(
                 deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem)),
-                addFollowPathCommand(Constants.MRED1, navxDriveControl),
-                deadline(addFollowPathCommand(Constants.MRED2, navxDriveControl), 
+                addFollowPathCommand(Constants.RRED1, navxDriveControl),
+                deadline(addFollowPathCommand(Constants.RRED2, navxDriveControl), 
                 new CollectCommand(cartridgeSystem, collectSystem)),
-                deadline(addFollowPathCommand(Constants.MRED3), 
+                deadline(addFollowPathCommand(Constants.RRED3), 
                 new SetOutputCommand(shootingSystem, Constants.CLOSE_SHOOT_RPM),
                 deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem))));
     }
