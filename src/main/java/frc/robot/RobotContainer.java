@@ -65,14 +65,15 @@ public class RobotContainer {
   // public final autoRedL autoRedL = new autoRedL(driveSystem, navx);
   // public final autoRedR autoRedR = new autoRedR(driveSystem, navx);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
-  public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
-      cartridgeSystem, shootingSystem);
-  public final oneAutoRedM oneAutoRedM = new oneAutoRedM(driveSystem, navx, collectSystem, navxDriveControl,
-      cartridgeSystem, shootingSystem);
+  // public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
+      // cartridgeSystem, shootingSystem);
+  // public final oneAutoRedM oneAutoRedM = new oneAutoRedM(driveSystem, navx, collectSystem, navxDriveControl,
+      // cartridgeSystem, shootingSystem);
   // public final oneAutoBlueL oneAutoBlueL = new oneAutoBlueL(driveSystem, navx);
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
-  public final AutoGenerator[] autoCommands = { forwardAuto, bowAuto, check, oneAutoRedM, oneAutoRedR
+  public final AutoGenerator[] autoCommands = { forwardAuto, bowAuto, check
       /*
+      , oneAutoRedM, oneAutoRedR
        * , autoRedL, autoRedR, autoBlueL,autoBlueR, oneAutoRedL, oneAutoRedM,
        * oneAutoBlueL, oneAutoBlueM
        */ };

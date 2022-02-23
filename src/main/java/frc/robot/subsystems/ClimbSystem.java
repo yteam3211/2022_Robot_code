@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.util.OutputSystem;
@@ -14,11 +17,11 @@ import frc.util.motor.SuperTalonSRX;
 
 public class ClimbSystem extends OutputSystem {
   
-  
-  private SuperTalonSRX climbMotor;
+  private DigitalInput magnetSensor = new DigitalInput(Constants.MAGNET_SENSOR);
+  private VictorSPX climbMotor;
   public ClimbSystem() {
     super("climbSystem");
-    climbMotor = new SuperTalonSRX(Constants.CAN_CLIMB_MOTOR, Constants.AMPER_LIMIT_CLIMB , false);
+    climbMotor = new VictorSPX(Constants.CAN_CLIMB_MOTOR);
     climbMotor.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -29,11 +32,11 @@ public class ClimbSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    climbMotor.set(TalonSRXControlMode.PercentOutput, output);    
+    climbMotor.set(ControlMode.PercentOutput, output);    
   }
-
-  public void setPosition(double position) {
-    climbMotor.set(TalonSRXControlMode.Position, position);    
+  
+  public boolean getMagnetMode(){
+    return !magnetSensor.get();
   }
 
 

@@ -26,21 +26,22 @@ public final class Constants {
 
     // _______________ANALOG_____________
     public static final int ANALOG_PRESSURE = 0;
+    public static final int MAGNET_SENSOR = 0;
 
     // _______________PATH__________________
-    public static final Path auto1 = new Path("auto1");
+    public static final Path auto1 = new Path("KaTest");
     public static final Path forward = new Path("forward");
     public static final Path bow = new Path("TEST");
     public static final Path check = new Path("check");
-    public static final Path RRED1 = new Path("RRED1");
-    public static final Path RRED2 = new Path("RRED2");
-    public static final Path RRED3 = new Path("RRED3");
-    public static final Path MRED1 = new Path("MRED1");
-    public static final Path MRED2 = new Path("MRED2");
-    public static final Path MRED3 = new Path("MRED3");
-    public static final Path autoBlueR = new Path("autoBlueR");
-    public static final Path autoRedL = new Path("autoRedL");
-    public static final Path autoRedR = new Path("autoRedR");
+    // public static final Path RRED1 = new Path("RRED1");
+    // public static final Path RRED2 = new Path("RRED2");
+    // public static final Path RRED3 = new Path("RRED3");
+    // public static final Path MRED1 = new Path("MRED1");
+    // public static final Path MRED2 = new Path("MRED2");
+    // public static final Path MRED3 = new Path("MRED3");
+    // public static final Path autoBlueR = new Path("autoBlueR");
+    // public static final Path autoRedL = new Path("autoRedL");
+    // public static final Path autoRedR = new Path("autoRedR");
     // public static final Path oneAutoRedL = new Path("oneAutoRedL");
     // public static final Path oneAutoRedM = new Path("oneAutoRedM");
     // public static final Path oneAutoBlueL = new Path("oneAutoBlueL");
@@ -49,8 +50,9 @@ public final class Constants {
     // _______________OTHER_________________
     public static final double ROBOT_WIDTH = 0.7;
     public static final int AMPER_LIMIT = 60;
-    public static final int AMPER_LIMIT_CLIMB = 60;
+    public static final int AMPER_LIMIT_CLIMB = 30;
     public static final int CLOSE_SHOOT_RPM = 13500;
+    public static final double CARITAGE_SPEED = -0.5;
 
     // ______________Changers_______________ 
     // Main robot:

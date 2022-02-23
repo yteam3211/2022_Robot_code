@@ -18,8 +18,8 @@ public class ShootingSystem extends OutputSystem {
 
   private SuperTalonFX frontMotor = new SuperTalonFX(Constants.CAN_SHOOT_FRONT_MOTOR, 10, true,
       false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
-  private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
-      shootGains, TalonFXControlMode.Velocity);
+  // private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
+      // shootGains, TalonFXControlMode.Velocity);
 
   public ShootingSystem() {
     super("ShootingSystem");
@@ -28,17 +28,17 @@ public class ShootingSystem extends OutputSystem {
   @Override
   public void periodic() {
     getTab().putInDashboard("VelocityF", frontMotor.getVelocity(), false);
-    getTab().putInDashboard("VelocityB", backMotor.getVelocity(), false);
+    // getTab().putInDashboard("VelocityB", backMotor.getVelocity(), false);
   }
 
   @Override
   public void setOutput(double output) {
     if (output == 0) {
       frontMotor.set(TalonFXControlMode.PercentOutput, 0);
-      backMotor.set(TalonFXControlMode.PercentOutput, 0);
+      // backMotor.set(TalonFXControlMode.PercentOutput, 0);
     } else {
-      frontMotor.setOutput(RobotContainer.RPM);
-      backMotor.setOutput(RobotContainer.RPM1);
+      frontMotor.setOutput(output);
+      // backMotor.setOutput(RobotContainer.RPM1);
     }
   }
 
@@ -46,9 +46,9 @@ public class ShootingSystem extends OutputSystem {
     return frontMotor.getVelocity();
   }
 
-  public double getBackVelocity() {
-    return backMotor.getVelocity();
-  }
+  // public double getBackVelocity() {
+  //   return backMotor.getVelocity();
+  // }
 
   public Gains getGains(){
     return shootGains;

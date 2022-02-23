@@ -31,7 +31,6 @@ public class DriveSystem extends SuperSystem {
       Constants.AMPER_LIMIT, !Constants.reverse,
       IdleMode.kBrake);
       
-  // private SuperNavX navX;
 
   private final double ENCODER_2_METER = 0.06349206349206349206349206349206;
 
@@ -39,7 +38,7 @@ public class DriveSystem extends SuperSystem {
   //public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
   public static final Gains autoGains = new Gains("autoGains", 0.3225, 0, 0, 0, 0);
 
-  public DriveSystem(SuperNavX navX) {
+  public DriveSystem() {
     super("Drive");
     RM.setIdleMode(IdleMode.kCoast);
     RS1.setIdleMode(IdleMode.kCoast);
@@ -47,14 +46,12 @@ public class DriveSystem extends SuperSystem {
     LM.setIdleMode(IdleMode.kCoast);
     LS1.setIdleMode(IdleMode.kCoast);
     LS2.setIdleMode(IdleMode.kCoast);
-    LS1.follow(LM);
-    LS2.follow(LM);
-    RS1.follow(RM);
-    RS2.follow(RM);
+    // LS1.follow(LM);
+    // LS2.follow(LM);
+    // RS1.follow(RM);
+    // RS2.follow(RM);
     resetSensors();
    
-    // this.navX = navX;
-
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
         () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
         ,() -> Constants.DIRCTION *(0.5 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 0.2, 1));
@@ -76,12 +73,16 @@ public class DriveSystem extends SuperSystem {
     getTab().putInDashboard("LS2", LS2.getOutput(), false);
     getTab().putInDashboard("RM", RM.getOutput(), false);
     getTab().putInDashboard("RS1", RS1.getOutput(), false);
-    getTab().putInDashboard("LS2", RS2.getOutput(), false);
+    getTab().putInDashboard("RS2", RS2.getOutput(), false);
   }
 
   public void tank(double left, double right) {
     LM.set(left);
+    LS1.set(left);
+    LS2.set(left);
     RM.set(right);
+    RS1.set(right);
+    RS2.set(right);
   }
 
   public void setOutput(double setOutput) {

@@ -8,9 +8,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.util.SuperSolenoid;
-import frc.util.SuperSystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -62,9 +59,9 @@ public class Robot extends TimedRobot {
     m_robotContainer.shootingSystem.periodic();
     m_robotContainer.cartridgeSystem.periodic();
     m_robotContainer.collectSystem.periodic();
-    SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
-    SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
-    SuperSystem.periodics();
+    // SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
+    // SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
+    // SuperSystem.periodics();
 
     CommandScheduler.getInstance().run();
   }

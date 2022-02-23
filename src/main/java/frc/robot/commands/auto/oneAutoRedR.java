@@ -21,10 +21,10 @@ public class oneAutoRedR extends AutoGenerator {
         super("oneAutoRedR", driveSystem.getAutoGains(), driveSystem, navX);
         addCommands(
                 deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem)),
-                addFollowPathCommand(Constants.RRED1, navxDriveControl),
-                deadline(addFollowPathCommand(Constants.RRED2, navxDriveControl), 
+                addFollowPathCommand(Constants.forward, navxDriveControl),
+                deadline(addFollowPathCommand(Constants.forward, navxDriveControl), 
                 new CollectCommand(cartridgeSystem, collectSystem)),
-                deadline(addFollowPathCommand(Constants.RRED3), 
+                deadline(addFollowPathCommand(Constants.forward), 
                 new SetOutputCommand(shootingSystem, Constants.CLOSE_SHOOT_RPM),
                 deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem))));
     }
