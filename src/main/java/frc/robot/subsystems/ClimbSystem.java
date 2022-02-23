@@ -17,7 +17,8 @@ import frc.util.motor.SuperTalonSRX;
 
 public class ClimbSystem extends OutputSystem {
   
-  private DigitalInput magnetSensor = new DigitalInput(Constants.MAGNET_SENSOR);
+  private DigitalInput magnetSensorUp = new DigitalInput(Constants.MAGNET_SENSOR_UP);
+  private DigitalInput magnetSensorDown = new DigitalInput(Constants.MAGNET_SENSOR_DOWN);
   private VictorSPX climbMotor;
   public ClimbSystem() {
     super("climbSystem");
@@ -32,11 +33,16 @@ public class ClimbSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    climbMotor.set(ControlMode.PercentOutput, output);    
+    if(getMagnetModeUp() && output > 0) output = 0;
+    if(getMagnetModeDown() && output < 0) output = 0;
+    climbMotor.set(ControlMode.PercentOutput, output); 
   }
   
-  public boolean getMagnetMode(){
-    return !magnetSensor.get();
+  public boolean getMagnetModeUp(){
+    return !magnetSensorUp.get();
+  }
+  public boolean getMagnetModeDown(){
+    return !magnetSensorDown.get();
   }
 
 

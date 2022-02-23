@@ -26,7 +26,8 @@ public final class Constants {
 
     // _______________ANALOG_____________
     public static final int ANALOG_PRESSURE = 0;
-    public static final int MAGNET_SENSOR = 0;
+    public static final int MAGNET_SENSOR_UP = 0;
+    public static final int MAGNET_SENSOR_DOWN = 0;
 
     // _______________PATH__________________
     public static final Path auto1 = new Path("KaTest");
