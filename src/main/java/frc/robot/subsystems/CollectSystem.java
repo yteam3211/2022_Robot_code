@@ -22,6 +22,7 @@ public class CollectSystem extends OutputSystem {
 
   @Override
   public void periodic() {
+    getTab().putInDashboard("Closed", SOLENOID.isForward(), true);
     // This method will be called once per scheduler run
   }
 

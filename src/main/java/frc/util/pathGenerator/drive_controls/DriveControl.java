@@ -19,6 +19,8 @@ public abstract class DriveControl {
 
     public abstract double getRobotErrorLeftPosition(int index);
 
+    public abstract void resetSensors();
+
     public void setPath(Path path) {
         this.path = path;
     }

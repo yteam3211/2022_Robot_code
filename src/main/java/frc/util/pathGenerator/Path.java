@@ -12,6 +12,7 @@ import frc.robot.Constants;
 public class Path {
     public Point[] left;
     public Point[] right;
+    // public Double[] angles;
     private double startAngle;
 
     public Path(String autoName) {
@@ -28,6 +29,7 @@ public class Path {
         String pathFolder = Filesystem.getDeployDirectory().toString() + "/" + autoName;
         right = loudFromCsv(pathFolder + "/" + autoName + ".left.csv");
         left = loudFromCsv(pathFolder + "/" + autoName + ".right.csv");
+        // angles = loudAngel(pathFolder + "/" + autoName + ".coords.csv");
     }
 
     /**
@@ -36,7 +38,28 @@ public class Path {
      * @return the angle from this point
      */
     public double getAngle(int index) {
-        return startAngle + ((left[index].pos - right[index].pos) / Constants.ROBOT_WIDTH);
+        return startAngle + Math.toDegrees(((right[index].pos - left[index].pos) 
+        / Constants.ROBOT_WIDTH));
+        // return angles[index];
+    }
+
+    public void inReverse(){
+        Point[] temp = left;
+        left = right;
+        right = temp;
+
+        for (int i = 0; i < left.length; i++) {
+            left[i].acc *= -1;
+            left[i].pos *= -1;
+            left[i].vel *= -1;
+        }
+
+        
+        for (int i = 0; i < right.length; i++) {
+            right[i].acc *= -1;
+            right[i].pos *= -1;
+            right[i].vel *= -1;
+        }
     }
 
     /**
@@ -69,4 +92,32 @@ public class Path {
         Point[] pointsArray = new Point[points.size()];
         return points.toArray(pointsArray);
     }
+
+
+    // Double[] loudAngel(String filePath){
+    //     List<Double> angels = new ArrayList<Double>();
+    //     try {
+    //         File csvFile = new File(filePath);
+    //         // TODO this is may cause problem
+    //         Scanner myReader = new Scanner(csvFile);
+    //         while (myReader.hasNextLine()) {
+    //             String data = myReader.nextLine();
+    //             if (data.charAt(0) == 'a') {
+    //                 continue;
+    //             }
+    //             String[] pointArr = data.split(",", 0);
+    //             // move the scv to list;
+    //             System.out.println();
+    //             Double angel = Double.parseDouble(pointArr[0]);
+    //             angels.add(angel);
+    //         }
+
+    //         myReader.close();
+    //     } catch (FileNotFoundException e) {
+    //         System.out.println("An error occurred.");
+    //         e.printStackTrace();
+    //     }
+    //     Double[] angelsArray = new Double[angels.size()];
+    //     return angels.toArray(angelsArray);
+    // }
 }

@@ -20,6 +20,7 @@ public class DefueltsCollectCommand extends CommandBase {
   @Override
   public void initialize() {
     collectSystem.SOLENOID.changePosition(true);
+    collectSystem.getTab().putInDashboard("Closed", true, false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

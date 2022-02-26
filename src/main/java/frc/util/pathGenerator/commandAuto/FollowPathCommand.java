@@ -44,6 +44,7 @@ public class FollowPathCommand extends CommandBase {
 
     @Override
     public void initialize() {
+        dc.resetSensors();
         driveSystem.stopOutput();
         rightLestError = 0;
         leftLestError = 0;
@@ -60,6 +61,8 @@ public class FollowPathCommand extends CommandBase {
 
         errorLeft = dc.getRobotErrorLeftPosition(index);
         errorRight = dc.getRobotErrorRightPosition(index);
+        driveSystem.getTab().putInDashboard("errorL", errorLeft, true);
+        driveSystem.getTab().putInDashboard("errorR", errorRight, true);
         leftOutput = (gains.kp * errorLeft + gains.kd * ((errorLeft - leftLestError) / Robot.kDefaultPeriod)
                 + (gains.kv * leftPoint.vel + gains.ka * leftPoint.acc));
         rightOutput = (gains.kp * errorRight + gains.kd * ((errorRight - rightLestError) / Robot.kDefaultPeriod)

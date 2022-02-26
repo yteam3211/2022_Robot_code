@@ -28,7 +28,8 @@ public class ClimbSystem extends OutputSystem {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    getTab().putInDashboard("upSensor", getMagnetModeUp(), false);
+    getTab().putInDashboard("downSensor", getMagnetModeDown(), false);
   }
 
   @Override

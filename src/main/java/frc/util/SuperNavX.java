@@ -6,13 +6,12 @@ import frc.util.commands.ResetSensorsCommand;
 
 public class SuperNavX extends SuperSystem implements SuperInterface {
   private AHRS navX = new AHRS(SPI.Port.kMXP);
-
+  private double offset;
   public SuperNavX() {
     super("Navx");
     this.resetNavx();
-    getTab().addCommandToDashboard(
-        "ResetSensor",
-        new ResetSensorsCommand(this, 0));
+    offset = 0;
+    getTab().addCommandToDashboard("ResetSensor", new ResetSensorsCommand(this, 0));
   }
 
   @Override
@@ -40,7 +39,7 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
   }
 
   public double getSuperAngle() {
-    return getAngle();
+    return getAngle() + offset;
   }
 
   public double getAngle360() {
@@ -64,6 +63,7 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
 
   @Override
   public void resetSensors(double pos) {
+    offset = pos;
     resetNavx();
   }
 }

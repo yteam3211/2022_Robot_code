@@ -39,7 +39,7 @@ public class ShootingCommand extends CommandBase {
     shootingSystem.setOutput(Constants.CLOSE_SHOOT_RPM);
 
     if(Math.abs(shootingSystem.getFrontVelocity() - Constants.CLOSE_SHOOT_RPM) < 200 
-     && RobotButtons.coPilotJoystick.getRawButton(6)){
+     || RobotButtons.coPilotJoystick.getRawButton(6)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }
     else {

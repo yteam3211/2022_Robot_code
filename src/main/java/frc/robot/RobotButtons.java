@@ -39,8 +39,8 @@ public class RobotButtons {
     public void loadButtons(ShootingSystem shoot, CartridgeSystem cartridge, CollectSystem collect, ClimbSystem climbSystem) {
         shootButton.whileActiveOnce(new ShootingCommand(shoot, cartridge));// (new
         // shootButton.whileActiveOnce(new SetOutputCommand(shoot,() -> RobotContainer.RPM));
-        climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 0.5));
-        climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -0.2));
+        climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 1));
+        climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -1));
         // (new
                                                                                         //    SetOutputCommand(shoot,
         // cartridgeOutButton.whileActiveContinuous(new SetOutputCommand(cartridge, 0.2));                                                                                           // shoot.getTab().getFromDashboard("RPM",

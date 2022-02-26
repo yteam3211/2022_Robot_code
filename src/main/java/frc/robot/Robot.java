@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
     m_robotContainer.shootingSystem.periodic();
     m_robotContainer.cartridgeSystem.periodic();
     m_robotContainer.collectSystem.periodic();
+    m_robotContainer.climbSystem.periodic();
     // SuperSolenoid.tab.add("pressure", 250 * (m_robotContainer.analogInput.getAverageVoltage() / 5) - 25).withPosition(3, 1);
     // SuperSolenoid.tab.add("pressureDefult",  m_robotContainer.analogInput.getAverageVoltage()).withPosition(4, 1);
     // SuperSystem.periodics();
@@ -115,6 +116,7 @@ public class Robot extends TimedRobot {
     // System.out.println("a" + RobotContainer.RPM);
     // System.out.println("b" + RobotContainer.speed);
     RobotContainer.RPM =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM", 0);
+    //RobotContainer.RPM = 3000;
     RobotContainer.RPM1 =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM1", 0);
     RobotContainer.ratio = m_robotContainer.shootingSystem.getTab().getFromDashboard("ratio", 0);
     RobotContainer.speed = m_robotContainer.cartridgeSystem.getTab().getFromDashboard("speed", 0);

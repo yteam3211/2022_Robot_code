@@ -20,4 +20,10 @@ public class EncoderDriveControl extends DriveControl {
     public double getRobotErrorRightPosition(int index) {
         return path.right[index].pos - getRightEncoderDistance();
     }
+
+    @Override
+    public void resetSensors() {
+        driveSystem.resetSensors(0);
+        
+    }
 }

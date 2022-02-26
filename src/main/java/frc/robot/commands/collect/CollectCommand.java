@@ -14,8 +14,8 @@ import frc.util.commands.SolenoidChangePositionCommand;
 public class CollectCommand extends ParallelCommandGroup {
   public CollectCommand(CartridgeSystem cartridge, CollectSystem collect) {
     addCommands(
+        new SolenoidChangePositionCommand(collect.SOLENOID, false),
         new SetOutputCommand(collect, -1),
-        new CartridgeCommand(cartridge),
-        new SolenoidChangePositionCommand(collect.SOLENOID, false));
+        new CartridgeCommand(cartridge));
   }
 }

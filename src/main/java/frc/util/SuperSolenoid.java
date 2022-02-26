@@ -176,6 +176,7 @@ public class SuperSolenoid {
      * @param reverse ture to change position to erverse.
      */
     public void changePosition(boolean reverse){
+        System.out.println(isOff());
         if(reverse){
             reverse();
         } else {
