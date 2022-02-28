@@ -39,6 +39,7 @@ public class DriveSystem extends SuperSystem implements SuperInterface{
   public static final Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
   //public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
   public static final Gains autoGains = new Gains("autoGains", 0.225, 0.075, 5.5, 0, 0);
+  public static final Gains turnGains = new Gains("turnGains", 0.15, 0, 0.3);
 
   public DriveSystem() {
     super("Drive");
@@ -98,6 +99,10 @@ public class DriveSystem extends SuperSystem implements SuperInterface{
 
   public Gains getAutoGains() {
     return autoGains;
+  }
+
+  public Gains getTurnGains() {
+    return turnGains;
   }
 
   public double getOutput() {

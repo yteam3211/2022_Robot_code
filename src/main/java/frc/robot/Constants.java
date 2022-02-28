@@ -14,6 +14,8 @@ public final class Constants {
     public static final int CAN_SHOOT_BACK_MOTOR = 7;
     public static final int CAN_SHOOT_FRONT_MOTOR = 8;
     public static final int CAN_CLIMB_MOTOR = 9;
+    public static final int CAN_CLIMB_MOTOR_LEFT = 11;
+    public static final int CAN_CLIMB_MOTOR_RIGHT = 10;
 
     // _______________PWM___________________
     // public static final int PWM_COLLECT_MOTOR = 9;
@@ -39,7 +41,7 @@ public final class Constants {
     public static final Path L2 = new Path("L2", 115);
     public static final Path L180 = new Path("L180", 180);
     public static final Path L360 = new Path("L360", 117.5);
-    public static final Path L3 = new Path("L3", 190);
+    public static final Path L3 = new Path("L3", 220);
     // public static final Path RRED1 = new Path("RRED1");
     // public static final Path RRED2 = new Path("RRED2");
     // public static final Path RRED3 = new Path("RRED3");
@@ -65,7 +67,7 @@ public final class Constants {
     // ______________Changers_______________ 
     // Main robot:
     public static final boolean reverse = true; 
-    public static final int PWM_COLLECT_MOTOR = 2;
+    public static final int PWM_COLLECT_MOTOR = 7;
     public static final int PWM_CARTRIDGE1_MOTOR = 1;
     public static final int PWM_CARTRIDGE2_MOTOR = 3;
     public static final int DIRCTION = 1;

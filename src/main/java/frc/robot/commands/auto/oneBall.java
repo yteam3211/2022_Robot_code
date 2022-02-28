@@ -20,8 +20,11 @@ public class oneBall extends AutoGenerator {
             super("1ball", driveSystem.getAutoGains(), driveSystem, navX);
             Constants.oneBall.inReverse();
 
-            addCommands(new ParallelDeadlineGroup(new TimeCommand(5000), new CloseCollectCommand(collectSystem, false) , new ShootingCommand(shootingSystem, cartridgeSystem)),
-            addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)));
+            addCommands(new ParallelDeadlineGroup(new TimeCommand(5000),
+             new CloseCollectCommand(collectSystem, false) ,
+             new ShootingCommand(shootingSystem, cartridgeSystem, true)));
+             addCommands(addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)));
+;
             // addCommands(new TimeCommand(3000));
             // addCommands();
 

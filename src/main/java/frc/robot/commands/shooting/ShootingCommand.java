@@ -21,11 +21,13 @@ public class ShootingCommand extends CommandBase {
 
 
   final int rpmDist = 1;
+  private boolean auto;
 
-  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem) {
+  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, boolean auto) {
     addRequirements(cartridgeSystem, shootingSystem);
     this.cartridgeSystem = cartridgeSystem;
     this.shootingSystem = shootingSystem;
+    this.auto = auto;
   }
 
   // Called when the command is initially scheduled.
@@ -39,7 +41,7 @@ public class ShootingCommand extends CommandBase {
     shootingSystem.setOutput(Constants.CLOSE_SHOOT_RPM);
 
     if(Math.abs(shootingSystem.getFrontVelocity() - Constants.CLOSE_SHOOT_RPM) < 200 
-     || RobotButtons.coPilotJoystick.getRawButton(6)){
+     && (RobotButtons.coPilotJoystick.getRawButton(6) || auto)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }
     else {

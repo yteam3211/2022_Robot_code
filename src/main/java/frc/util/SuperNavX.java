@@ -16,7 +16,7 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
 
   @Override
   public void periodic() {
-    getTab().putInDashboard("NavX Angle", getAngle(), 2, 0, true);
+    getTab().putInDashboard("NavX Angle", getSuperAngle(), 2, 0, true);
     getTab().putInDashboard("NavX Pitch", getPitch(), 2, 1, true);
     getTab().putInDashboard("NavX Roll", getRoll(), 2, 2, true);
     getTab().putInDashboard("NavX Yaw", getYaw(), 2, 3, true);
@@ -43,7 +43,7 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
   }
 
   public double getAngle360() {
-    double angle = getAngle() % 360;
+    double angle = getSuperAngle() % 360;
     if (angle < 0)
       angle += 360;
     return angle;

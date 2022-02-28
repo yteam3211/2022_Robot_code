@@ -22,6 +22,7 @@ import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.ClimbSystem;
 import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
+import frc.robot.subsystems.ExpandedClimbSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.SuperNavX;
 import frc.util.pathGenerator.commandAuto.AutoChooser;
@@ -52,6 +53,7 @@ public class RobotContainer {
   public final CartridgeSystem cartridgeSystem = new CartridgeSystem();
   public final ShootingSystem shootingSystem = new ShootingSystem();
   public final ClimbSystem climbSystem = new ClimbSystem();
+  public final ExpandedClimbSystem expandedClimbSystem = new ExpandedClimbSystem();
   static public final SuperNavX navx = new SuperNavX();
   public final EncoderAndNavxDriveControl navxDriveControl = new EncoderAndNavxDriveControl(driveSystem, navx);
   public final TestAuto testAuto = new TestAuto(driveSystem, navx,
@@ -72,7 +74,7 @@ public class RobotContainer {
       // cartridgeSystem, shootingSystem);
   // public final oneAutoBlueL oneAutoBlueL = new oneAutoBlueL(driveSystem, navx);
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
-  public final AutoGenerator[] autoCommands = { forwardAuto, bowAuto, check, oneBall, twoBall
+  public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall
       /*
       , oneAutoRedM, oneAutoRedR
        * , autoRedL, autoRedR, autoBlueL,autoBlueR, oneAutoRedL, oneAutoRedM,
@@ -97,7 +99,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    robotButtons.loadButtons(shootingSystem, cartridgeSystem, collectSystem, climbSystem);
+    robotButtons.loadButtons(shootingSystem, cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem);
   }
 
   /**

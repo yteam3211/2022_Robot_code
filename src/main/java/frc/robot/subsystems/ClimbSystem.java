@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,6 +21,7 @@ public class ClimbSystem extends OutputSystem {
   private DigitalInput magnetSensorUp = new DigitalInput(Constants.MAGNET_SENSOR_UP);
   private DigitalInput magnetSensorDown = new DigitalInput(Constants.MAGNET_SENSOR_DOWN);
   private VictorSPX climbMotor;
+
   public ClimbSystem() {
     super("climbSystem");
     climbMotor = new VictorSPX(Constants.CAN_CLIMB_MOTOR);

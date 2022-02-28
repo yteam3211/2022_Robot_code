@@ -19,12 +19,12 @@ public class oneAutoRedM extends AutoGenerator {
             CartridgeSystem cartridgeSystem, ShootingSystem shootingSystem) {
         super("oneAutoRedM", driveSystem.getAutoGains(), driveSystem, navX);
         addCommands(
-                deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem)),
+                deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem, true)),
                 addFollowPathCommand(Constants.forward, navxDriveControl),
                 deadline(addFollowPathCommand(Constants.forward, navxDriveControl), 
                 new CollectCommand(cartridgeSystem, collectSystem)),
                 deadline(addFollowPathCommand(Constants.forward), 
                 new SetOutputCommand(shootingSystem, Constants.CLOSE_SHOOT_RPM),
-                deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem))));
+                deadline(new TimeCommand(3000), new ShootingCommand(shootingSystem, cartridgeSystem, true))));
     }
 }

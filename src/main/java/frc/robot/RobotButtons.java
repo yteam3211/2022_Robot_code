@@ -16,6 +16,7 @@ import frc.robot.commands.shooting.ShootingCommand;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.ClimbSystem;
 import frc.robot.subsystems.CollectSystem;
+import frc.robot.subsystems.ExpandedClimbSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.commands.SetOutputCommand;
 
@@ -29,6 +30,8 @@ public class RobotButtons {
     public Trigger cartridgeOutButton = new Trigger(() -> coPilotJoystick.getRawButton(1));
     public Trigger climbOpen = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger climbClose = new Trigger(() -> coPilotJoystick.getPOV() == 180);
+    public Trigger climbExpandedClose = new Trigger(() -> coPilotJoystick.getRawButton(4));
+    public Trigger climbExpandedOpen = new Trigger(() -> coPilotJoystick.getRawButton(1));
     // public Trigger collectButton = new Trigger(() -> driverJoystick.getRawAxis(2)
     // > 0.02);
     // public Trigger collectSolenoidButton = new Trigger(() -> driverJoystick.getRawButton(5));
@@ -36,8 +39,8 @@ public class RobotButtons {
 
     // public Trigger shootWithCartridgeButton = new Trigger(() -> coPilotJoystick.getRawAxis(2) > 0.05);
 
-    public void loadButtons(ShootingSystem shoot, CartridgeSystem cartridge, CollectSystem collect, ClimbSystem climbSystem) {
-        shootButton.whileActiveOnce(new ShootingCommand(shoot, cartridge));// (new
+    public void loadButtons(ShootingSystem shoot, CartridgeSystem cartridge, CollectSystem collect, ClimbSystem climbSystem, ExpandedClimbSystem expandedClimbSystem) {
+        shootButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, false));// (new
         // shootButton.whileActiveOnce(new SetOutputCommand(shoot,() -> RobotContainer.RPM));
         climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 1));
         climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -1));
@@ -47,6 +50,8 @@ public class RobotButtons {
         // shootWithCartridgeButton.whileActiveContinuous(new ShootingCommand(shoot, cartridge));                                                                                           // 0)));
         cartridgeOutButton.whileActiveOnce(new SetOutputCommand(cartridge, 0.2));
         collectButton.whileActiveOnce(new CollectCommand(cartridge, collect));
+        climbExpandedClose.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, 0.5));
+        climbExpandedOpen.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, -0.5));
         // collectSolenoidButton.whenActive(new SolenoidChangePositionCommand(collect.SOLENOID));
   
     }
