@@ -35,8 +35,8 @@ public class SuperShuffleBoardTab {
      * @param checkIfCompetition if true when the robot in comption the data will not be send
      */
     public void putInDashboard(final String key, final Object value, boolean checkIfCompetition) {
-        // if (checkIfCompetition && DriverStation.isFMSAttached())
-        //     return;
+        if (checkIfCompetition && DriverStation.isFMSAttached())
+            return;
         if (keys.containsKey(key)) {
             keys.get(key).setValue(value);
         } else {

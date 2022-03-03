@@ -18,7 +18,7 @@ public class ExpandedClimbSystem extends OutputSystem{
   private VictorSPX climbMotorLeft;
   private TalonSRX climbMotorRight;
   public ExpandedClimbSystem() {
-    super("ExpandedClimbSystem");
+    super("ExClimb");
     climbMotorLeft = new VictorSPX(Constants.CAN_CLIMB_MOTOR_LEFT);
     climbMotorLeft.setNeutralMode(NeutralMode.Brake);
     climbMotorRight = new TalonSRX(Constants.CAN_CLIMB_MOTOR_RIGHT);

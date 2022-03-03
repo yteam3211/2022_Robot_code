@@ -9,15 +9,13 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.auto.TestAuto;
+import frc.robot.commands.auto.ThreeBallFar;
 import frc.robot.commands.auto.bowAuto;
 import frc.robot.commands.auto.check;
 import frc.robot.commands.auto.forwardAuto;
-import frc.robot.commands.auto.oneAutoBlueL;
-import frc.robot.commands.auto.oneAutoBlueM;
-import frc.robot.commands.auto.oneAutoRedR;
+import frc.robot.commands.auto.AutoRedL;
 import frc.robot.commands.auto.oneBall;
 import frc.robot.commands.auto.twoBall;
-import frc.robot.commands.auto.oneAutoRedM;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.ClimbSystem;
 import frc.robot.subsystems.CollectSystem;
@@ -63,10 +61,11 @@ public class RobotContainer {
   public final check check = new check(driveSystem, navx);
   public final oneBall oneBall = new oneBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem);
   public final twoBall twoBall = new twoBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem);
+  public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
   // public final autoBlueL autoBlueL = new autoBlueL(driveSystem, navx);
   // public final autoBlueR autoBlueR = new autoBlueR(driveSystem, navx);
   // public final autoRedL autoRedL = new autoRedL(driveSystem, navx);
-  // public final autoRedR autoRedR = new autoRedR(driveSystem, navx);
+  public final AutoRedL autoRedL = new AutoRedL(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
   // public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
       // cartridgeSystem, shootingSystem);
@@ -74,12 +73,7 @@ public class RobotContainer {
       // cartridgeSystem, shootingSystem);
   // public final oneAutoBlueL oneAutoBlueL = new oneAutoBlueL(driveSystem, navx);
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
-  public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall
-      /*
-      , oneAutoRedM, oneAutoRedR
-       * , autoRedL, autoRedR, autoBlueL,autoBlueR, oneAutoRedL, oneAutoRedM,
-       * oneAutoBlueL, oneAutoBlueM
-       */ };
+  public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall, autoRedL, threeBallFar};
   public final AutoChooser autoChooser = new AutoChooser(oneBall, autoCommands);
   public final RobotButtons robotButtons = new RobotButtons();
 

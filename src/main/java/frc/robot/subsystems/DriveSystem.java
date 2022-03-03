@@ -38,7 +38,7 @@ public class DriveSystem extends SuperSystem implements SuperInterface{
 
   public static final Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
   //public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
-  public static final Gains autoGains = new Gains("autoGains", 0.225, 0.075, 5.5, 0, 0);
+  public static final Gains autoGains = new Gains("autoGains", 0.225, 0.075, 8, 0, 0);
   public static final Gains turnGains = new Gains("turnGains", 0.15, 0, 0.3);
 
   public DriveSystem() {
@@ -57,7 +57,7 @@ public class DriveSystem extends SuperSystem implements SuperInterface{
     getTab().addCommandToDashboard("Reset Sensors",new ResetSensorsCommand(this, 0));
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
         () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
-        ,() -> Constants.DIRCTION *(0.5 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 0.2, 1));
+        ,() -> Constants.DIRCTION *(1 * RobotButtons.driverJoystick.getRawAxis(0)  + 0 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 1, 1));
   }
 
   @Override
@@ -66,17 +66,7 @@ public class DriveSystem extends SuperSystem implements SuperInterface{
     getTab().putInDashboard("right position", getRightPosition(), true);
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance(), true);
     getTab().putInDashboard("right encoder position", getRightEncoderDistance(), true);
-    // getTab().putInDashboard("average position", getPosition(), true);
-    // getTab().putInDashboard("VelocityX", navX.getNavX().getVelocityX(), false);
-    // getTab().putInDashboard("VelocityY", navX.getNavX().getVelocityY(), false);
-    // getTab().putInDashboard("VelocityZ", navX.getNavX().getVelocityZ(), false);
 
-    getTab().putInDashboard("LM", LM.getOutput(), false);
-    getTab().putInDashboard("LS1", LS1.getOutput(), false);
-    getTab().putInDashboard("LS2", LS2.getOutput(), false);
-    getTab().putInDashboard("RM", RM.getOutput(), false);
-    getTab().putInDashboard("RS1", RS1.getOutput(), false);
-    getTab().putInDashboard("RS2", RS2.getOutput(), false);
   }
 
   public void tank(double left, double right) {

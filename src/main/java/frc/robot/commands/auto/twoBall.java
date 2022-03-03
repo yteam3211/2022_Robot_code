@@ -22,11 +22,11 @@ public class twoBall extends AutoGenerator {
     public twoBall(DriveSystem driveSystem, SuperNavX navX, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, CollectSystem collectSystem) {
             super("2 ball", driveSystem.getAutoGains(), driveSystem, navX, 200);
             
-            Constants.L1.inReverse();
+            // Constants.L1.inReverse();
             addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new CloseCollectCommand(collectSystem, false), new ShootingCommand(shootingSystem, cartridgeSystem,true)));
-            addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.L1, new EncoderAndNavxDriveControl(driveSystem, navX)),new CloseCollectCommand(collectSystem, true)));
+            // addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.L1, new EncoderAndNavxDriveControl(driveSystem, navX)),new CloseCollectCommand(collectSystem, true)));
             // addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 115)));
-            addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.L2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));
+            // addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.L2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));
             // addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 220)));
             // addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.L3, new EncoderAndNavxDriveControl(driveSystem, navX)),new CloseCollectCommand(collectSystem, true)));
             // addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), new ShootingCommand(shootingSystem, cartridgeSystem, true)));

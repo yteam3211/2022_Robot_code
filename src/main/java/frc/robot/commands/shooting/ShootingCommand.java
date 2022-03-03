@@ -38,9 +38,10 @@ public class ShootingCommand extends CommandBase {
   @Override
   public void execute() {
      
-    shootingSystem.setOutput(Constants.CLOSE_SHOOT_RPM);
+    shootingSystem.setOutput(RobotContainer.RPM);
 
-    if(Math.abs(shootingSystem.getFrontVelocity() - Constants.CLOSE_SHOOT_RPM) < 200 
+    if(Math.abs(shootingSystem.getFrontVelocity() - RobotContainer.RPM) < 100 
+    
      && (RobotButtons.coPilotJoystick.getRawButton(6) || auto)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }

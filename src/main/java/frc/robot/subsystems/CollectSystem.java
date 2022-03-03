@@ -16,7 +16,7 @@ public class CollectSystem extends OutputSystem {
   public final SuperSolenoid SOLENOID = new SuperSolenoid("collectSolenoid", Constants.COLLECT_SOLENOID, false);
 
   public CollectSystem() {
-    super("CollectingSystem");
+    super("Collecting");
     setDefaultCommand(new DefueltsCollectCommand(this));
   }
 

@@ -13,7 +13,7 @@ public class CartridgeSystem extends OutputSystem {
   private VictorSP CartridgeMotor2 = new VictorSP(Constants.PWM_CARTRIDGE2_MOTOR);
 
   public CartridgeSystem() {
-    super("CartridgeSystem");
+    super("Cartridge");
   }
 
   @Override
@@ -23,8 +23,8 @@ public class CartridgeSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    CartridgeMotor1.set(output);
-    CartridgeMotor2.set(output);
+    CartridgeMotor1.set(-output);
+    CartridgeMotor2.set(-(output - 0.1));
   }
 
 

@@ -23,7 +23,7 @@ public class ClimbSystem extends OutputSystem {
   private VictorSPX climbMotor;
 
   public ClimbSystem() {
-    super("climbSystem");
+    super("climb");
     climbMotor = new VictorSPX(Constants.CAN_CLIMB_MOTOR);
     climbMotor.setNeutralMode(NeutralMode.Brake);
   }

@@ -13,6 +13,7 @@ public final class Constants {
     public static final int CAN_DRIVE_RS2_MOTOR = 1;
     public static final int CAN_SHOOT_BACK_MOTOR = 7;
     public static final int CAN_SHOOT_FRONT_MOTOR = 8;
+    //public static final int CAN_SHOOT_FRONT_MOTOR_SLAVE = 0;
     public static final int CAN_CLIMB_MOTOR = 9;
     public static final int CAN_CLIMB_MOTOR_LEFT = 11;
     public static final int CAN_CLIMB_MOTOR_RIGHT = 10;
@@ -37,39 +38,31 @@ public final class Constants {
     public static final Path forward = new Path("forword");
     public static final Path bow = new Path("bow");
     public static final Path oneBall = new Path("1ball");
-    public static final Path L1 = new Path("L1", 200);
-    public static final Path L2 = new Path("L2", 115);
-    public static final Path L180 = new Path("L180", 180);
-    public static final Path L360 = new Path("L360", 117.5);
-    public static final Path L3 = new Path("L3", 220);
-    // public static final Path RRED1 = new Path("RRED1");
-    // public static final Path RRED2 = new Path("RRED2");
-    // public static final Path RRED3 = new Path("RRED3");
-    // public static final Path MRED1 = new Path("MRED1");
-    // public static final Path MRED2 = new Path("MRED2");
-    // public static final Path MRED3 = new Path("MRED3");
-    // public static final Path autoBlueR = new Path("autoBlueR");
-    // public static final Path autoRedL = new Path("autoRedL");
-    // public static final Path autoRedR = new Path("autoRedR");
-    // public static final Path oneAutoRedL = new Path("oneAutoRedL");
-    // public static final Path oneAutoRedM = new Path("oneAutoRedM");
-    // public static final Path oneAutoBlueL = new Path("oneAutoBlueL");
-    // public static final Path oneAutoBlueM = new Path("oneAutoBlueM");
+    public static final Path TP1 = new Path("3P1", 200);
+    public static final Path TP2 = new Path("3P2", 320);
+    public static final Path TP3 = new Path("3P3", 320);
+    public static final Path TP4 = new Path("3P4", 90);
+    public static final Path L3 = new Path("L3", 175);
+    public static final Path LRED0 = new Path("LRed0", 200);
+    public static final Path LRED1 = new Path("LRed1", 200);
+    public static final Path LRED2 = new Path("LRed2", 40);
+    public static final Path LRED3 = new Path("LRed3", 220);
+
     
 
     // _______________OTHER_________________
     public static final double ROBOT_WIDTH = 0.653;
     public static final int AMPER_LIMIT = 60;
     public static final int AMPER_LIMIT_CLIMB = 30;
-    public static final int CLOSE_SHOOT_RPM = 13500;
-    public static final double CARITAGE_SPEED = -0.5;
+    public static final int CLOSE_SHOOT_RPM = 12550;
+    public static final double CARITAGE_SPEED = -0.2;
 
     // ______________Changers_______________ 
     // Main robot:
     public static final boolean reverse = true; 
     public static final int PWM_COLLECT_MOTOR = 7;
-    public static final int PWM_CARTRIDGE1_MOTOR = 1;
-    public static final int PWM_CARTRIDGE2_MOTOR = 3;
+    public static final int PWM_CARTRIDGE1_MOTOR = 6;
+    public static final int PWM_CARTRIDGE2_MOTOR = 5;
     public static final int DIRCTION = 1;
     
 
