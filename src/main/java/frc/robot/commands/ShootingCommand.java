@@ -40,8 +40,8 @@ public class ShootingCommand extends CommandBase {
      
     shootingSystem.setOutput(RobotContainer.RPM);
     double error = shootingSystem.getFrontVelocity() - RobotContainer.RPM;
-    if(error < 100 && error > -20
-     && (RobotButtons.coPilotJoystick.getRawButton(6) || auto)){
+    if(error < 100 && error > -100
+     && (RobotButtons.coPilotJoystick.getRawButton(6) || RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }
     else {

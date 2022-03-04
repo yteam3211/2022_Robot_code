@@ -26,9 +26,9 @@ public class AutoRedL extends AutoGenerator {
         Constants.LRED1.inReverse();
         addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new changeSelenoidCommand(collectSystem, false), new ShootingCommand(shootingSystem, cartridgeSystem,true)));
         addCommands(addFollowPathCommand(Constants.LRED1, new EncoderAndNavxDriveControl(driveSystem, navX)));
-        addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 40)));
+        addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 50)));
         addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LRED2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));
-        addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 220),new changeSelenoidCommand(collectSystem, true)));
+        addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 220),new changeSelenoidCommand(collectSystem, true)));
         addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LRED3, new EncoderAndNavxDriveControl(driveSystem, navX)),new SetOutputCommand(shootingSystem,Constants.CLOSE_SHOOT_RPM)));
         addCommands(new ParallelDeadlineGroup(new TimeCommand(7000), new ShootingCommand(shootingSystem, cartridgeSystem, true)));
 }

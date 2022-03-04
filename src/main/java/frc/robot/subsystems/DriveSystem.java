@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.robot.RobotButtons;
 import frc.robot.Constants;
+import frc.util.OutputSystem;
 import frc.util.SuperInterface;
 import frc.util.SuperNavX;
 import frc.util.SuperSystem;
@@ -14,7 +15,7 @@ import frc.util.commands.DriveWithJoysticksAccCommand;
 import frc.util.commands.ResetSensorsCommand;
 
 
-public class DriveSystem extends SuperSystem implements SuperInterface{
+public class DriveSystem extends OutputSystem implements SuperInterface{
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, Constants.reverse, IdleMode.kBrake);
   private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless,

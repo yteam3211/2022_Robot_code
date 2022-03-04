@@ -43,13 +43,13 @@ public final class Constants {
     public static final Path TP4 = new Path("3P4", 90);
     public static final Path L3 = new Path("L3", 175);
     public static final Path RTB1 = new Path("RTB1", 110);
-    public static final Path RTB2 = new Path("RTB2", 340);
-    public static final Path RTB3 = new Path("RTB3", 150);
+    public static final Path RTB2 = new Path("RTB2", 0);
+    public static final Path RTB3 = new Path("RTB3", 180);
     public static final Path LTB1 = new Path("LTB1", 110);
     public static final Path LTB2 = new Path("LTB2", 270);
     public static final Path LTB3 = new Path("LTB3", 0);
     public static final Path LRED1 = new Path("LRed1", 200);
-    public static final Path LRED2 = new Path("LRed2", 40);
+    public static final Path LRED2 = new Path("LRed2", 50);
     public static final Path LRED3 = new Path("LRed3", 220);
 
     
@@ -58,7 +58,7 @@ public final class Constants {
     public static final double ROBOT_WIDTH = 0.653;
     public static final int AMPER_LIMIT = 60;
     public static final int AMPER_LIMIT_CLIMB = 30;
-    public static final int CLOSE_SHOOT_RPM = 12300;
+    public static final int CLOSE_SHOOT_RPM = 10000;
     public static final double CARITAGE_SPEED = -0.2;
 
     // ______________Changers_______________ 

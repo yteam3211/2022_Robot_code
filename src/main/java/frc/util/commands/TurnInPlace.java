@@ -34,7 +34,7 @@ public class TurnInPlace extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double errorAngle = navX.getAngle360() - angle;
+    double errorAngle = navX.getSuperAngle() - angle;
     driveSystem.tank(reverse * ( gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)), 
     -1 * reverse *  (gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)));
     LastAngle = errorAngle; 

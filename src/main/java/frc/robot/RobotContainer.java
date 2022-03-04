@@ -43,7 +43,7 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static double ratio = 0;
   public static double speed = 0;
-  public static int RPM = 0; // 4300 is recommended
+  public static int RPM = Constants.CLOSE_SHOOT_RPM; // 4300 is recommended
   public static int RPM1 = 0; // 4300 is recommended
 
   public final Limelight limelight = new Limelight.Builder().build();
