@@ -3,8 +3,8 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import frc.robot.Constants;
-import frc.robot.commands.collect.CloseCollectCommand;
-import frc.robot.commands.shooting.ShootingCommand;
+import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.collect.changeSelenoidCommand;
 import frc.util.SuperNavX;
 import frc.util.commands.SolenoidChangePositionCommand;
 import frc.util.commands.TimeCommand;
@@ -21,9 +21,9 @@ public class oneBall extends AutoGenerator {
             Constants.oneBall.inReverse();
 
             addCommands(new ParallelDeadlineGroup(new TimeCommand(5000),
-             new CloseCollectCommand(collectSystem, false) ,
+             new changeSelenoidCommand(collectSystem, false) ,
              new ShootingCommand(shootingSystem, cartridgeSystem, true)));
-             addCommands(addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)));
+             addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSystem, true)));
 ;
             // addCommands(new TimeCommand(3000));
             // addCommands();

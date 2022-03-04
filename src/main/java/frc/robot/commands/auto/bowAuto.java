@@ -5,7 +5,6 @@ import frc.robot.Constants;
 import frc.util.SuperNavX;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
 import frc.util.pathGenerator.drive_controls.EncoderAndNavxDriveControl;
-import frc.util.pathGenerator.drive_controls.EncoderDriveControl;
 import frc.robot.subsystems.DriveSystem;
 
 public class bowAuto extends AutoGenerator {

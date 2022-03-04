@@ -7,14 +7,14 @@ package frc.robot.commands.collect;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSystem;
 
-public class CloseCollectCommand extends CommandBase {
+public class changeSelenoidCommand extends CommandBase {
   /** Creates a new CloseCollectCommand. */
   CollectSystem collectSystem;
   boolean open;
-  public CloseCollectCommand(CollectSystem collectSystem, boolean open) {
+  public changeSelenoidCommand(CollectSystem collectSystem, boolean open) {
+    addRequirements(collectSystem);
     this.collectSystem = collectSystem;
     this.open = open;
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.

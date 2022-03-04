@@ -18,13 +18,12 @@ public class CartridgeSystem extends OutputSystem {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 
   @Override
   public void setOutput(double output) {
-    CartridgeMotor1.set(-output);
-    CartridgeMotor2.set(-(output - 0.1));
+    CartridgeMotor1.set(output);
+    CartridgeMotor2.set(output * 0.75);
   }
 
 

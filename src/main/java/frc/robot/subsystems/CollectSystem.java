@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import frc.robot.Constants;
-import frc.robot.commands.collect.DefueltCollectCommand;
 import frc.robot.commands.collect.DefueltsCollectCommand;
 import frc.util.OutputSystem;
 import frc.util.SuperSolenoid;

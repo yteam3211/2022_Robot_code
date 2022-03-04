@@ -8,17 +8,17 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.util.OutputSystem;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
 public class ShootingSystem extends OutputSystem {
-  private Gains shootGains = new Gains("shoot", 0.22, 0.0005, 0.7);
+  private Gains shootGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, 0.02,0);
 
-  private SuperTalonFX frontMotor = new SuperTalonFX(Constants.CAN_SHOOT_FRONT_MOTOR, 10, true,
+  private SuperTalonFX masterMotor = new SuperTalonFX(Constants.CAN_SHOOT_MASTER_MOTOR, 30, true,
       false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
-  //private SuperTalonFX frontMotorSlave = new SuperTalonFX(Constants.CAN_SHOOT_FRONT_MOTOR_SLAVE, 10, false,
-  //    false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
+  private SuperTalonFX salveMotor = new SuperTalonFX(masterMotor, Constants.CAN_SHOOT_SLAVE_MOTOR, 30, false);
   // private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
       // shootGains, TalonFXControlMode.Velocity);
 
@@ -28,22 +28,22 @@ public class ShootingSystem extends OutputSystem {
 
   @Override
   public void periodic() {
-    getTab().putInDashboard("VelocityF", frontMotor.getVelocity(), true);
-    getTab().putInDashboard("SHOOT?", Math.abs(getFrontVelocity() - Constants.CLOSE_SHOOT_RPM) < 100 , false);
+    getTab().putInDashboard("Velocity", masterMotor.getVelocity(), true);
+    getTab().putInDashboard("SHOOT?", Math.abs(getFrontVelocity() - RobotContainer.RPM) < 100 , false);
     // getTab().putInDashboard("VelocityB", backMotor.getVelocity(), false);
   }
 
   @Override
   public void setOutput(double output) {
     if (output == 0) {
-      frontMotor.set(TalonFXControlMode.PercentOutput, 0);
+      masterMotor.set(TalonFXControlMode.PercentOutput, 0);
     } else {
-      frontMotor.setOutput(output);
+      masterMotor.setOutput(output);
     }
   }
 
   public double getFrontVelocity() {
-    return frontMotor.getVelocity();
+    return masterMotor.getVelocity();
   }
 
   public Gains getGains(){

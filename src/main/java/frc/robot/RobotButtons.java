@@ -12,8 +12,9 @@ import javax.swing.plaf.basic.BasicOptionPaneUI.ButtonAreaLayout;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.collect.CollectCommand;
-import frc.robot.commands.shooting.ShootingCommand;
+import frc.robot.commands.collect.changeSelenoidCommand;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.ClimbSystem;
 import frc.robot.subsystems.CollectSystem;
@@ -28,17 +29,17 @@ public class RobotButtons {
     public static Joystick coPilotJoystick = new Joystick(1);
 
     public Trigger shootButton = new Trigger(() -> coPilotJoystick.getRawAxis(3) > 0.02);
-    public Trigger cartridgeButton = new Trigger(() -> driverJoystick.getRawAxis(3) > 0.02);
     public Trigger cartridgeShootOutButton = new Trigger(() -> coPilotJoystick.getRawButton(3));
     public Trigger collectOutButton = new Trigger(() -> coPilotJoystick.getRawButton(2));
     public Trigger climbOpen = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger climbClose = new Trigger(() -> coPilotJoystick.getPOV() == 180);
-    public Trigger climbExpandedClose = new Trigger(() -> coPilotJoystick.getRawButton(4));
-    public Trigger climbExpandedOpen = new Trigger(() -> coPilotJoystick.getRawButton(1));
+    public Trigger climbExpandedClose = new Trigger(() -> driverJoystick.getRawButton(4) || coPilotJoystick.getRawButton(4));
+    public Trigger climbExpandedOpen = new Trigger(() -> driverJoystick.getRawButton(1) || coPilotJoystick.getRawButton(1));
     // public Trigger collectButton = new Trigger(() -> driverJoystick.getRawAxis(2)
     // > 0.02);
     // public Trigger collectSolenoidButton = new Trigger(() -> driverJoystick.getRawButton(5));
     public Trigger collectButton = new Trigger(() -> coPilotJoystick.getRawButton(5));
+    public Trigger openCollectButton = new Trigger(() -> coPilotJoystick.getRawAxis(2) > 0.02);
 
     // public Trigger shootWithCartridgeButton = new Trigger(() -> coPilotJoystick.getRawAxis(2) > 0.05);
 
@@ -53,6 +54,7 @@ public class RobotButtons {
         // shootWithCartridgeButton.whileActiveContinuous(new ShootingCommand(shoot, cartridge));                                                                                           
         cartridgeShootOutButton.whileActiveOnce(new ParallelCommandGroup(new SetOutputCommand(cartridge, 0.2),new SetOutputCommand(shoot, -3000)));
         collectButton.whileActiveOnce(new CollectCommand(cartridge, collect));
+        openCollectButton.whileActiveOnce(new changeSelenoidCommand(collect, false));
         climbExpandedClose.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, 0.5));
         climbExpandedOpen.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, -0.5));
         // collectSolenoidButton.whenActive(new SolenoidChangePositionCommand(collect.SOLENOID));
