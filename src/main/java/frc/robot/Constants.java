@@ -47,8 +47,9 @@ public final class Constants {
     public static final Path RTB2 = new Path("RTB2", 0);
     public static final Path RTB3 = new Path("RTB3", 180);
     public static final Path LTB1 = new Path("LTB1", 110);
-    public static final Path LTB2 = new Path("LTB2", 270);
-    public static final Path LTB3 = new Path("LTB3", 0);
+    public static final Path LTB2 = new Path("LTB2", 315);
+    public static final Path LTB3 = new Path("LTB3", 275);
+    public static final Path LTB4 = new Path("LTB4", 45);
     public static final Path LRED1 = new Path("LRed1", 200);
     public static final Path LRED2 = new Path("LRed2", 50);
     public static final Path LRED3 = new Path("LRed3", 220);

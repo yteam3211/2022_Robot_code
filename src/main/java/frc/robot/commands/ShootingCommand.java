@@ -29,7 +29,7 @@ public class ShootingCommand extends CommandBase {
     this.cartridgeSystem = cartridgeSystem;
     this.shootingSystem = shootingSystem;
     this.auto = auto;
-    this.high = true;
+    this.high = false;
   }
 
   public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,Boolean high, boolean auto) {
@@ -42,12 +42,15 @@ public class ShootingCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    if (!auto) shootingSystem.changeStation(high);
+    // else shootingSystem.changeStation(shootingSystem.);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int output = high? RobotContainer.RPMHigh : RobotContainer.RPMLow;
+    int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
     shootingSystem.setOutput(output);
     double error = shootingSystem.getFrontVelocity() - output;
     if(error < 100 && error > -100

@@ -51,7 +51,7 @@ public class RobotButtons {
         climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 1));
         climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -1));
         // (new
-        collectOutButton.whileActiveOnce(new ParallelCommandGroup(new SetOutputCommand(collect, 1), new SolenoidChangePositionCommand(collect.SOLENOID, false)));  
+        collectOutButton.whileActiveOnce(new ParallelCommandGroup(new SetOutputCommand(collect, -1), new SolenoidChangePositionCommand(collect.SOLENOID, false)));  
         // cartridgeOutButton.whileActiveContinuous(new SetOutputCommand(cartridge, 0.2));                                                                                           
         // shootWithCartridgeButton.whileActiveContinuous(new ShootingCommand(shoot, cartridge));                                                                                           
         cartridgeShootOutButton.whileActiveOnce(new ParallelCommandGroup(new SetOutputCommand(cartridge, 0.2),new SetOutputCommand(shoot, -3000)));

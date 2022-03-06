@@ -13,7 +13,7 @@ import frc.util.commands.SetOutputCommand;
 public class CollectCommand extends ParallelCommandGroup {
   public CollectCommand(CartridgeSystem cartridge, CollectSystem collect) {
     addCommands(
-        new SetOutputCommand(collect, -1),
-        new CartridgeCommand(cartridge));
+        new SetOutputCommand(collect, 1),
+        new SetOutputCommand(cartridge, 0.2));
   }
 }

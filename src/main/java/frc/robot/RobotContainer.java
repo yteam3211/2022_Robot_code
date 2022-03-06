@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.auto.TestAuto;
 import frc.robot.commands.auto.ThreeBallFar;
@@ -76,11 +78,16 @@ public class RobotContainer {
   public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall, autoRedL, threeBallFar, leftTwoBalls};
   public final AutoChooser autoChooser = new AutoChooser(oneBall, autoCommands);
   public final RobotButtons robotButtons = new RobotButtons();
+  public SendableChooser<Boolean> High;
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    High = new SendableChooser<>();
+    High.addOption("high", Boolean.TRUE);
+    High.setDefaultOption("low", Boolean.FALSE);
+    SmartDashboard.putData("High", High);
     configureButtonBindings();
   }
 

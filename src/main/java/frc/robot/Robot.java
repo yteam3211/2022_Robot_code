@@ -31,6 +31,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.''
     CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
     m_robotContainer.analogInput.setAverageBits(4);
 
@@ -82,8 +83,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    if (m_robotContainer.High.getSelected().booleanValue()) m_robotContainer.shootingSystem.changeStation(true);
+    else m_robotContainer.shootingSystem.changeStation(false);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
