@@ -22,12 +22,22 @@ public class ShootingCommand extends CommandBase {
 
   final int rpmDist = 1;
   private boolean auto;
+  private boolean high;
 
   public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, boolean auto) {
     addRequirements(cartridgeSystem, shootingSystem);
     this.cartridgeSystem = cartridgeSystem;
     this.shootingSystem = shootingSystem;
     this.auto = auto;
+    this.high = true;
+  }
+
+  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,Boolean high, boolean auto) {
+    addRequirements(cartridgeSystem, shootingSystem);
+    this.cartridgeSystem = cartridgeSystem;
+    this.shootingSystem = shootingSystem;
+    this.auto = auto;
+    this.high = high;
   }
 
   // Called when the command is initially scheduled.
@@ -37,11 +47,12 @@ public class ShootingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-     
-    shootingSystem.setOutput(RobotContainer.RPM);
-    double error = shootingSystem.getFrontVelocity() - RobotContainer.RPM;
+    int output = high? RobotContainer.RPMHigh : RobotContainer.RPMLow;
+    shootingSystem.setOutput(output);
+    double error = shootingSystem.getFrontVelocity() - output;
     if(error < 100 && error > -100
-     && (RobotButtons.coPilotJoystick.getRawButton(6) || RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
+     && (RobotButtons.coPilotJoystick.getRawButton(6) ||
+      RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }
     else {

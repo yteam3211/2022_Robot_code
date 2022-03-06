@@ -28,8 +28,9 @@ public class RobotButtons {
     public static Joystick driverJoystick = new Joystick(0);
     public static Joystick coPilotJoystick = new Joystick(1);
 
-    public Trigger shootButton = new Trigger(() -> coPilotJoystick.getRawAxis(3) > 0.02);
-    public Trigger cartridgeShootOutButton = new Trigger(() -> coPilotJoystick.getRawButton(3));
+    public Trigger shootLowButton = new Trigger(() -> coPilotJoystick.getRawAxis(3) > 0.02);
+    public Trigger shootHighButton = new Trigger(() -> coPilotJoystick.getRawButton(3));
+    public Trigger cartridgeShootOutButton = new Trigger(() -> coPilotJoystick.getRawButton(8));
     public Trigger collectOutButton = new Trigger(() -> coPilotJoystick.getRawButton(2));
     public Trigger climbOpen = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger climbClose = new Trigger(() -> coPilotJoystick.getPOV() == 180);
@@ -44,7 +45,8 @@ public class RobotButtons {
     // public Trigger shootWithCartridgeButton = new Trigger(() -> coPilotJoystick.getRawAxis(2) > 0.05);
 
     public void loadButtons(ShootingSystem shoot, CartridgeSystem cartridge, CollectSystem collect, ClimbSystem climbSystem, ExpandedClimbSystem expandedClimbSystem) {
-        shootButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, false));// (new
+        shootHighButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, false));// (new
+        shootLowButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, false ,false));// (new
         // shootButton.whileActiveOnce(new SetOutputCommand(shoot,() -> RobotContainer.RPM));
         climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 1));
         climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -1));

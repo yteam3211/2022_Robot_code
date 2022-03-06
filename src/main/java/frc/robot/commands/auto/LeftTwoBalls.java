@@ -14,6 +14,7 @@ import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.SuperNavX;
+import frc.util.commands.SetOutputCommand;
 import frc.util.commands.TimeCommand;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
 import frc.util.pathGenerator.drive_controls.EncoderDriveControl;
@@ -22,20 +23,23 @@ import frc.util.pathGenerator.drive_controls.EncoderDriveControl;
 public class LeftTwoBalls extends AutoGenerator {
   public LeftTwoBalls(DriveSystem driveSystem, SuperNavX navX, CollectSystem collectSystem, CartridgeSystem cartridgeSystem, ShootingSystem shootingSystem) {
           super("LeftTwoBalls", driveSystem.getAutoGains(), driveSystem, navX);
+          Constants.LTB1.inReverse();
           addCommands(new ParallelDeadlineGroup(
             new TimeCommand(2500),
             new changeSelenoidCommand(collectSystem, false), 
-            new ShootingCommand(shootingSystem, cartridgeSystem,true)));
+            new ShootingCommand(shootingSystem, cartridgeSystem,true))/*,
+            new SetOutputCommand(driveSystem, 0)*/);
           addCommands(new ParallelDeadlineGroup(
             addFollowPathCommand(Constants.LTB1, new EncoderDriveControl(driveSystem))),
             new CollectCommand(cartridgeSystem, collectSystem));
-          addCommands(new ParallelDeadlineGroup(
-            addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)),
-            new changeSelenoidCommand(collectSystem, true)));
-          addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
-          addCommands(new ParallelDeadlineGroup(
-            new TimeCommand(2500),
-            new changeSelenoidCommand(collectSystem, false), 
-            new ShootingCommand(shootingSystem, cartridgeSystem,true)));
+  //         addCommands(new ParallelDeadlineGroup(
+  //           addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)),
+  //           new changeSelenoidCommand(collectSystem, true)));
+  //         addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
+  //         addCommands(new ParallelDeadlineGroup(
+  //           new TimeCommand(2500),
+  //           new changeSelenoidCommand(collectSystem, false), 
+  //           new ShootingCommand(shootingSystem, cartridgeSystem,true)), 
+  //           new SetOutputCommand(driveSystem, 0));
   }
 }

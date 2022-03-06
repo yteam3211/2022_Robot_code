@@ -32,7 +32,7 @@ public class ThreeBallFar extends AutoGenerator {
         addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));
         addCommands(addFollowPathCommand(Constants.TP3, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSystem, true));
         addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 90)));
-        addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP4, new EncoderAndNavxDriveControl(driveSystem, navX)), new SetOutputCommand(shootingSystem, Constants.CLOSE_SHOOT_RPM)));
+        addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP4, new EncoderAndNavxDriveControl(driveSystem, navX)), new SetOutputCommand(shootingSystem, Constants.HIGH_SHOOT_RPM)));
         addCommands(new ParallelDeadlineGroup(new TimeCommand(7000), new ShootingCommand(shootingSystem, cartridgeSystem, true)));
     }
 }

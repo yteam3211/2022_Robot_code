@@ -30,6 +30,7 @@ public final class Constants {
     public static final int ANALOG_PRESSURE = 0;
     public static final int MAGNET_SENSOR_UP = 2;
     public static final int MAGNET_SENSOR_DOWN = 1;
+    public static final int MAGNET_SENSOR_EXCLIMB = 3;
 
     // _______________PATH__________________
     public static final Path turn180 = new Path("180");
@@ -58,7 +59,8 @@ public final class Constants {
     public static final double ROBOT_WIDTH = 0.653;
     public static final int AMPER_LIMIT = 60;
     public static final int AMPER_LIMIT_CLIMB = 30;
-    public static final int CLOSE_SHOOT_RPM = 10000;
+    public static final int LOW_SHOOT_RPM = 5300;
+    public static final int HIGH_SHOOT_RPM = 10000;
     public static final double CARITAGE_SPEED = -0.2;
 
     // ______________Changers_______________ 

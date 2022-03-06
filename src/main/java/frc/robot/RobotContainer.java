@@ -13,7 +13,7 @@ import frc.robot.commands.auto.ThreeBallFar;
 import frc.robot.commands.auto.bowAuto;
 import frc.robot.commands.auto.check;
 import frc.robot.commands.auto.forwardAuto;
-import frc.robot.commands.auto.AutoRedL;
+import frc.robot.commands.auto.ClimbTwoBalls;
 import frc.robot.commands.auto.LeftTwoBalls;
 import frc.robot.commands.auto.oneBall;
 import frc.robot.commands.auto.RightTwoBalls;
@@ -43,8 +43,8 @@ public class RobotContainer {
   // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public static double ratio = 0;
   public static double speed = 0;
-  public static int RPM = Constants.CLOSE_SHOOT_RPM; // 4300 is recommended
-  public static int RPM1 = 0; // 4300 is recommended
+  public static int RPMHigh = Constants.HIGH_SHOOT_RPM; // 4300 is recommended
+  public static int RPMLow = Constants.LOW_SHOOT_RPM; // 4300 is recommended
 
   public final Limelight limelight = new Limelight.Builder().build();
   public final DriveSystem driveSystem = new DriveSystem();
@@ -65,7 +65,7 @@ public class RobotContainer {
   public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem);
   public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
   public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem);
-  public final AutoRedL autoRedL = new AutoRedL(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
+  public final ClimbTwoBalls autoRedL = new ClimbTwoBalls(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
   // public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
       // cartridgeSystem, shootingSystem);

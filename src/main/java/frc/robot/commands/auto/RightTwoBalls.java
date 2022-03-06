@@ -24,7 +24,7 @@ public class RightTwoBalls extends AutoGenerator {
             super("RightTwoBalls", driveSystem.getAutoGains(), driveSystem, navX, 110);
             
             Constants.RTB1.inReverse();
-            addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new changeSelenoidCommand(collectSystem, false), new ShootingCommand(shootingSystem, cartridgeSystem,true)));
+            addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new changeSelenoidCommand(collectSystem, false), new ShootingCommand(shootingSystem, cartridgeSystem,true)), new SetOutputCommand(driveSystem, 0));
             addCommands(addFollowPathCommand(Constants.RTB1, new EncoderAndNavxDriveControl(driveSystem, navX)));
             addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 0))/*,new changeSelenoidCommand(collectSystem, false)*/);
             addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.RTB2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));

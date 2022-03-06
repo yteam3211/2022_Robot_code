@@ -97,7 +97,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM", Constants.CLOSE_SHOOT_RPM,true);
+    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM Low", Constants.LOW_SHOOT_RPM,true);
+    m_robotContainer.shootingSystem.getTab().putInDashboard("RPM High", Constants.HIGH_SHOOT_RPM,true);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -112,7 +113,8 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     // System.out.println("a" + RobotContainer.RPM);
     // System.out.println("b" + RobotContainer.speed);
-    RobotContainer.RPM =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM", Constants.CLOSE_SHOOT_RPM);
+    RobotContainer.RPMHigh =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM High", Constants.HIGH_SHOOT_RPM);
+    RobotContainer.RPMLow =  (int)m_robotContainer.shootingSystem.getTab().getFromDashboard("RPM Low", Constants.LOW_SHOOT_RPM);
   }
 
   @Override

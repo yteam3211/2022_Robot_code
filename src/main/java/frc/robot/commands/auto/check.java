@@ -7,8 +7,8 @@ import frc.robot.subsystems.DriveSystem;
 
 public class check extends AutoGenerator {
     public check(DriveSystem driveSystem, SuperNavX navX) {
-            super("check", driveSystem.getAutoGains(), driveSystem, navX, 90);
-            addCommands(new TurnInPlace(driveSystem, navX, 0));
+            super("check", driveSystem.getAutoGains(), driveSystem, navX, 0);
+            addCommands(new TurnInPlace(driveSystem, navX, 90));
 
     }
 }

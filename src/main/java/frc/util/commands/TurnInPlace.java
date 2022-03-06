@@ -34,6 +34,7 @@ public class TurnInPlace extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    driveSystem.getTab().putInDashboard("turn", false, true);
     double errorAngle = navX.getSuperAngle() - angle;
     driveSystem.tank(reverse * ( gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)), 
     -1 * reverse *  (gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)));
@@ -43,7 +44,7 @@ public class TurnInPlace extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println(angle);
+    driveSystem.getTab().putInDashboard("turn", true, true);
   }
 
   // Returns true when the command should end.

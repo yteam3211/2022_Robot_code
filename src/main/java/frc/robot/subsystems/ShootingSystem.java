@@ -14,7 +14,8 @@ import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
 public class ShootingSystem extends OutputSystem {
-  private Gains shootGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.CLOSE_SHOOT_RPM /  615000.0,0);
+  private Gains shootGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  615000.0,0);
+  // private Gains shootGains = new Gains("shoot",0.2, 0.0004, 0.4);
 
   private SuperTalonFX masterMotor = new SuperTalonFX(Constants.CAN_SHOOT_MASTER_MOTOR, 30, true,
       false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
@@ -29,7 +30,8 @@ public class ShootingSystem extends OutputSystem {
   @Override
   public void periodic() {
     getTab().putInDashboard("Velocity", masterMotor.getVelocity(), true);
-    getTab().putInDashboard("SHOOT?", Math.abs(getFrontVelocity() - RobotContainer.RPM) < 100 , false);
+    getTab().putInDashboard("SHOOTHigh?", Math.abs(getFrontVelocity() - RobotContainer.RPMHigh) < 100 , false);
+    getTab().putInDashboard("SHOOTLow?", Math.abs(getFrontVelocity() - RobotContainer.RPMLow) < 100 , false);
     // getTab().putInDashboard("VelocityB", backMotor.getVelocity(), false);
   }
 

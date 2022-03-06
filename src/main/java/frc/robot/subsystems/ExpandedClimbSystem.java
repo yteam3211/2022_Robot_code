@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.util.OutputSystem;
@@ -17,6 +18,8 @@ public class ExpandedClimbSystem extends OutputSystem{
    
   private VictorSPX climbMotorLeft;
   private TalonSRX climbMotorRight;
+  private DigitalInput magnetExClimb = new DigitalInput(Constants.MAGNET_SENSOR_EXCLIMB);
+
   public ExpandedClimbSystem() {
     super("ExClimb");
     climbMotorLeft = new VictorSPX(Constants.CAN_CLIMB_MOTOR_LEFT);
@@ -33,6 +36,11 @@ public class ExpandedClimbSystem extends OutputSystem{
 
   @Override
   public void setOutput(double output) {
+    if(getMagnetMode() && output < 0) output = 0;
      climbMotorRight.set(ControlMode.PercentOutput, output);
+  }
+
+  public boolean getMagnetMode(){
+    return !magnetExClimb.get();
   }
 }
