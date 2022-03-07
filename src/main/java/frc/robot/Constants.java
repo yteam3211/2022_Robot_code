@@ -47,8 +47,9 @@ public final class Constants {
     public static final Path RTB2 = new Path("RTB2", 0);
     public static final Path RTB3 = new Path("RTB3", 180);
     public static final Path LTB1 = new Path("LTB1", 110);
-    public static final Path LTB2 = new Path("LTB2", 315);
-    public static final Path LTB3 = new Path("LTB3", 275);
+    public static final Path LTB2 = new Path("LTB2", 300);
+    public static final Path LTB2V2 = new Path("LTB2V2", 268);
+    public static final Path LTB3 = new Path("LTB3", 180);
     public static final Path LTB4 = new Path("LTB4", 45);
     public static final Path LRED1 = new Path("LRed1", 200);
     public static final Path LRED2 = new Path("LRed2", 50);
@@ -63,6 +64,7 @@ public final class Constants {
     public static final int LOW_SHOOT_RPM = 5300;
     public static final int HIGH_SHOOT_RPM = 10000;
     public static final double CARITAGE_SPEED = -0.2;
+    public static final boolean DEFULT_SHOOT = false;//true to high false to low
 
     // ______________Changers_______________ 
     // Main robot:

@@ -56,6 +56,8 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
     // RS2.follow(RM);
     resetSensors(0);
     getTab().addCommandToDashboard("Reset Sensors",new ResetSensorsCommand(this, 0));
+    // () -> {double x = RobotButtons.driverJoystick.getRawAxis(5) > 0.02 ? RobotButtons.driverJoystick.getRawAxis(5) : 0;
+      // return 0.8 * x + 0.2 * Math.pow(3,x);}, 3)
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
         () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
         ,() -> Constants.DIRCTION *(1 * RobotButtons.driverJoystick.getRawAxis(0)  + 0 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 1, 1));

@@ -53,13 +53,13 @@ public class ShootingCommand extends CommandBase {
     int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
     shootingSystem.setOutput(output);
     double error = shootingSystem.getFrontVelocity() - output;
-    if(error < 100 && error > -100
+    if(error < 100 && error > -50
      && (RobotButtons.coPilotJoystick.getRawButton(6) ||
       RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
       cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
     }
     else {
-      cartridgeSystem.setOutput(0.2);
+      cartridgeSystem.setOutput(0);
     }
   }
 

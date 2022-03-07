@@ -26,12 +26,14 @@ public class ShootingSystem extends OutputSystem {
 
   public ShootingSystem() {
     super("Shooting");
-    high = false;
+    high = Constants.DEFULT_SHOOT;
     masterMotor.config_kF(1, shootHighGains.Kf);
     masterMotor.config_kP(1, shootHighGains.kp);
     masterMotor.config_kI(1, shootHighGains.ki);
     masterMotor.config_kD(1, shootHighGains.kd);
-  }
+    if(!high) masterMotor.selectProfileSlot(0, 0);
+    else masterMotor.selectProfileSlot(1, 0);
+    }
 
   @Override
   public void periodic() {

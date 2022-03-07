@@ -23,7 +23,7 @@ public class CartridgeSystem extends OutputSystem {
   @Override
   public void setOutput(double output) {
     CartridgeMotor1.set(output);
-    CartridgeMotor2.set(output * 0.5);
+    CartridgeMotor2.set(output * 0.75);
   }
 
 

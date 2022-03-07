@@ -84,7 +84,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    High = new SendableChooser<>();
+    High = new SendableChooser<Boolean>();
     High.addOption("high", Boolean.TRUE);
     High.setDefaultOption("low", Boolean.FALSE);
     SmartDashboard.putData("High", High);
