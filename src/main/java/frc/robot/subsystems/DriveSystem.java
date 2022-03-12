@@ -13,6 +13,7 @@ import frc.util.PID.Gains;
 import frc.util.motor.SuperSparkMax;
 import frc.util.commands.DriveWithJoysticksAccCommand;
 import frc.util.commands.ResetSensorsCommand;
+import frc.util.commands.SetOutputCommand;
 
 
 public class DriveSystem extends OutputSystem implements SuperInterface{
@@ -50,17 +51,17 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
     LM.setIdleMode(IdleMode.kCoast);
     LS1.setIdleMode(IdleMode.kCoast);
     LS2.setIdleMode(IdleMode.kCoast);
-    // LS1.follow(LM);
-    // LS2.follow(LM);
-    // RS1.follow(RM);
-    // RS2.follow(RM);
+    LS1.follow(LM);
+    LS2.follow(LM);
+    RS1.follow(RM);
+    RS2.follow(RM);
     resetSensors(0);
     getTab().addCommandToDashboard("Reset Sensors",new ResetSensorsCommand(this, 0));
     // () -> {double x = RobotButtons.driverJoystick.getRawAxis(5) > 0.02 ? RobotButtons.driverJoystick.getRawAxis(5) : 0;
       // return 0.8 * x + 0.2 * Math.pow(3,x);}, 3)
     setDefaultCommand(new DriveWithJoysticksAccCommand(this,
         () -> 0.8 * RobotButtons.driverJoystick.getRawAxis(5)  + 0.2 * Math.pow(RobotButtons.driverJoystick.getRawAxis(5), 3)
-        ,() -> Constants.DIRCTION *(1 * RobotButtons.driverJoystick.getRawAxis(0)  + 0 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 1, 1));
+        ,() -> 0.5 * Constants.DIRCTION *(1 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 1, 1));
   }
 
   @Override
@@ -74,10 +75,6 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
 
   public void tank(double left, double right) {
     LM.set(left);
-    LM.set(left);
-    LM.set(left);
-    RM.set(right);
-    RM.set(right);
     RM.set(right);
   }
 
@@ -121,6 +118,7 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
 
   public double getLeftPosition() {
     return LM.getEncoder().getPosition();
+    
   }
 
   public void stopOutput() {

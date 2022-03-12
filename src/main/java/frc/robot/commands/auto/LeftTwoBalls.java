@@ -30,12 +30,12 @@ public class LeftTwoBalls extends AutoGenerator {
           addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), new changeSelenoidCommand(collectSystem, false), 
           new ShootingCommand(shootingSystem, cartridgeSystem,true))/*, new SetOutputCommand(driveSystem, 0)*/);
           addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB1, new EncoderDriveControl(driveSystem))));
-          addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, -60), new changeSelenoidCommand(collectSystem, false)));
-          addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)), new CollectCommand(cartridgeSystem, collectSystem)));
-          addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 180), new changeSelenoidCommand(collectSystem, true)));
-          addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
-          addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), 
-          new ShootingCommand(shootingSystem, cartridgeSystem,true)), 
-          new SetOutputCommand(driveSystem, 0));
+          // addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, -60), new changeSelenoidCommand(collectSystem, false)));
+          // addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)), new CollectCommand(cartridgeSystem, collectSystem)));
+          // addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 180), new changeSelenoidCommand(collectSystem, true)));
+          // addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
+          // addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), 
+          // new ShootingCommand(shootingSystem, cartridgeSystem,true)), 
+          // new SetOutputCommand(driveSystem, 0));
   }
 }

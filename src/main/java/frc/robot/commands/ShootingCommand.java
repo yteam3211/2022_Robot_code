@@ -43,14 +43,15 @@ public class ShootingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!auto) shootingSystem.changeStation(high);
+    // if (!auto) shootingSystem.changeStation(high);
     // else shootingSystem.changeStation(shootingSystem.);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
+    // int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
+    int output = RobotContainer.RPMHigh;
     shootingSystem.setOutput(output);
     double error = shootingSystem.getFrontVelocity() - output;
     if(error < 100 && error > -50

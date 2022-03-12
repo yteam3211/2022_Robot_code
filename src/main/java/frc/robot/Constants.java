@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalSource;
 import frc.util.pathGenerator.Path;
 
 public final class Constants {
@@ -69,10 +70,15 @@ public final class Constants {
     // ______________Changers_______________ 
     // Main robot:
     public static final boolean reverse = true; 
-    public static final int PWM_COLLECT_MOTOR = 7;
-    public static final int PWM_CARTRIDGE1_MOTOR = 6;
-    public static final int PWM_CARTRIDGE2_MOTOR = 5;
+    public static final int PWM_COLLECT_MOTOR = 1;
+    public static final int PWM_CARTRIDGE1_MOTOR = 8;
+    public static final int PWM_CARTRIDGE2_MOTOR = 6;
     public static final int DIRCTION = 1;
+    public static final double kEncoderDistancePerPulse = 0;
+    public static DigitalSource[] kRightEncoderPorts;
+    public static DigitalSource kRightEncoderReversed;
+    public static DigitalSource[] kLeftEncoderPorts;
+    public static DigitalSource kLeftEncoderReversed;
     
 
     // Prototype:

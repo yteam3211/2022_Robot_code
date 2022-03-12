@@ -13,11 +13,13 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.collect.CollectAndOpen;
 import frc.robot.commands.collect.CollectCommand;
 import frc.robot.commands.collect.changeSelenoidCommand;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.ClimbSystem;
 import frc.robot.subsystems.CollectSystem;
+import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ExpandedClimbSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.commands.SetOutputCommand;
@@ -32,8 +34,8 @@ public class RobotButtons {
     public Trigger shootLowButton = new Trigger(() -> coPilotJoystick.getRawButton(3));
     public Trigger cartridgeShootOutButton = new Trigger(() -> coPilotJoystick.getRawButton(8));
     public Trigger collectOutButton = new Trigger(() -> coPilotJoystick.getRawButton(2));
-    public Trigger climbOpen = new Trigger(() -> coPilotJoystick.getPOV() == 0);
-    public Trigger climbClose = new Trigger(() -> coPilotJoystick.getPOV() == 180);
+    public Trigger climbOpen = new Trigger(() -> coPilotJoystick.getPOV() == 180);
+    public Trigger climbClose = new Trigger(() -> coPilotJoystick.getPOV() == 0);
     public Trigger climbExpandedClose = new Trigger(() -> driverJoystick.getRawButton(4) || coPilotJoystick.getRawButton(4));
     public Trigger climbExpandedOpen = new Trigger(() -> driverJoystick.getRawButton(1) || coPilotJoystick.getRawButton(1));
     // public Trigger collectButton = new Trigger(() -> driverJoystick.getRawAxis(2)
@@ -57,6 +59,7 @@ public class RobotButtons {
         cartridgeShootOutButton.whileActiveOnce(new ParallelCommandGroup(new SetOutputCommand(cartridge, 0.4),new SetOutputCommand(shoot, -3000)));
         collectButton.whileActiveOnce(new SetOutputCommand(collect, 1));
         openCollectButton.whileActiveOnce(new changeSelenoidCommand(collect, false));
+        // openCollectButton.whileActiveOnce(new CollectAndOpen(collect, coPilotJoystick));
         climbExpandedClose.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, 0.5));
         climbExpandedOpen.whileActiveOnce(new SetOutputCommand(expandedClimbSystem, -0.5));
         // collectSolenoidButton.whenActive(new SolenoidChangePositionCommand(collect.SOLENOID));

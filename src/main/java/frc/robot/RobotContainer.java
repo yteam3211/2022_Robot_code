@@ -77,17 +77,12 @@ public class RobotContainer {
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
   public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall, autoRedL, threeBallFar, leftTwoBalls};
   public final AutoChooser autoChooser = new AutoChooser(oneBall, autoCommands);
-  public final RobotButtons robotButtons = new RobotButtons();
-  public SendableChooser<Boolean> High;
+  public static final RobotButtons robotButtons = new RobotButtons();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    High = new SendableChooser<Boolean>();
-    High.addOption("high", Boolean.TRUE);
-    High.setDefaultOption("low", Boolean.FALSE);
-    SmartDashboard.putData("High", High);
     configureButtonBindings();
   }
 

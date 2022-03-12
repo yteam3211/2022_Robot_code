@@ -36,8 +36,8 @@ public class ClimbSystem extends OutputSystem {
 
   @Override
   public void setOutput(double output) {
-    if(getMagnetModeUp() && output > 0) output = 0;
-    if(getMagnetModeDown() && output < 0) output = 0;
+    if(getMagnetModeUp() && output < 0) output = 0;
+    if(getMagnetModeDown() && output > 0) output = 0;
     climbMotor.set(ControlMode.PercentOutput, output); 
   }
   

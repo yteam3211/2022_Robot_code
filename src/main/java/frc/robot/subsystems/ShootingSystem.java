@@ -14,12 +14,12 @@ import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
 public class ShootingSystem extends OutputSystem {
-  private Gains shootHighGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  615000.0,0);
-  private Gains shootLowGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.LOW_SHOOT_RPM /  615000.0,0);
+  private Gains shootGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  615000.0,0);
+  // private Gains shootLowGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.LOW_SHOOT_RPM /  615000.0,0);
   // private Gains shootGains = new Gains("shoot",0.2, 0.0004, 0.4);
   public boolean high;
   private SuperTalonFX masterMotor = new SuperTalonFX(Constants.CAN_SHOOT_MASTER_MOTOR, 30, true,
-      false, NeutralMode.Coast, shootLowGains, TalonFXControlMode.Velocity);
+      false, NeutralMode.Coast, shootGains, TalonFXControlMode.Velocity);
   private SuperTalonFX salveMotor = new SuperTalonFX(masterMotor, Constants.CAN_SHOOT_SLAVE_MOTOR, 30, false);
   // private SuperTalonFX backMotor = new SuperTalonFX(Constants.CAN_SHOOT_BACK_MOTOR, 10, true, false, NeutralMode.Coast,
       // shootGains, TalonFXControlMode.Velocity);
@@ -27,10 +27,10 @@ public class ShootingSystem extends OutputSystem {
   public ShootingSystem() {
     super("Shooting");
     high = Constants.DEFULT_SHOOT;
-    masterMotor.config_kF(1, shootHighGains.Kf);
-    masterMotor.config_kP(1, shootHighGains.kp);
-    masterMotor.config_kI(1, shootHighGains.ki);
-    masterMotor.config_kD(1, shootHighGains.kd);
+    // masterMotor.config_kF(1, shootHighGains.Kf);
+    // masterMotor.config_kP(1, shootHighGains.kp);
+    // masterMotor.config_kI(1, shootHighGains.ki);
+    // masterMotor.config_kD(1, shootHighGains.kd);
     if(!high) masterMotor.selectProfileSlot(0, 0);
     else masterMotor.selectProfileSlot(1, 0);
     }
@@ -57,7 +57,7 @@ public class ShootingSystem extends OutputSystem {
   }
 
   public Gains getGains(){
-    return shootLowGains;
+    return shootGains;
   }
 
   public void changeStation(boolean high){
