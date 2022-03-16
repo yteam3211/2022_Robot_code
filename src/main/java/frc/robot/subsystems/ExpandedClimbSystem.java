@@ -16,19 +16,17 @@ import frc.util.OutputSystem;
 
 public class ExpandedClimbSystem extends OutputSystem{
    
-  private VictorSPX climbMotorLeft;
+  private TalonSRX climbMotorLeft;
   private TalonSRX climbMotorRight;
   private DigitalInput magnetExClimb = new DigitalInput(Constants.MAGNET_SENSOR_EXCLIMB);
 
   public ExpandedClimbSystem() {
     super("ExClimb");
-    climbMotorLeft = new VictorSPX(Constants.CAN_CLIMB_MOTOR_LEFT);
+    climbMotorLeft = new TalonSRX(Constants.CAN_CLIMB_MOTOR_LEFT);
     climbMotorLeft.setNeutralMode(NeutralMode.Brake);
     climbMotorRight = new TalonSRX(Constants.CAN_CLIMB_MOTOR_RIGHT);
     climbMotorRight.setNeutralMode(NeutralMode.Brake);
-    climbMotorLeft.follow(climbMotorRight);
   }
-
   @Override
   public void periodic() {
     
@@ -38,6 +36,7 @@ public class ExpandedClimbSystem extends OutputSystem{
   public void setOutput(double output) {
     if(getMagnetMode() && output < 0) output = 0;
      climbMotorRight.set(ControlMode.PercentOutput, output);
+     climbMotorLeft.set(ControlMode.PercentOutput, -output);
   }
 
   public boolean getMagnetMode(){

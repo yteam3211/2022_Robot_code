@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -73,6 +75,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    m_robotContainer.driveSystem.changeIdleMode(IdleMode.kCoast);
   }
 
   @Override
@@ -87,6 +90,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     // schedule the autonomous command (example)
+    m_robotContainer.driveSystem.changeIdleMode(IdleMode.kBrake);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -99,6 +103,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    m_robotContainer.driveSystem.changeIdleMode(IdleMode.kCoast);
     m_robotContainer.shootingSystem.getTab().putInDashboard("RPM Low", Constants.LOW_SHOOT_RPM,true);
     m_robotContainer.shootingSystem.getTab().putInDashboard("RPM High", Constants.HIGH_SHOOT_RPM,true);
     // This makes sure that the autonomous stops running when

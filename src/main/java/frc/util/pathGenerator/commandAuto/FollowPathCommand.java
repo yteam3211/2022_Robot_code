@@ -82,6 +82,7 @@ public class FollowPathCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        driveSystem.setOutput(0);
     }
 
     @Override

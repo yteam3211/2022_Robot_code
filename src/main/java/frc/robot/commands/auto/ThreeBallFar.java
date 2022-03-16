@@ -18,21 +18,22 @@ import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.ShootingSystem;
+import frc.robot.subsystems.collectSelnoid;
 
 public class ThreeBallFar extends AutoGenerator {
     public ThreeBallFar(DriveSystem driveSystem, SuperNavX navX, CollectSystem collectSystem,
-            EncoderAndNavxDriveControl navxDriveControl,
+            EncoderAndNavxDriveControl navxDriveControl, collectSelnoid collectSelnoid,
             CartridgeSystem cartridgeSystem, ShootingSystem shootingSystem) {
         super("ThreeBallFar", driveSystem.getAutoGains(), driveSystem, navX, 200);
         Constants.TP1.inReverse();
         Constants.TP3.inReverse();
-        addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new changeSelenoidCommand(collectSystem, false), new ShootingCommand(shootingSystem, cartridgeSystem,true)));
-        addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP1, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSystem, true)));
-        addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 320), new changeSelenoidCommand(collectSystem, false)));
+        addCommands(new ParallelDeadlineGroup(new TimeCommand(2500),new changeSelenoidCommand(collectSelnoid, false), new ShootingCommand(shootingSystem, cartridgeSystem,driveSystem,true)));
+        addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP1, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSelnoid, true)));
+        addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 320), new changeSelenoidCommand(collectSelnoid, false)));
         addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP2, new EncoderAndNavxDriveControl(driveSystem, navX)),new CollectCommand(cartridgeSystem, collectSystem)));
-        addCommands(addFollowPathCommand(Constants.TP3, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSystem, true));
+        addCommands(addFollowPathCommand(Constants.TP3, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSelnoid, true));
         addCommands(new ParallelRaceGroup(new TimeCommand(2000), new TurnInPlace(driveSystem, navX, 90)));
         addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.TP4, new EncoderAndNavxDriveControl(driveSystem, navX)), new SetOutputCommand(shootingSystem, Constants.HIGH_SHOOT_RPM)));
-        addCommands(new ParallelDeadlineGroup(new TimeCommand(7000), new ShootingCommand(shootingSystem, cartridgeSystem, true)));
+        addCommands(new ParallelDeadlineGroup(new TimeCommand(7000), new ShootingCommand(shootingSystem, cartridgeSystem,driveSystem, true)));
     }
 }

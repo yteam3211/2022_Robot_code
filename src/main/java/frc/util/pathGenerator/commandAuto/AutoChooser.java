@@ -4,19 +4,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.commands.auto.oneBall;
 
 public class AutoChooser {
     private CommandBase autoCommand = null;
     SendableChooser<CommandBase> autoChooser = new SendableChooser<>();
 
-    public AutoChooser(oneBall oneBall, AutoGenerator[] autoCommands) {
+    public AutoChooser(AutoGenerator defultAuto, AutoGenerator[] autoCommands) {
 
         for (AutoGenerator command : autoCommands) {
             System.out.println(command.getNamePath());
             autoChooser.addOption(command.getNamePath(), command);
         }
-        autoChooser.setDefaultOption("1 ball", oneBall);
+        autoChooser.setDefaultOption(defultAuto.getNamePath(), defultAuto);
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         

@@ -14,6 +14,6 @@ public class TestAuto extends AutoGenerator {
         public TestAuto(DriveSystem driveSystem, SuperNavX navX,
         CartridgeSystem cartridgeSystem, ShootingSystem shootingSystem) {
                 super("TestAuto", driveSystem.getAutoGains(), driveSystem, navX);
-                addCommands( new ShootingCommand(shootingSystem, cartridgeSystem, true));
+                addCommands( new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem,true));
         }
 }

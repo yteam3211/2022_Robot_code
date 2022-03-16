@@ -18,7 +18,7 @@ import frc.util.commands.SetOutputCommand;
 
 public class DriveSystem extends OutputSystem implements SuperInterface{
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, Constants.reverse, IdleMode.kBrake);
+      Constants.AMPER_LIMIT, Constants.reverse, IdleMode.kCoast);
   private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, Constants.reverse,
       IdleMode.kBrake);
@@ -41,16 +41,11 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
   public static final Gains visionGains = new Gains("visionGains", 0.07, 0, 0.14);
   //public static final Gains autoGains = new Gains("autoGains", 0.1825, 0.05, 1, 0, 0.03);
   public static final Gains autoGains = new Gains("autoGains", 0.225, 0.075, 8, 0, 0);
-  public static final Gains turnGains = new Gains("turnGains", 0.15, 0, 0.3);
+  // public static final Gains autoGains = new Gains("autoGains", 0.225, 0.075, 8, 0, 0);
+  public static final Gains turnGains = new Gains("turnGains", 0.03, 0, 0.1);
 
   public DriveSystem() {
     super("Drive");
-    RM.setIdleMode(IdleMode.kCoast);
-    RS1.setIdleMode(IdleMode.kCoast);
-    RS2.setIdleMode(IdleMode.kCoast);
-    LM.setIdleMode(IdleMode.kCoast);
-    LS1.setIdleMode(IdleMode.kCoast);
-    LS2.setIdleMode(IdleMode.kCoast);
     LS1.follow(LM);
     LS2.follow(LM);
     RS1.follow(RM);
@@ -64,13 +59,27 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
         ,() -> 0.5 * Constants.DIRCTION *(1 * RobotButtons.driverJoystick.getRawAxis(0)  + 0.5 * Math.pow(RobotButtons.driverJoystick.getRawAxis(0), 3)), 1, 1));
   }
 
+
+
+  public void changeIdleMode(IdleMode idleMode){
+    RM.setIdleMode(idleMode);
+    RS1.setIdleMode(idleMode);
+    RS2.setIdleMode(idleMode);
+    LM.setIdleMode(idleMode);
+    LS1.setIdleMode(idleMode);
+    LS2.setIdleMode(idleMode);
+  }
+
+
+
   @Override
   public void periodic() {
     getTab().putInDashboard("left position", getLeftPosition(), true);
     getTab().putInDashboard("right position", getRightPosition(), true);
+    getTab().putInDashboard("right output", RM.getOutput(), true);
+    getTab().putInDashboard("left output", LM.getOutput(), true);
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance(), true);
     getTab().putInDashboard("right encoder position", getRightEncoderDistance(), true);
-
   }
 
   public void tank(double left, double right) {

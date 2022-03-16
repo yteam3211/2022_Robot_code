@@ -23,8 +23,9 @@ public class EncoderAndNavxDriveControl extends DriveControl {
     }
     @Override
     public  double getRobotErrorLeftPosition(int index){
-        driveSystem.getTab().putInDashboard("errorAngle", path.getAngle(index), true);
+        driveSystem.getTab().putInDashboard("PathAngle", path.getAngle(index), true);
         errorAngle = angle2Distance(path.getAngle(index) - navX.getSuperAngle());
+        driveSystem.getTab().putInDashboard("errorAngle", errorAngle, true);
         return path.left[index].pos - getLeftEncoderDistance() - errorAngle;
     }
 

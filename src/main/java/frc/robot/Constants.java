@@ -25,6 +25,7 @@ public final class Constants {
 
     // _______________SOLENOIDS_____________
     public static final int COLLECT_SOLENOID = 0;
+    public static final int SHOOTING_SOLENOID = 1;
 
 
     // _______________ANALOG_____________
@@ -60,12 +61,12 @@ public final class Constants {
 
     // _______________OTHER_________________
     public static final double ROBOT_WIDTH = 0.653;
-    public static final int AMPER_LIMIT = 60;
+    public static final int AMPER_LIMIT = 40;
     public static final int AMPER_LIMIT_CLIMB = 30;
-    public static final int LOW_SHOOT_RPM = 5300;
+    public static final int LOW_SHOOT_RPM = 5600;
     public static final int HIGH_SHOOT_RPM = 10000;
-    public static final double CARITAGE_SPEED = -0.2;
-    public static final boolean DEFULT_SHOOT = false;//true to high false to low
+    public static final double CARITAGE_SPEED = -0.5;
+    public static final boolean DEFULT_SHOOT = true;//true to high false to low
 
     // ______________Changers_______________ 
     // Main robot:
@@ -74,11 +75,11 @@ public final class Constants {
     public static final int PWM_CARTRIDGE1_MOTOR = 8;
     public static final int PWM_CARTRIDGE2_MOTOR = 6;
     public static final int DIRCTION = 1;
-    public static final double kEncoderDistancePerPulse = 0;
-    public static DigitalSource[] kRightEncoderPorts;
-    public static DigitalSource kRightEncoderReversed;
-    public static DigitalSource[] kLeftEncoderPorts;
-    public static DigitalSource kLeftEncoderReversed;
+    // public static final double kEncoderDistancePerPulse = 0;
+    // public static DigitalSource[] kRightEncoderPorts;
+    // public static DigitalSource kRightEncoderReversed;
+    // public static DigitalSource[] kLeftEncoderPorts;
+    // public static DigitalSource kLeftEncoderReversed;
     
 
     // Prototype:

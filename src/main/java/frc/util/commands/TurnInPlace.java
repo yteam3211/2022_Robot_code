@@ -12,10 +12,23 @@ import frc.util.PID.Gains;
 public class TurnInPlace extends CommandBase {
   DriveSystem driveSystem;
   SuperNavX navX;
-  double angle;
+  double angle, LastAngle, maxOutput;
   int count, reverse;
   Gains gains;
-  double LastAngle;
+  double sumError = 0;
+  public TurnInPlace(DriveSystem driveSystem, SuperNavX navX, double angle, double maxOutput) {
+    addRequirements(driveSystem);
+    this.angle = angle;
+    this.driveSystem = driveSystem;
+    this.navX = navX;
+    this.gains = driveSystem.getTurnGains();
+    count = 0;
+    this.maxOutput = maxOutput;
+    // this.reverse = reverse ? -1 : 1;
+    this.reverse = 1;
+  }
+
+
   public TurnInPlace(DriveSystem driveSystem, SuperNavX navX, double angle) {
     addRequirements(driveSystem);
     this.angle = angle;
@@ -23,6 +36,7 @@ public class TurnInPlace extends CommandBase {
     this.navX = navX;
     this.gains = driveSystem.getTurnGains();
     count = 0;
+    this.maxOutput = 1;
     // this.reverse = reverse ? -1 : 1;
     this.reverse = 1;
   }
@@ -36,22 +50,25 @@ public class TurnInPlace extends CommandBase {
   public void execute() {
     driveSystem.getTab().putInDashboard("turn", false, true);
     double errorAngle = navX.getSuperAngle() - angle;
-    driveSystem.tank(reverse * ( gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)), 
-    -1 * reverse *  (gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle)));
+    if(sumError * errorAngle <= 0) sumError = 0;
+    sumError += errorAngle;
+    double output = (gains.kp * errorAngle + gains.kd * (errorAngle - LastAngle) + gains.ki * sumError);
+    output = Math.abs(output) > maxOutput ? (output > 0 ? maxOutput : maxOutput * -1 ): output;
+    driveSystem.tank(reverse * output, -1 * reverse * output);
     LastAngle = errorAngle; 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    driveSystem.getTab().putInDashboard("turn", true, true);
+    driveSystem.getTab().putInDashboard("turn", !interrupted, true);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(angle - navX.getAngle360()) < 1) count++;
+    if(Math.abs(angle - navX.getSuperAngle()) < 1) count++;
     else count = 0;
-    return count > 10;
+    return count > 5;
   }
 }

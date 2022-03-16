@@ -25,6 +25,7 @@ import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ExpandedClimbSystem;
 import frc.robot.subsystems.ShootingSystem;
+import frc.robot.subsystems.collectSelnoid;
 import frc.util.SuperNavX;
 import frc.util.pathGenerator.commandAuto.AutoChooser;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
@@ -55,6 +56,7 @@ public class RobotContainer {
   public final ShootingSystem shootingSystem = new ShootingSystem();
   public final ClimbSystem climbSystem = new ClimbSystem();
   public final ExpandedClimbSystem expandedClimbSystem = new ExpandedClimbSystem();
+  public final collectSelnoid collectSelnoid = new collectSelnoid();
   static public final SuperNavX navx = new SuperNavX();
 
   public final EncoderAndNavxDriveControl navxDriveControl = new EncoderAndNavxDriveControl(driveSystem, navx);
@@ -63,11 +65,11 @@ public class RobotContainer {
   public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
   public final check check = new check(driveSystem, navx);
-  public final oneBall oneBall = new oneBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem);
-  public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem);
-  public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
-  public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem);
-  public final ClimbTwoBalls autoRedL = new ClimbTwoBalls(driveSystem, navx, collectSystem, navxDriveControl, cartridgeSystem, shootingSystem);
+  public final oneBall oneBall = new oneBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
+  public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
+  public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl,collectSelnoid, cartridgeSystem,shootingSystem);
+  public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem, collectSelnoid);
+  public final ClimbTwoBalls climbTwoBalls = new ClimbTwoBalls(driveSystem, navx, collectSystem,collectSelnoid, navxDriveControl, cartridgeSystem, shootingSystem);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
   // public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
       // cartridgeSystem, shootingSystem);
@@ -75,9 +77,9 @@ public class RobotContainer {
       // cartridgeSystem, shootingSystem);
   // public final oneAutoBlueL oneAutoBlueL = new oneAutoBlueL(driveSystem, navx);
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
-  public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall, autoRedL, threeBallFar, leftTwoBalls};
-  public final AutoChooser autoChooser = new AutoChooser(oneBall, autoCommands);
-  public static final RobotButtons robotButtons = new RobotButtons();
+  public final AutoGenerator[] autoCommands =  { forwardAuto, bowAuto, check, oneBall, twoBall, threeBallFar, leftTwoBalls};
+  public final AutoChooser autoChooser = new AutoChooser(climbTwoBalls, autoCommands);
+  public final RobotButtons robotButtons = new RobotButtons();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -95,7 +97,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    robotButtons.loadButtons(shootingSystem, cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem);
+    robotButtons.loadButtons(driveSystem, shootingSystem, collectSelnoid,cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem);
   }
 
   /**

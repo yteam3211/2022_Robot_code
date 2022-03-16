@@ -20,6 +20,10 @@ public class SuperNavX extends SuperSystem implements SuperInterface {
     getTab().putInDashboard("NavX Pitch", getPitch(), 2, 1, true);
     getTab().putInDashboard("NavX Roll", getRoll(), 2, 2, true);
     getTab().putInDashboard("NavX Yaw", getYaw(), 2, 3, true);
+
+    getTab().putInDashboard("Navx Velocity X", getNavX().getVelocityX(), true);
+    getTab().putInDashboard("Navx Velocity y", getNavX().getVelocityY(), true);
+    getTab().putInDashboard("Navx Velocity Z", getNavX().getVelocityZ(), true);
   }
 
   public float getYaw() {

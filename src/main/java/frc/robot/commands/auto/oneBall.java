@@ -14,16 +14,17 @@ import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
+import frc.robot.subsystems.collectSelnoid;
 
 public class oneBall extends AutoGenerator {
-    public oneBall(DriveSystem driveSystem, SuperNavX navX, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, CollectSystem collectSystem) {
+    public oneBall(DriveSystem driveSystem, SuperNavX navX, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, CollectSystem collectSystem, collectSelnoid collectSelnoid) {
             super("1ball", driveSystem.getAutoGains(), driveSystem, navX);
             Constants.oneBall.inReverse();
 
             addCommands(new ParallelDeadlineGroup(new TimeCommand(5000),
-             new changeSelenoidCommand(collectSystem, false) ,
-             new ShootingCommand(shootingSystem, cartridgeSystem, true)));
-             addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSystem, true)));
+             new changeSelenoidCommand(collectSelnoid, false) ,
+             new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, true)));
+             addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.oneBall, new EncoderAndNavxDriveControl(driveSystem, navX)),new changeSelenoidCommand(collectSelnoid, true)));
 ;
             // addCommands(new TimeCommand(3000));
             // addCommands();

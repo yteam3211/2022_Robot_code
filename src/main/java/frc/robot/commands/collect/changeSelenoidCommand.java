@@ -6,12 +6,13 @@ package frc.robot.commands.collect;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSystem;
+import frc.robot.subsystems.collectSelnoid;
 
 public class changeSelenoidCommand extends CommandBase {
   /** Creates a new CloseCollectCommand. */
-  CollectSystem collectSystem;
+  collectSelnoid collectSystem;
   boolean open;
-  public changeSelenoidCommand(CollectSystem collectSystem, boolean open) {
+  public changeSelenoidCommand(collectSelnoid collectSystem, boolean open) {
     addRequirements(collectSystem);
     this.collectSystem = collectSystem;
     this.open = open;

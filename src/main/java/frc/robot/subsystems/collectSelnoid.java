@@ -4,27 +4,27 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.collect.DefueltsCollectCommand;
 import frc.util.OutputSystem;
 import frc.util.SuperSolenoid;
 
-public class CollectSystem extends OutputSystem {
-  private VictorSP motor = new VictorSP(Constants.PWM_COLLECT_MOTOR);
-
-  public CollectSystem() {
-    super("Collecting");
+public class collectSelnoid extends OutputSystem {
+  /** Creates a new collectSelnoid. */
+  public static final SuperSolenoid SOLENOID = new SuperSolenoid("collectSolenoid", Constants.COLLECT_SOLENOID, false);
+  public collectSelnoid() {
+    super("collectSelnoid");
+    setDefaultCommand(new DefueltsCollectCommand(this));
   }
 
   @Override
   public void periodic() {
-    getTab().putInDashboard("power", motor.get(), true);
-    // This method will be called once per scheduler run
+    getTab().putInDashboard("Closed", SOLENOID.isForward(), true);
   }
 
   @Override
   public void setOutput(double output) {
-    motor.set(output);
+      // CollectSystem.    
   }
 }

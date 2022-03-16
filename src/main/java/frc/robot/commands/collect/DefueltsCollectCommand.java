@@ -6,11 +6,12 @@ package frc.robot.commands.collect;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CollectSystem;
+import frc.robot.subsystems.collectSelnoid;
 
 public class DefueltsCollectCommand extends CommandBase {
   /** Creates a new DefueltsCollectCommand. */
-  CollectSystem collectSystem; 
-  public DefueltsCollectCommand(CollectSystem collectSystem) {
+  collectSelnoid collectSystem; 
+  public DefueltsCollectCommand(collectSelnoid collectSystem) {
     addRequirements(collectSystem);
     this.collectSystem = collectSystem;
     // Use addRequirements() here to declare subsystem dependencies.
