@@ -40,10 +40,10 @@ public final class Constants {
     public static final Path forward = new Path("forword");
     public static final Path bow = new Path("bow");
     public static final Path oneBall = new Path("1ball");
-    public static final Path TP1 = new Path("3P1", 200);
-    public static final Path TP2 = new Path("3P2", 320);
-    public static final Path TP3 = new Path("3P3", 320);
-    public static final Path TP4 = new Path("3P4", 90);
+    // public static final Path TP1 = new Path("3P1", 200);
+    // public static final Path TP2 = new Path("3P2", 320);
+    // public static final Path TP3 = new Path("3P3", 320);
+    // public static final Path TP4 = new Path("3P4", 90);
     public static final Path L3 = new Path("L3", 175);
     public static final Path RTB1 = new Path("RTB1", 110);
     public static final Path RTB2 = new Path("RTB2", 0);
@@ -56,7 +56,15 @@ public final class Constants {
     public static final Path LRED1 = new Path("LRed1", 200);
     public static final Path LRED2 = new Path("LRed2", 50);
     public static final Path LRED3 = new Path("LRed3", 220);
-
+    // Three balls
+    public static final Path ThreeC1 = new Path("3CLS1", 110);
+    public static final Path ThreeC2 = new Path("3CLS2", 0);
+    public static final Path ThreeC3 = new Path("3CLS3", 180);
+    public static final Path ThreeL1 = new Path("3LEFT1", 110);
+    public static final Path ThreeL2 = new Path("3LEFT2", 340);
+    public static final Path ThreeL3 = new Path("3LEFT3", 320);
+    public static final Path ThreeL3V2 = new Path("3LEFT3V2", 320);
+    public static final Path ThreeL4 = new Path("3LEFT4", 450);
     
 
     // _______________OTHER_________________
