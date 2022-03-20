@@ -59,7 +59,6 @@ public class RobotContainer {
   public final ExpandedClimbSystem expandedClimbSystem = new ExpandedClimbSystem();
   public final collectSelnoid collectSelnoid = new collectSelnoid();
   static public final SuperNavX navx = new SuperNavX();
-
   public final EncoderAndNavxDriveControl navxDriveControl = new EncoderAndNavxDriveControl(driveSystem, navx);
   public final TestAuto testAuto = new TestAuto(driveSystem, navx,
   cartridgeSystem, shootingSystem);

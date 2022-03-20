@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.function.DoubleFunction;
+
 import edu.wpi.first.wpilibj.DigitalSource;
 import frc.util.pathGenerator.Path;
 
@@ -77,6 +79,14 @@ public final class Constants {
     public static final double CARITAGE_SPEED = -0.5;
     public static final boolean DEFULT_SHOOT = true;//true to high false to low
 
+
+
+
+    // _______________SHOOT_FUNC____________
+    public static final DoubleFunction<Double> VISION_RPM_FUNCTION = y -> {
+        //return Math.pow(y, 2) * 3.2473 - 8.2114 * y + 3743.7;
+         return Math.pow(y, 2) * 2.954 - 49.839 * y + 3735.2;
+    };
     // ______________Changers_______________ 
     // Main robot:
     public static final boolean reverse = true; 

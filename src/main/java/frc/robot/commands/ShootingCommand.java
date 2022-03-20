@@ -13,6 +13,8 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
+import frc.util.vision.Limelight;
+import frc.util.vision.Limelight.limelightLEDMode;
 
 
 public class ShootingCommand extends CommandBase {
@@ -27,6 +29,7 @@ public class ShootingCommand extends CommandBase {
   private boolean auto;
   private boolean high;
   private DriveSystem driveSystem;
+  // private Limelight  limelight = null;
 
   public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, DriveSystem driveSystem , boolean auto) {
     addRequirements(cartridgeSystem, shootingSystem);
@@ -46,9 +49,20 @@ public class ShootingCommand extends CommandBase {
     this.high = high;
   }
 
+  // public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem, Limelight limelight) {
+  //   addRequirements(cartridgeSystem, shootingSystem);
+  //   this.driveSystem = driveSystem;
+  //   this.cartridgeSystem = cartridgeSystem;
+  //   this.shootingSystem = shootingSystem;
+  //   this.auto = false;
+  //   this.high = false;
+  //   this.limelight = limelight;
+  // }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    // double y = limelight.getY();
     shootingSystem.changeStation(high);
     // else shootingSystem.changeStation(shootingSystem.);
   }
@@ -56,8 +70,9 @@ public class ShootingCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
     int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
-        shootingSystem.setOutput(output);
+    shootingSystem.setOutput(output);
     double error = shootingSystem.getFrontVelocity() - output;
     if(error < 100 && error > -50
      && (RobotButtons.coPilotJoystick.getRawButton(6) ||
@@ -75,6 +90,7 @@ public class ShootingCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // limelight.setLEDMode(limelightLEDMode.kOff);
     shootingSystem.changeStation(true);
     if(!auto) driveSystem.changeIdleMode(IdleMode.kCoast);
     cartridgeSystem.setOutput(0);
