@@ -62,7 +62,7 @@ public class ShootingCommand extends CommandBase {
     if(error < 100 && error > -50
      && (RobotButtons.coPilotJoystick.getRawButton(6) ||
       RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
-      cartridgeSystem.setOutput(Constants.CARITAGE_SPEED); 
+      cartridgeSystem.setOutput(high ? Constants.CARITAGE_SPEED : Constants.CARITAGE_SPEED_LOW); 
       driveSystem.changeIdleMode(IdleMode.kBrake);
 
     }

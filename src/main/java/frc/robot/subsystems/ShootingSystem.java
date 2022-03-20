@@ -22,7 +22,7 @@ public class ShootingSystem extends OutputSystem {
   private SuperTalonFX masterMotor = new SuperTalonFX(Constants.CAN_SHOOT_MASTER_MOTOR, 30, true,
       false, NeutralMode.Coast, shootHighGains, TalonFXControlMode.Velocity);
   private SuperTalonFX salveMotor = new SuperTalonFX(masterMotor, Constants.CAN_SHOOT_SLAVE_MOTOR, 30, false);
-  public final SuperSolenoid shootingSolenoid = new SuperSolenoid("shootingSolenoid", Constants.SHOOTING_SOLENOID, false);
+  public final SuperSolenoid shootingSolenoid = new SuperSolenoid("shootingSolenoid", Constants.SHOOTING_SOLENOID, true);
 
 
   public ShootingSystem() {
@@ -64,12 +64,12 @@ public class ShootingSystem extends OutputSystem {
     if(this.high && !high){
       this.high = false;
       masterMotor.selectProfileSlot(1, 0);
-      shootingSolenoid.changePosition(true);
+      shootingSolenoid.changePosition(false);
     }
     else if (!this.high && high) {
       this.high = true;
       masterMotor.selectProfileSlot(0, 0);
-      shootingSolenoid.changePosition(false);
+      shootingSolenoid.changePosition(true);
     }
   }
 }

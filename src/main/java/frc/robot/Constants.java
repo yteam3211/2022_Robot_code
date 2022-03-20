@@ -73,6 +73,7 @@ public final class Constants {
     public static final int AMPER_LIMIT_CLIMB = 30;
     public static final int LOW_SHOOT_RPM = 5600;
     public static final int HIGH_SHOOT_RPM = 10000;
+    public static final double CARITAGE_SPEED_LOW = -1;
     public static final double CARITAGE_SPEED = -0.5;
     public static final boolean DEFULT_SHOOT = true;//true to high false to low
 
