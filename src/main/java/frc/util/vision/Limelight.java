@@ -75,6 +75,8 @@ public class Limelight extends SubsystemBase {
     CommandBase vision = new LimelightCameraChangeModeCommand(this, limelightCameraMode.kVision);
     // CommandBase USB = new LimelightCameraChangeModeCommand(this,
     // limelightCameraMode.kUSB);
+    setStreamMode(limelightStreamMode.kPiPSecondary);
+
 
     ledOff.setName("Set");
     ledOn.setName("Set");
@@ -143,11 +145,11 @@ public class Limelight extends SubsystemBase {
    */
   public void setStreamMode(limelightStreamMode value) {
     if (value == limelightStreamMode.kStandard) {
-      cameraMode.setNumber(0);
+      limelightTable.getEntry("stream").setNumber(0);
     } else if (value == limelightStreamMode.kPiPMain) {
-      cameraMode.setNumber(1);
+      limelightTable.getEntry("stream").setNumber(1);
     } else {
-      cameraMode.setNumber(2);
+      limelightTable.getEntry("stream").setNumber(2);
     }
   }
 
@@ -182,14 +184,14 @@ public class Limelight extends SubsystemBase {
    * @return X angle.
    */
   public double getX() {
-    return tx_;
+    return limelightTable.getEntry("tx").getDouble(0);
   }
 
   /**
    * @return Y angle.
    */
   public double getY() {
-    return ty_;
+    return limelightTable.getEntry("ty").getDouble(0);
   }
 
   /**

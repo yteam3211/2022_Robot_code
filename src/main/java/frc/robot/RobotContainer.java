@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.auto.TestAuto;
 import frc.robot.commands.auto.ThreeBallsClose;
-import frc.robot.commands.auto.ThreeBallsLeft;
+import frc.robot.commands.auto.ThreeBallsFar;
 import frc.robot.commands.auto.bowAuto;
 import frc.robot.commands.auto.check;
 import frc.robot.commands.auto.forwardAuto;
@@ -32,6 +32,7 @@ import frc.util.pathGenerator.commandAuto.AutoChooser;
 import frc.util.pathGenerator.commandAuto.AutoGenerator;
 import frc.util.pathGenerator.drive_controls.EncoderAndNavxDriveControl;
 import frc.util.vision.Limelight;
+import frc.util.vision.Limelight.limelightStreamMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -68,12 +69,13 @@ public class RobotContainer {
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
   public final check check = new check(driveSystem, navx);
   public final oneBall oneBall = new oneBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
-  public final ThreeBallsLeft threeBallsLeft = new ThreeBallsLeft(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
+  public final ThreeBallsFar threeBallsLeft = new ThreeBallsFar(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
   public final ThreeBallsClose threeBallsClose = new ThreeBallsClose(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
   public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
   public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem, collectSelnoid);
   public final ClimbTwoBalls climbTwoBalls = new ClimbTwoBalls(driveSystem, navx, collectSystem,collectSelnoid, navxDriveControl, cartridgeSystem, shootingSystem);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
+  
 
   //AUTO ARCHIVE:
   // public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl,collectSelnoid, cartridgeSystem,shootingSystem);
@@ -103,7 +105,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    robotButtons.loadButtons(driveSystem, shootingSystem, collectSelnoid,cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem, limelight);
+    robotButtons.loadButtons(driveSystem, shootingSystem, collectSelnoid,cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem, limelight, navx);
   }
 
   /**

@@ -4,6 +4,8 @@
 
 package frc.util.commands;
 
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSystem;
 import frc.util.SuperNavX;
@@ -13,9 +15,23 @@ public class TurnInPlace extends CommandBase {
   DriveSystem driveSystem;
   SuperNavX navX;
   double angle, LastAngle, maxOutput;
+  DoubleSupplier angleDouble = null;
   int count, reverse;
   Gains gains;
   double sumError = 0;
+
+  public TurnInPlace(DriveSystem driveSystem, SuperNavX navX, double angle, double maxOutput, double reset) {
+    addRequirements(driveSystem);
+    this.angle = angle;
+    this.driveSystem = driveSystem;
+    this.navX = navX;
+    this.gains = driveSystem.getTurnGains();
+    count = 0;
+    this.maxOutput = maxOutput;
+    this.reverse = 1;
+    navX.resetSensors(reset);
+  }
+
   public TurnInPlace(DriveSystem driveSystem, SuperNavX navX, double angle, double maxOutput) {
     addRequirements(driveSystem);
     this.angle = angle;
@@ -41,9 +57,25 @@ public class TurnInPlace extends CommandBase {
     this.reverse = 1;
   }
 
+
+  public TurnInPlace(DriveSystem driveSystem, SuperNavX navX, DoubleSupplier angle) {
+    addRequirements(driveSystem);
+    this.angle = 3211;
+    this.angleDouble = angle;
+    this.driveSystem = driveSystem;
+    this.navX = navX;
+    this.gains = driveSystem.getTurnGains();
+    count = 0;
+    this.maxOutput = 1;
+    // this.reverse = reverse ? -1 : 1;
+    this.reverse = 1;
+  }
+
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    if(angleDouble != null )angle = angleDouble.getAsDouble();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

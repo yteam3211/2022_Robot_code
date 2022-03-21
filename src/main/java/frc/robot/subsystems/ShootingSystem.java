@@ -23,7 +23,7 @@ public class ShootingSystem extends OutputSystem {
     lime, high, low
   }
 
-  private Gains shootHighGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  615000.0,0);
+  private Gains shootHighGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  400000.0,0);
   private Gains shootLowGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.LOW_SHOOT_RPM /  615000.0,0);
   private Gains LimeGains = new Gains("shoot",0.16, 0.0005, 0.1);
   // private Gains shootGains = new Gains("shoot",0.2, 0.0004, 0.4);

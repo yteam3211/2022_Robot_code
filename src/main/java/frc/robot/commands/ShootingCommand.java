@@ -14,10 +14,8 @@ import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.robot.subsystems.ShootingSystem.gains;
+import frc.util.commands.TurnInPlace;
 import frc.util.vision.Limelight;
-import frc.util.vision.Limelight.limelightLEDMode;
-import frc.util.vision.commands.LimelightLEDChangeModeCommand;
-
 
 public class ShootingCommand extends CommandBase {
   /** Creates a new ShootingCommand. */
@@ -65,7 +63,7 @@ public class ShootingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // if ( limelight != null) shootingSystem.changeStation(lime);
+    if ( mode == gains.lime && !limelight.isValid()) mode = gains.high;
     shootingSystem.changeStation(mode);
   }
 
@@ -74,7 +72,9 @@ public class ShootingCommand extends CommandBase {
   public void execute() {
     if (limelight != null && limelight.isValid()) {
       double y = limelight.getY();
-      output = 3211 + 254 * y + 148 * y * y;
+      output = 19500 + 985 * y + 55.2 * Math.pow(y, 2) + 1.13 * Math.pow(y , 3);
+      // output = 15642 + 177 * y;
+      // output = 14988 + 141 * y;
     }
     else {
       output = (mode == gains.low ? RobotContainer.RPMLow : RobotContainer.RPMHigh);

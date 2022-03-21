@@ -16,22 +16,23 @@ import frc.util.commands.ResetSensorsCommand;
 
 public class DriveSystem extends OutputSystem implements SuperInterface{
   private SuperSparkMax RM = new SuperSparkMax(Constants.CAN_DRIVE_RM_MOTOR, MotorType.kBrushless,
-      Constants.AMPER_LIMIT, Constants.reverse, IdleMode.kCoast);
+      Constants.AMPER_LIMIT, Constants.reverse, 
+      IdleMode.kCoast);
   private SuperSparkMax RS1 = new SuperSparkMax(Constants.CAN_DRIVE_RS1_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, Constants.reverse,
-      IdleMode.kBrake);
+      IdleMode.kCoast);
   private SuperSparkMax RS2 = new SuperSparkMax(Constants.CAN_DRIVE_RS2_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, Constants.reverse,
-      IdleMode.kBrake);
+      IdleMode.kCoast);
   private SuperSparkMax LM = new SuperSparkMax(Constants.CAN_DRIVE_LM_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, !Constants.reverse,
-      IdleMode.kBrake);
+      IdleMode.kCoast);
   private SuperSparkMax LS1 = new SuperSparkMax(Constants.CAN_DRIVE_LS1_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, !Constants.reverse,
-      IdleMode.kBrake);
+      IdleMode.kCoast);
   private SuperSparkMax LS2 = new SuperSparkMax(Constants.CAN_DRIVE_LS2_MOTOR, MotorType.kBrushless,
       Constants.AMPER_LIMIT, !Constants.reverse,
-      IdleMode.kBrake);
+      IdleMode.kCoast);
       
 
   private final double ENCODER_2_METER = 4.0/74.0;
@@ -78,6 +79,12 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
     getTab().putInDashboard("left output", LM.getOutput(), true);
     getTab().putInDashboard("left encoder position", getLeftEncoderDistance(), true);
     getTab().putInDashboard("right encoder position", getRightEncoderDistance(), true);
+    getTab().putInDashboard("LS1", LS1.get(), true);
+    getTab().putInDashboard("LS2", LS2.get(), true);
+    getTab().putInDashboard("LM", LM.get(), true);
+    getTab().putInDashboard("RS1", RS1.get(), true);
+    getTab().putInDashboard("RS2", RS2.get(), true);
+    getTab().putInDashboard("RM", RM.get(), true);
   }
 
   public void tank(double left, double right) {
@@ -125,7 +132,6 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
 
   public double getLeftPosition() {
     return LM.getEncoder().getPosition();
-    
   }
 
   public void stopOutput() {
@@ -137,6 +143,5 @@ public class DriveSystem extends OutputSystem implements SuperInterface{
   public void resetSensors(double pos) {
     RM.reset(pos);
     LM.reset(pos);
-    
   }
 }
