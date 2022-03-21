@@ -50,6 +50,7 @@ public class RobotContainer {
   public static int RPMHigh = Constants.HIGH_SHOOT_RPM; // 4300 is recommended
   public static int RPMLow = Constants.LOW_SHOOT_RPM; // 4300 is recommended
 
+  //SYSTEMS:
   public final Limelight limelight = new Limelight.Builder().build();
   public final DriveSystem driveSystem = new DriveSystem();
   static public final CollectSystem collectSystem = new CollectSystem();
@@ -60,8 +61,9 @@ public class RobotContainer {
   public final collectSelnoid collectSelnoid = new collectSelnoid();
   static public final SuperNavX navx = new SuperNavX();
   public final EncoderAndNavxDriveControl navxDriveControl = new EncoderAndNavxDriveControl(driveSystem, navx);
-  public final TestAuto testAuto = new TestAuto(driveSystem, navx,
-  cartridgeSystem, shootingSystem);
+  
+  //AUTONOMUSES:
+  public final TestAuto testAuto = new TestAuto(driveSystem, navx, cartridgeSystem, shootingSystem);
   public final forwardAuto forwardAuto = new forwardAuto(driveSystem, navx);
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
   public final check check = new check(driveSystem, navx);
@@ -69,10 +71,12 @@ public class RobotContainer {
   public final ThreeBallsLeft threeBallsLeft = new ThreeBallsLeft(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
   public final ThreeBallsClose threeBallsClose = new ThreeBallsClose(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
   public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
-  // public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl,collectSelnoid, cartridgeSystem,shootingSystem);
   public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem, collectSelnoid);
   public final ClimbTwoBalls climbTwoBalls = new ClimbTwoBalls(driveSystem, navx, collectSystem,collectSelnoid, navxDriveControl, cartridgeSystem, shootingSystem);
   public final AnalogInput analogInput = new AnalogInput(Constants.ANALOG_PRESSURE);
+
+  //AUTO ARCHIVE:
+  // public final ThreeBallFar threeBallFar = new ThreeBallFar(driveSystem, navx, collectSystem, navxDriveControl,collectSelnoid, cartridgeSystem,shootingSystem);
   // public final oneAutoRedR oneAutoRedR = new oneAutoRedR(driveSystem, navx, collectSystem, navxDriveControl,
       // cartridgeSystem, shootingSystem);
   // public final oneAutoRedM oneAutoRedM = new oneAutoRedM(driveSystem, navx, collectSystem, navxDriveControl,
@@ -99,7 +103,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    robotButtons.loadButtons(driveSystem, shootingSystem, collectSelnoid,cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem);
+    robotButtons.loadButtons(driveSystem, shootingSystem, collectSelnoid,cartridgeSystem, collectSystem, climbSystem, expandedClimbSystem, limelight);
   }
 
   /**

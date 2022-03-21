@@ -13,8 +13,10 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
+import frc.robot.subsystems.ShootingSystem.gains;
 import frc.util.vision.Limelight;
 import frc.util.vision.Limelight.limelightLEDMode;
+import frc.util.vision.commands.LimelightLEDChangeModeCommand;
 
 
 public class ShootingCommand extends CommandBase {
@@ -27,9 +29,10 @@ public class ShootingCommand extends CommandBase {
 
   final int rpmDist = 1;
   private boolean auto;
-  private boolean high;
+  private gains mode;
   private DriveSystem driveSystem;
-  // private Limelight  limelight = null;
+  private Limelight  limelight = null;
+  private double output = 0;
 
   public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, DriveSystem driveSystem , boolean auto) {
     addRequirements(cartridgeSystem, shootingSystem);
@@ -37,49 +40,52 @@ public class ShootingCommand extends CommandBase {
     this.cartridgeSystem = cartridgeSystem;
     this.shootingSystem = shootingSystem;
     this.auto = auto;
-    this.high = Constants.DEFULT_SHOOT;
+    this.mode = Constants.DEFULT_SHOOT;
   }
 
-  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem ,Boolean high, boolean auto) {
+  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem ,gains mode, boolean auto) {
     addRequirements(cartridgeSystem, shootingSystem);
     this.driveSystem = driveSystem;
     this.cartridgeSystem = cartridgeSystem;
     this.shootingSystem = shootingSystem;
     this.auto = auto;
-    this.high = high;
+    this.mode = mode;
   }
 
-  // public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem, Limelight limelight) {
-  //   addRequirements(cartridgeSystem, shootingSystem);
-  //   this.driveSystem = driveSystem;
-  //   this.cartridgeSystem = cartridgeSystem;
-  //   this.shootingSystem = shootingSystem;
-  //   this.auto = false;
-  //   this.high = false;
-  //   this.limelight = limelight;
-  // }
+  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem, Limelight limelight) {
+    addRequirements(cartridgeSystem, shootingSystem);
+    this.driveSystem = driveSystem;
+    this.cartridgeSystem = cartridgeSystem;
+    this.shootingSystem = shootingSystem;
+    this.auto = false;
+    this.mode = gains.lime;
+    this.limelight = limelight;
+  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // double y = limelight.getY();
-    shootingSystem.changeStation(high);
-    // else shootingSystem.changeStation(shootingSystem.);
+    // if ( limelight != null) shootingSystem.changeStation(lime);
+    shootingSystem.changeStation(mode);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
-    int output = shootingSystem.high ? RobotContainer.RPMHigh : RobotContainer.RPMLow;
+    if (limelight != null && limelight.isValid()) {
+      double y = limelight.getY();
+      output = 3211 + 254 * y + 148 * y * y;
+    }
+    else {
+      output = (mode == gains.low ? RobotContainer.RPMLow : RobotContainer.RPMHigh);
+    }
     shootingSystem.setOutput(output);
-    double error = shootingSystem.getFrontVelocity() - output;
-    if(error < 100 && error > -50
-     && (RobotButtons.coPilotJoystick.getRawButton(6) ||
-      RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
-      cartridgeSystem.setOutput(high ? Constants.CARITAGE_SPEED : Constants.CARITAGE_SPEED_LOW); 
-      driveSystem.changeIdleMode(IdleMode.kBrake);
 
+    double error = shootingSystem.getFrontVelocity() - output;
+    if(error < 100 && error > -50 && (RobotButtons.coPilotJoystick.getRawButton(6) ||
+                                  RobotButtons.coPilotJoystick.getRawButton(7) || auto)){
+      cartridgeSystem.setOutput(mode == gains.high ? Constants.CARITAGE_SPEED : Constants.CARITAGE_SPEED_LOW); 
+      driveSystem.changeIdleMode(IdleMode.kBrake);
     }
     else {
       cartridgeSystem.setOutput(0);
@@ -91,7 +97,6 @@ public class ShootingCommand extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // limelight.setLEDMode(limelightLEDMode.kOff);
-    shootingSystem.changeStation(true);
     if(!auto) driveSystem.changeIdleMode(IdleMode.kCoast);
     cartridgeSystem.setOutput(0);
     shootingSystem.setOutput(0);

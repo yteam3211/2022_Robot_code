@@ -14,16 +14,24 @@ import frc.util.SuperSolenoid;
 import frc.util.PID.Gains;
 import frc.util.motor.SuperTalonFX;
 
+
+
 public class ShootingSystem extends OutputSystem {
+
+
+  public enum gains {
+    lime, high, low
+  }
+
   private Gains shootHighGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.HIGH_SHOOT_RPM /  615000.0,0);
   private Gains shootLowGains = new Gains("shoot", 0,0,0.16, 0.0005, 0.1, Constants.LOW_SHOOT_RPM /  615000.0,0);
+  private Gains LimeGains = new Gains("shoot",0.16, 0.0005, 0.1);
   // private Gains shootGains = new Gains("shoot",0.2, 0.0004, 0.4);
-  public boolean high;
+  public gains mode;
   private SuperTalonFX masterMotor = new SuperTalonFX(Constants.CAN_SHOOT_MASTER_MOTOR, 30, true,
       false, NeutralMode.Coast, shootHighGains, TalonFXControlMode.Velocity);
   private SuperTalonFX salveMotor = new SuperTalonFX(masterMotor, Constants.CAN_SHOOT_SLAVE_MOTOR, 30, false);
   public final SuperSolenoid shootingSolenoid = new SuperSolenoid("shootingSolenoid", Constants.SHOOTING_SOLENOID, true);
-
 
   public ShootingSystem() {
     super("Shooting");
@@ -31,7 +39,11 @@ public class ShootingSystem extends OutputSystem {
     masterMotor.config_kP(1, shootLowGains.kp);
     masterMotor.config_kI(1, shootLowGains.ki);
     masterMotor.config_kD(1, shootLowGains.kd);
-    if(!high) masterMotor.selectProfileSlot(0, 0);
+
+    masterMotor.config_kP(2, LimeGains.kp);
+    masterMotor.config_kI(2, LimeGains.ki);
+    masterMotor.config_kD(2, LimeGains.kd);
+    if(Constants.DEFULT_SHOOT == gains.high) masterMotor.selectProfileSlot(0, 0);
     else masterMotor.selectProfileSlot(1, 0);
     }
 
@@ -60,15 +72,20 @@ public class ShootingSystem extends OutputSystem {
     return shootHighGains;
   }
 
-  public void changeStation(boolean high){
-    if(this.high && !high){
-      this.high = false;
+  public void changeStation(gains mode){
+    if(this.mode != gains.low && mode == gains.low){
+      this.mode = gains.low;
       masterMotor.selectProfileSlot(1, 0);
+      shootingSolenoid.changePosition(true);
+    }
+    else if(this.mode != gains.high && mode == gains.high){
+      this.mode = gains.high;
+      masterMotor.selectProfileSlot(0, 0);
       shootingSolenoid.changePosition(false);
     }
-    else if (!this.high && high) {
-      this.high = true;
-      masterMotor.selectProfileSlot(0, 0);
+    else if(this.mode != gains.lime && mode == gains.lime){
+      this.mode = gains.lime;
+      masterMotor.selectProfileSlot(2, 0);
       shootingSolenoid.changePosition(true);
     }
   }
