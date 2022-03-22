@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.auto.TestAuto;
 import frc.robot.commands.auto.ThreeBallsClose;
 import frc.robot.commands.auto.ThreeBallsFar;
@@ -94,6 +95,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     configureButtonBindings();
+    limelight.setStreamMode(limelightStreamMode.kPiPSecondary);
   }
 
   /**
@@ -116,4 +118,11 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return autoChooser.getAutoCommand();
   }
+
+
+
+  private int select(){
+    return 1;
+  }
+
 }

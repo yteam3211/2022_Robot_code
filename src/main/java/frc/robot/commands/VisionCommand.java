@@ -4,9 +4,12 @@
 
 package frc.robot.commands;
 
+import java.util.Map;
+
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SelectCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.CartridgeSystem;
@@ -15,6 +18,7 @@ import frc.robot.subsystems.ShootingSystem;
 import frc.util.SuperNavX;
 import frc.util.commands.ResetSensorsCommand;
 import frc.util.commands.SetOutputCommand;
+import frc.util.commands.TimeCommand;
 import frc.util.commands.TurnInPlace;
 import frc.util.commands.TurnInPlaceLimelight;
 import frc.util.vision.Limelight;
@@ -23,17 +27,16 @@ import frc.util.vision.Limelight;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class VisionCommand extends SequentialCommandGroup {
+  Limelight limelight;
   public VisionCommand(Limelight limelight, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, DriveSystem driveSystem, SuperNavX navX) {
-    if (!limelight.isValid()){
-      addCommands(new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, false));
-    }
-    else{
-      addCommands(new TurnInPlaceLimelight(driveSystem, limelight));
-      // addCommands(new ResetSensorsCommand(navX, 0));
-      // addCommands(new ParallelDeadlineGroup(new TurnInPlace(driveSystem, navX,() -> -limelight.getX()), new SetOutputCommand(shootingSystem, Constants.HIGH_SHOOT_RPM)));
-      // addCommands(new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, limelight));
-    }
-
-    
+    this.limelight =limelight;
+    addCommands(new SelectCommand(Map.ofEntries(
+      Map.entry(0, new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, false)),
+      Map.entry(1, new SequentialCommandGroup( new ParallelRaceGroup(new TimeCommand(1500),new TurnInPlaceLimelight(driveSystem, limelight)), new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, limelight)))),
+      this::select));
+      addCommands();
   }
+  public int select(){
+    return limelight.isValid() ? 1 : 0;
+  };
 }

@@ -28,7 +28,7 @@ public class TurnInPlaceLimelight extends CommandBase {
   public void execute() {
     double x =  limelight.getX();
     double output = 0.00022 * x * x + 0.02259 * x + 0.06250;
-    output = x > 0 ? output : -output;
+    // output = x > 0 ? output : output;
     driveSystem.tank(output, -output);
   
   }
@@ -42,8 +42,9 @@ public class TurnInPlaceLimelight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(Math.abs(limelight.getX()) < 1) count++;
+    if(Math.abs(limelight.getX()) < 4) count++;
     else count = 0;
     return count > 5;
+    // return Math.abs(limelight.getX()) < 1;
   }
 }

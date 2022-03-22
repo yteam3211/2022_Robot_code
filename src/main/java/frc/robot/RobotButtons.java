@@ -46,8 +46,7 @@ public class RobotButtons {
     // public Trigger shootWithCartridgeButton = new Trigger(() -> coPilotJoystick.getRawAxis(2) > 0.05);
 
     public void loadButtons(DriveSystem driveSystem,ShootingSystem shoot, collectSelnoid collectSelnoid, CartridgeSystem cartridge, CollectSystem collect, ClimbSystem climbSystem, ExpandedClimbSystem expandedClimbSystem, Limelight limelight, SuperNavX superNavX) {
-        shootHighButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, driveSystem, 
-        gains.high, false));// (new
+        shootHighButton.whileActiveOnce(new VisionCommand(limelight, shoot, cartridge, driveSystem, superNavX));// (new
         shootLowButton.whileActiveOnce(new ShootingCommand(shoot, cartridge, driveSystem, gains.low, false));// (new
         climbOpen.whileActiveOnce(new SetOutputCommand(climbSystem, 1));
         climbClose.whileActiveOnce(new SetOutputCommand(climbSystem, -1));
