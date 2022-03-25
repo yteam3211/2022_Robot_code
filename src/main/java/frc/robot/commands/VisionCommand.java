@@ -17,6 +17,7 @@ import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.util.SuperNavX;
 import frc.util.commands.ResetSensorsCommand;
+
 import frc.util.commands.SetOutputCommand;
 import frc.util.commands.TimeCommand;
 import frc.util.commands.TurnInPlace;
@@ -28,11 +29,13 @@ import frc.util.vision.Limelight;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class VisionCommand extends SequentialCommandGroup {
   Limelight limelight;
-  public VisionCommand(Limelight limelight, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, DriveSystem driveSystem, SuperNavX navX) {
-    this.limelight =limelight;
+  public VisionCommand(Limelight limelight, ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem, DriveSystem driveSystem, SuperNavX navX, boolean auto) {
+    this.limelight = limelight;
     addCommands(new SelectCommand(Map.ofEntries(
       Map.entry(0, new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, false)),
-      Map.entry(1, new SequentialCommandGroup( new ParallelRaceGroup(new TimeCommand(1500),new TurnInPlaceLimelight(driveSystem, limelight)), new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, limelight)))),
+      Map.entry(1, new SequentialCommandGroup( new ResetSensorsCommand(navX, 0),
+        new ParallelRaceGroup(new TimeCommand(2000),new TurnInPlace(driveSystem, navX, () -> -limelight.getX()))
+        , new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, limelight,  auto)))),
       this::select));
       addCommands();
   }

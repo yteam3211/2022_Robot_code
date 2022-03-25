@@ -15,7 +15,9 @@ import frc.robot.subsystems.CollectSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.robot.subsystems.collectSelnoid;
+import frc.robot.subsystems.ShootingSystem.gains;
 import frc.util.SuperNavX;
+import frc.util.PID.Gains;
 import frc.util.commands.SetOutputCommand;
 import frc.util.commands.TimeCommand;
 import frc.util.commands.TurnInPlace;
@@ -32,11 +34,11 @@ public class LeftTwoBalls extends AutoGenerator {
           new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem,true))/*, new SetOutputCommand(driveSystem, 0)*/);
           addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB1, new EncoderDriveControl(driveSystem))));
           // addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, -60), new changeSelenoidCommand(collectSystem, false)));
-          // addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)), new CollectCommand(cartridgeSystem, collectSystem)));
+          addCommands(new ParallelDeadlineGroup(addFollowPathCommand(Constants.LTB2, new EncoderDriveControl(driveSystem)), new CollectCommand(cartridgeSystem, collectSystem)));
           // addCommands(new ParallelRaceGroup(new TimeCommand(2500), new TurnInPlace(driveSystem, navX, 180), new changeSelenoidCommand(collectSystem, true)));
-          // addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
-          // addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), 
-          // new ShootingCommand(shootingSystem, cartridgeSystem,true)), 
-          // new SetOutputCommand(driveSystem, 0));
+          addCommands(addFollowPathCommand(Constants.LTB3, new EncoderDriveControl(driveSystem)));
+          addCommands(new ParallelDeadlineGroup(new TimeCommand(2500), 
+          new ShootingCommand(shootingSystem, cartridgeSystem, driveSystem, gains.high, true)), 
+          new SetOutputCommand(driveSystem, 0));
   }
 }

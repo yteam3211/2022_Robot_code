@@ -32,7 +32,8 @@ public final class Constants {
     public static final int ANALOG_PRESSURE = 0;
     public static final int MAGNET_SENSOR_UP = 2;
     public static final int MAGNET_SENSOR_DOWN = 1;
-    public static final int MAGNET_SENSOR_EXCLIMB = 3;
+    public static final int SWICH_SENSOR_DOWN = 3;
+    public static final int MAGNET_SENSOR_EXCLIMB = 4;
 
     // _______________PATH__________________
     public static final Path turn180 = new Path("180");
@@ -54,7 +55,7 @@ public final class Constants {
     public static final Path LTB3 = new Path("LTB3", 180);
     public static final Path LTB4 = new Path("LTB4", 45);
     public static final Path LRED1 = new Path("LRed1", 200);
-    public static final Path LRED2 = new Path("LRed2", 50);
+    public static final Path LRED2 = new Path("LRed2", 55);
     public static final Path LRED3 = new Path("LRed3", 220);
     // Three balls
     public static final Path ThreeC1 = new Path("3CLS1", 110);
@@ -62,7 +63,7 @@ public final class Constants {
     public static final Path ThreeC3 = new Path("3CLS3", 180);
     public static final Path ThreeL1 = new Path("3LEFT1", 110);
     public static final Path ThreeL2 = new Path("3LEFT2", 350);
-    public static final Path ThreeL3 = new Path("3LEFT3", 0);
+    public static final Path ThreeL3 = new Path("3LEFT3", 340);
     public static final Path ThreeL3V2 = new Path("3LEFT3V2", 320);
     public static final Path ThreeL4 = new Path("3LEFT4", 90);
     
@@ -71,8 +72,8 @@ public final class Constants {
     public static final double ROBOT_WIDTH = 0.653;
     public static final int AMPER_LIMIT = 40;
     public static final int AMPER_LIMIT_CLIMB = 30;
-    public static final int LOW_SHOOT_RPM = 5600;
-    public static final int HIGH_SHOOT_RPM = 12000;
+    public static final int LOW_SHOOT_RPM = 6600;
+    public static final int HIGH_SHOOT_RPM = 12100;
     public static final double CARITAGE_SPEED_LOW = -1;
     public static final double CARITAGE_SPEED = -0.5;
     public static final gains DEFULT_SHOOT = gains.high;//true to high false to low

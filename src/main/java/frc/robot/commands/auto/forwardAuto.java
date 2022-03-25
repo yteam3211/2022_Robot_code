@@ -9,6 +9,7 @@ import frc.robot.subsystems.DriveSystem;
 public class forwardAuto extends AutoGenerator {
         public forwardAuto(DriveSystem driveSystem, SuperNavX navX) {
                 super("forwardAuto", driveSystem.getAutoGains(), driveSystem, navX);
+                Constants.forward.inReverse();
                 addCommands(addFollowPathCommand(Constants.forward, new EncoderDriveControl(driveSystem)));
 
         }

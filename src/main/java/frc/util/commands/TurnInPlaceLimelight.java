@@ -11,7 +11,8 @@ import frc.util.vision.Limelight;
 public class TurnInPlaceLimelight extends CommandBase {
   /** Creates a new TurnInPlaceLimelight. */
   DriveSystem driveSystem;
-   Limelight limelight;
+  Limelight limelight;
+  // double i = 0;
    int count = 0;
   public TurnInPlaceLimelight(DriveSystem driveSystem, Limelight limelight) {
     addRequirements(driveSystem);
@@ -27,8 +28,11 @@ public class TurnInPlaceLimelight extends CommandBase {
   @Override
   public void execute() {
     double x =  limelight.getX();
-    double output = 0.00022 * x * x + 0.02259 * x + 0.06250;
-    // output = x > 0 ? output : output;
+    // if(abs())
+    // i += x;
+    double output = 0.0003 * x * x + 0.0225 * Math.abs(x) + 0.01429;
+
+    output = x > 0 ? output : -output;
     driveSystem.tank(output, -output);
   
   }

@@ -70,7 +70,7 @@ public class RobotContainer {
   public final bowAuto bowAuto = new bowAuto(driveSystem, navx);
   public final check check = new check(driveSystem, navx);
   public final oneBall oneBall = new oneBall(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
-  public final ThreeBallsFar threeBallsLeft = new ThreeBallsFar(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
+  public final ThreeBallsFar threeBallsLeft = new ThreeBallsFar(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem, limelight);
   public final ThreeBallsClose threeBallsClose = new ThreeBallsClose(driveSystem, navx, collectSystem, navxDriveControl, collectSelnoid, cartridgeSystem, shootingSystem);
   public final RightTwoBalls twoBall = new RightTwoBalls(driveSystem, navx, shootingSystem, cartridgeSystem, collectSystem, collectSelnoid);
   public final LeftTwoBalls leftTwoBalls = new LeftTwoBalls(driveSystem, navx, collectSystem, cartridgeSystem, shootingSystem, collectSelnoid);
@@ -86,7 +86,7 @@ public class RobotContainer {
       // cartridgeSystem, shootingSystem);
   // public final oneAutoBlueL oneAutoBlueL = new oneAutoBlueL(driveSystem, navx);
   // public final oneAutoBlueM oneAutoBlueM = new oneAutoBlueM(driveSystem, navx);
-  public final AutoGenerator[] autoCommands =  {oneBall, threeBallsClose, threeBallsLeft};
+  public final AutoGenerator[] autoCommands =  {oneBall, threeBallsClose, threeBallsLeft, forwardAuto};
   public final AutoChooser autoChooser = new AutoChooser(climbTwoBalls, autoCommands);
   public final RobotButtons robotButtons = new RobotButtons();
 
@@ -117,12 +117,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.getAutoCommand();
-  }
-
-
-
-  private int select(){
-    return 1;
   }
 
 }

@@ -14,7 +14,6 @@ import frc.robot.subsystems.CartridgeSystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.ShootingSystem;
 import frc.robot.subsystems.ShootingSystem.gains;
-import frc.util.commands.TurnInPlace;
 import frc.util.vision.Limelight;
 
 public class ShootingCommand extends CommandBase {
@@ -22,8 +21,6 @@ public class ShootingCommand extends CommandBase {
 
   ShootingSystem shootingSystem;
   CartridgeSystem cartridgeSystem;
-
-
 
   final int rpmDist = 1;
   private boolean auto;
@@ -60,10 +57,22 @@ public class ShootingCommand extends CommandBase {
     this.limelight = limelight;
   }
 
+  public ShootingCommand(ShootingSystem shootingSystem, CartridgeSystem cartridgeSystem,DriveSystem driveSystem, Limelight limelight, boolean auto) {
+    addRequirements(cartridgeSystem, shootingSystem);
+    this.driveSystem = driveSystem;
+    this.cartridgeSystem = cartridgeSystem;
+    this.shootingSystem = shootingSystem;
+    this.auto = auto;
+    this.mode = gains.lime;
+    this.limelight = limelight;
+  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if ( mode == gains.lime && !limelight.isValid()) mode = gains.high;
+    if (mode == gains.lime && !limelight.isValid()) {
+      mode = gains.high;
+    }
     shootingSystem.changeStation(mode);
   }
 
@@ -72,6 +81,7 @@ public class ShootingCommand extends CommandBase {
   public void execute() {
     if (limelight != null && limelight.isValid()) {
       double y = limelight.getY();
+      // output = 19500 + 985 * y + 55.2 * Math.pow(y, 2) + 1.13 * Math.pow(y , 3);
       output = 19500 + 985 * y + 55.2 * Math.pow(y, 2) + 1.13 * Math.pow(y , 3);
       // output = 15642 + 177 * y;
       // output = 14988 + 141 * y;
@@ -96,7 +106,6 @@ public class ShootingCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // limelight.setLEDMode(limelightLEDMode.kOff);
     if(!auto) driveSystem.changeIdleMode(IdleMode.kCoast);
     cartridgeSystem.setOutput(0);
     shootingSystem.setOutput(0);
